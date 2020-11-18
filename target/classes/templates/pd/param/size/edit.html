@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${p.id}" type="hidden">
+                    <input name="type" value="封装及外形尺寸" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">尺寸代码<span style="color:red">*</span></label>
+                        <div class="col-sm-8">
+                            <input name="code" class="form-control" type="text" th:value="${p.code}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">执行标准<span style="color:red">*</span></label>
+                        <div class="col-sm-8">
+                            <input id="rel" name="rel" th:value="${p.rel}" type="hidden">
+                            <input id="stdName" name="stdName" class="form-control" type="text" placeholder="执行标准"
+                                   onclick="openStd()" th:value="${p.rel}" style="cursor: pointer;" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">描述</label>
+                        <div class="col-sm-8">
+                            <textarea name="name" class="form-control" type="text" th:text="${p.name}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注</label>
+                        <div class="col-sm-8">
+                            <input name="gp" class="form-control" type="text" th:value="${p.gp}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">序号<span style="color:red">*</span></label>
+                        <div class="col-sm-8">
+                            <input name="idx" class="form-control" type="text" th:value="${p.idx}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/pd/param/size/edit.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd.dao.extmapper.ExtPdInfoMapper">
+    <select id="list" resultType="com.chk.pdms.pd.vo.PdInfoVo">
+        select
+        pm.name as pmName,
+        pi.*
+        from pd_info pi
+        left join pd_model pm on pi.pd_model_id = pm.id
+        where 1=1
+        <if test="key != null">
+            AND MATCH(pi.search_key) AGAINST(#{key} in boolean mode)
+        </if>
+        order by id desc
+    </select>
+
+    <select id="listFt" resultType="com.chk.pdms.pd.vo.PdFtVo">
+        select
+        pc.name as pcName,
+        pm.name as pmName,
+        pi.*
+        from pd_info pi
+        left join pd_model pm on pi.pd_model_id = pm.id
+        left join pd_class pc on pm.pd_class_id = pc.id
+    </select>
+
+    <update id="updateSearchKey" parameterType="java.util.List">
+        <foreach collection="pdsks" item="sk" index="index" open="" close="" separator=";">
+            UPDATE pd_info set search_key=#{sk.searchKey} where id=#{sk.id}
+        </foreach>
+    </update>
+
+    <insert id="insert" parameterType="java.util.List">
+        <foreach collection="infos" item="info" index="index" open="" close="" separator=";">
+    insert into pd_info (id, std, quality,
+      pd_model_id, size,
+      temperature, voltage, capacity_min,
+      capacity_max, capacity_min_idx, capacity_max_idx,
+      tolerance, outlet, search_key
+      )
+    values (#{info.id,jdbcType=BIGINT}, #{info.std,jdbcType=VARCHAR}, #{info.quality,jdbcType=VARCHAR},
+      #{info.pdModelId,jdbcType=BIGINT}, #{info.size,jdbcType=VARCHAR},
+      #{info.temperature,jdbcType=VARCHAR}, #{info.voltage,jdbcType=VARCHAR}, #{info.capacityMin,jdbcType=VARCHAR},
+      #{info.capacityMax,jdbcType=VARCHAR}, #{info.capacityMinIdx,jdbcType=INTEGER}, #{info.capacityMaxIdx,jdbcType=INTEGER},
+      #{info.tolerance,jdbcType=VARCHAR}, #{info.outlet,jdbcType=VARCHAR}, #{info.searchKey,jdbcType=VARCHAR}
+      )
+        </foreach>
+  </insert>
+</mapper>

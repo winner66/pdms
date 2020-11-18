@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.data.dao.extmapper.DataMapper">
+
+    <select id="listClz" resultType="com.chk.pdms.data.vo.ClassVo">
+        SELECT pc3.id     AS id,
+               pc1.NAME   AS lev1,
+               pc2.NAME   AS lev21,
+               pc3.NAME   AS lev3,
+               pc3.qa_gp  AS lev22,
+               qa.qa_code AS qa
+        FROM pd_class pc3
+                 JOIN pd_class pc2 ON pc3.p_id = pc2.id
+                 JOIN pd_class pc1 ON pc2.p_id = pc1.id
+                 LEFT JOIN pd_class_qa qa ON pc3.id = qa.pd_class_id
+        WHERE pc3.LEVEL = 3
+        ORDER BY pc3.idx ASC
+    </select>
+
+    <insert id="insertInfo" parameterType="java.util.List">
+        <foreach collection="infos" item="item" index="index" open="" close="" separator=";">
+            insert into pd_info (pd_model_id, std, quality,
+            model, size, temperature,
+            voltage, capacity_min, capacity_max,
+            capacity_min_idx, capacity_max_idx, tolerance,
+            outlet, elec_code, cap_num, elec_type, temper_range,
+            wire_ma, wire_size, elec_ser,
+            soc_str, pack_type, pin, search_key)
+            values (#{item.pdModelId,jdbcType=BIGINT}, #{item.std,jdbcType=VARCHAR}, #{item.quality,jdbcType=VARCHAR},
+            #{item.model,jdbcType=VARCHAR}, #{item.size,jdbcType=VARCHAR}, #{item.temperature,jdbcType=VARCHAR},
+            #{item.voltage,jdbcType=VARCHAR}, #{item.capacityMin,jdbcType=VARCHAR},
+            #{item.capacityMax,jdbcType=VARCHAR},
+            #{item.capacityMinIdx,jdbcType=INTEGER}, #{item.capacityMaxIdx,jdbcType=INTEGER},
+            #{item.tolerance,jdbcType=VARCHAR},
+            #{item.outlet,jdbcType=VARCHAR}, #{item.elecCode,jdbcType=VARCHAR}, #{item.capNum,jdbcType=VARCHAR},
+            #{item.elecType,jdbcType=VARCHAR}, #{item.temperRange,jdbcType=VARCHAR},
+            #{item.wireMa,jdbcType=VARCHAR}, #{item.wireSize,jdbcType=VARCHAR}, #{item.elecSer,jdbcType=VARCHAR},
+            #{item.socStr,jdbcType=VARCHAR}, #{item.packType,jdbcType=VARCHAR},
+            #{item.pin,jdbcType=VARCHAR},#{item.searchKey,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertModel" parameterType="java.util.List">
+        <foreach collection="models" item="item" index="index" open="" close="" separator=";">
+            insert into pd_model (name, code,
+            qa_code, pd_class_id, voltage,
+            ohm, tan, other_param,
+            purpose, feature, contact,
+            phone, order_rule, manual_url,
+            size_url, order_rule_url, object_url,
+            chart_url, company)
+            values (#{item.name,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR},
+            #{item.qaCode,jdbcType=VARCHAR}, #{item.pdClassId,jdbcType=BIGINT}, #{item.voltage,jdbcType=VARCHAR},
+            #{item.ohm,jdbcType=VARCHAR}, #{item.tan,jdbcType=VARCHAR}, #{item.otherParam,jdbcType=VARCHAR},
+            #{item.purpose,jdbcType=VARCHAR}, #{item.feature,jdbcType=VARCHAR}, #{item.contact,jdbcType=VARCHAR},
+            #{item.phone,jdbcType=VARCHAR}, #{item.orderRule,jdbcType=VARCHAR}, #{item.manualUrl,jdbcType=VARCHAR},
+            #{item.sizeUrl,jdbcType=VARCHAR}, #{item.orderRuleUrl,jdbcType=VARCHAR}, #{item.objectUrl,jdbcType=VARCHAR},
+            #{item.chartUrl,jdbcType=VARCHAR}, #{item.company,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertParam" parameterType="java.util.List">
+        <foreach collection="params" item="item" index="index" open="" close="" separator=";">
+            insert into pd_param (type, name,
+            code, idx, gp, rel,
+            descr)
+            values (#{item.type,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
+            #{item.code,jdbcType=VARCHAR}, #{item.idx,jdbcType=INTEGER}, #{item.gp,jdbcType=VARCHAR},
+            #{item.rel,jdbcType=VARCHAR},
+            #{item.descr,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <update id="updateModelOR" parameterType="java.util.List">
+        <foreach collection="models" item="item" index="index" open="" close="" separator=";">
+            UPDATE pd_model set order_rule=#{item.orderRule} where id=#{item.id}
+        </foreach>
+    </update>
+
+    <select id="get" resultType="com.chk.pdms.pd.domain.PdInfo">
+        select * from pd_info
+        where 1=1
+        <if test="info.pdModelId != null">
+            and pd_model_id = #{info.pdModelId}
+        </if>
+        <if test="info.std != null">
+            and std = #{info.std}
+        </if>
+        <if test="info.quality != null">
+            and quality = #{info.quality}
+        </if>
+        <if test="info.model != null">
+            and model = #{info.model}
+        </if>
+        <if test="info.size != null">
+            and size = #{info.size}
+        </if>
+        <if test="info.temperature != null">
+            and temperature = #{info.temperature}
+        </if>
+        <if test="info.voltage != null">
+            and voltage = #{info.voltage}
+        </if>
+        <if test="info.capacityMin != null">
+            and capacity_min = #{info.capacityMin}
+        </if>
+        <if test="info.capacityMax != null">
+            and capacity_max = #{info.capacityMax}
+        </if>
+        <if test="info.capacityMinIdx != null">
+            and capacity_min_idx = #{info.capacityMinIdx}
+        </if>
+        <if test="info.capacityMaxIdx != null">
+            and capacity_max_idx = #{info.capacityMaxIdx}
+        </if>
+        <if test="info.tolerance != null">
+            and tolerance = #{info.tolerance}
+        </if>
+        <if test="info.outlet != null">
+            and outlet = #{info.outlet}
+        </if>
+        <if test="info.elecCode != null">
+            and elec_code = #{info.elecCode}
+        </if>
+        <if test="info.capNum != null">
+            and cap_num = #{info.capNum}
+        </if>
+        <if test="info.elecType != null">
+            and elec_type = #{info.elecType}
+        </if>
+        <if test="info.temperRange != null">
+            and temper_range = #{info.temperRange}
+        </if>
+        <if test="info.wireMa != null">
+            and wire_ma = #{info.wireMa}
+        </if>
+        <if test="info.wireSize != null">
+            and wire_size = #{info.wireSize}
+        </if>
+        <if test="info.elecSer != null">
+            and elec_ser = #{info.elecSer}
+        </if>
+        <if test="info.socStr != null">
+            and soc_str = #{info.socStr}
+        </if>
+        <if test="info.packType != null">
+            and pack_type = #{info.packType}
+        </if>
+        <if test="info.pin != null">
+            and pin = #{info.pin}
+        </if>
+        limit 1
+    </select>
+</mapper>

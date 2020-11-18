@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${info.id}" type="hidden">
+                    <input id="pdClassId" th:value="${info.pdClassId}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">执行标准<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input id="std" name="std" class="form-control" type="text" placeholder="请选择执行标准"
+                                   onclick="openStd()" th:value="${info.std}" style="cursor: pointer;" readonly>
+                        </div>
+                        <label class="col-sm-2 control-label">质量等级<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <select id="quality" name="quality" data-placeholder="请选择质量等级" class="form-control" tabindex="2" style="width:100%">
+                                <option value>请选择质量等级</option>
+                                <option th:each="qa:${quality}" th:value="${qa.code}" th:text="${qa.code}" th:selected="${qa.code eq info.quality}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">型号<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input id="pdModelId" name="pdModelId" th:value="${info.pdModelId}" type="hidden">
+                            <input id="model" name="model" class="form-control" type="text" placeholder="请选择型号"
+                                   onclick="openModel()" th:value="${info.model}" style="cursor: pointer;" readonly>
+                        </div>
+                        <label class="col-sm-2 control-label">尺寸<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <select id="size" name="size" data-placeholder="请选择尺寸" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择尺寸</option>
+                                <option th:each="o:${selectedSize}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.size}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">特性</label>
+                        <div class="col-sm-4">
+                            <select id="temperature" name="temperature" data-placeholder="请选择特性" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择特性</option>
+                                <option th:each="o:${temperature}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.temperature}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">电压</label>
+                        <div class="col-sm-4">
+                            <select id="voltage" name="voltage" data-placeholder="请选择电压" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择电压</option>
+                                <option th:each="o:${voltage}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.voltage}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">容量起<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input id="capacityMinIdx" name="capacityMinIdx" type="hidden" th:value="${info.capacityMinIdx}">
+                            <input id="capacityMin" name="capacityMin" type="hidden" th:value="${info.capacityMin}">
+                            <select id="cMin" name="cMin" data-placeholder="请选择容量起" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择容量起</option>
+                                <option th:each="o:${capacity}" th:value="${o.idx}" th:text="${o.code}" th:selected="${o.code eq info.capacityMin}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">容量止<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input id="capacityMaxIdx" name="capacityMaxIdx" type="hidden" th:value="${info.capacityMaxIdx}">
+                            <input id="capacityMax" name="capacityMax" type="hidden" th:value="${info.capacityMax}">
+                            <select id="cMax" name="cMax" data-placeholder="请选择容量止" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择容量止</option>
+                                <option th:each="o:${capacity}" th:value="${o.idx}" th:text="${o.code}" th:selected="${o.code eq info.capacityMax}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">精度</label>
+                        <div class="col-sm-4">
+                            <input id="htolerance" th:value="${info.tolerance}" type="hidden">
+                            <select id="tolerance" name="tolerance" data-placeholder="请选择精度 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+<!--                                <option value="">请选择精度</option>-->
+                                <option th:each="o:${tolerance}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.tolerance}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">引出端形式</label>
+                        <div class="col-sm-4">
+                            <input id="houtlet" th:value="${info.outlet}" type="hidden">
+                            <select id="outlet" name="outlet" data-placeholder="请选择引出端形式 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+<!--                                <option value="">请选择引出端形式</option>-->
+                                <option th:each="o:${outlet}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.outlet}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电极材料代码</label>
+                        <div class="col-sm-4">
+                            <select id="elecCode" name="elecCode" data-placeholder="请选择电极材料代码" class="form-control" tabindex="2">
+                                <option value="">请选择电极材料代码</option>
+                                <option th:each="o:${elecCode}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.elecCode}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">电容数量</label>
+                        <div class="col-sm-4">
+                            <select id="capNum" name="capNum" data-placeholder="请选择电容数量" class="form-control" tabindex="2">
+                                <option value="">请选择电容数量</option>
+                                <option th:each="o:${capNum}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.capNum}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电路形式</label>
+                        <div class="col-sm-4">
+                            <select id="elecType" name="elecType" data-placeholder="请选择电路形式" class="form-control" tabindex="2">
+                                <option value="">请选择电路形式</option>
+                                <option th:each="o:${elecType}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.elecType}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">工作温度范围</label>
+                        <div class="col-sm-4">
+                            <select id="temperRange" name="temperRange" data-placeholder="请选择工作温度范围" class="form-control" tabindex="2">
+                                <option value="">请选择工作温度范围</option>
+                                <option th:each="o:${temperRange}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.temperRange}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">引线材质</label>
+                        <div class="col-sm-4">
+                            <input id="hwireMa" th:value="${info.wireMa}" type="hidden">
+                            <select id="wireMa" name="wireMa" data-placeholder="请选择引线材质 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+                                <option th:each="o:${wireMa}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.wireMa}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">引线长短</label>
+                        <div class="col-sm-4">
+                            <input id="hwireSize" th:value="${info.wireSize}" type="hidden">
+                            <select id="wireSize" name="wireSize" data-placeholder="请选择引线长短 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+                                <option th:each="o:${wireSize}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.wireSize}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电流系列</label>
+                        <div class="col-sm-4">
+                            <select id="elecSer" name="elecSer" data-placeholder="请选择电流系列" class="form-control" tabindex="2">
+                                <option value="">请选择电流系列</option>
+                                <option th:each="o:${elecSer}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.elecSer}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">端头结构</label>
+                        <div class="col-sm-4">
+                            <select id="socStr" name="socStr" data-placeholder="请选择端头结构" class="form-control" tabindex="2">
+                                <option value="">请选择端头结构</option>
+                                <option th:each="o:${socStr}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.socStr}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">包装方式</label>
+                        <div class="col-sm-4">
+                            <select id="packType" name="packType" data-placeholder="请选择包装方式" class="form-control" tabindex="2">
+                                <option value="">请选择包装方式</option>
+                                <option th:each="o:${packType}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.packType}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">引脚形状</label>
+                        <div class="col-sm-4">
+                            <input id="hpin" th:value="${info.pin}" type="hidden">
+                            <select id="pin" name="pin" data-placeholder="请选择引脚形状 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+                                <option th:each="o:${pin}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq info.pin}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+<!--                    <div class="form-group">-->
+<!--                        <label class="col-sm-2 control-label">备注</label>-->
+<!--                        <div class="col-sm-10">-->
+<!--                            <textarea name="descr" class="form-control" type="text"></textarea>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    var sizes = [[${size}]];
+</script>
+
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/pd/info/edit.js">
+</script>
+</body>
+</html>

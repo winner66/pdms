@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd.dao.mapper.PdModelMapper">
+  <resultMap id="BaseResultMap" type="com.chk.pdms.pd.domain.PdModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="qa_code" jdbcType="VARCHAR" property="qaCode" />
+    <result column="pd_class_id" jdbcType="BIGINT" property="pdClassId" />
+    <result column="voltage" jdbcType="VARCHAR" property="voltage" />
+    <result column="ohm" jdbcType="VARCHAR" property="ohm" />
+    <result column="tan" jdbcType="VARCHAR" property="tan" />
+    <result column="other_param" jdbcType="VARCHAR" property="otherParam" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+    <result column="feature" jdbcType="VARCHAR" property="feature" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="order_rule" jdbcType="VARCHAR" property="orderRule" />
+    <result column="manual_url" jdbcType="VARCHAR" property="manualUrl" />
+    <result column="size_url" jdbcType="VARCHAR" property="sizeUrl" />
+    <result column="order_rule_url" jdbcType="VARCHAR" property="orderRuleUrl" />
+    <result column="object_url" jdbcType="VARCHAR" property="objectUrl" />
+    <result column="chart_url" jdbcType="VARCHAR" property="chartUrl" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, code, qa_code, pd_class_id, voltage, ohm, tan, other_param, purpose, feature, 
+    contact, phone, order_rule, manual_url, size_url, order_rule_url, object_url, chart_url, 
+    company
+  </sql>
+  <select id="selectByExample" parameterType="com.chk.pdms.pd.domain.PdModelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pd_model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pd_model
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pd_model
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chk.pdms.pd.domain.PdModelExample">
+    delete from pd_model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chk.pdms.pd.domain.PdModel">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pd_model (name, code, qa_code, 
+      pd_class_id, voltage, ohm, 
+      tan, other_param, purpose, 
+      feature, contact, phone, 
+      order_rule, manual_url, size_url, 
+      order_rule_url, object_url, chart_url, 
+      company)
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{qaCode,jdbcType=VARCHAR}, 
+      #{pdClassId,jdbcType=BIGINT}, #{voltage,jdbcType=VARCHAR}, #{ohm,jdbcType=VARCHAR}, 
+      #{tan,jdbcType=VARCHAR}, #{otherParam,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, 
+      #{feature,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{orderRule,jdbcType=VARCHAR}, #{manualUrl,jdbcType=VARCHAR}, #{sizeUrl,jdbcType=VARCHAR}, 
+      #{orderRuleUrl,jdbcType=VARCHAR}, #{objectUrl,jdbcType=VARCHAR}, #{chartUrl,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chk.pdms.pd.domain.PdModel">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pd_model
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="qaCode != null">
+        qa_code,
+      </if>
+      <if test="pdClassId != null">
+        pd_class_id,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="ohm != null">
+        ohm,
+      </if>
+      <if test="tan != null">
+        tan,
+      </if>
+      <if test="otherParam != null">
+        other_param,
+      </if>
+      <if test="purpose != null">
+        purpose,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="orderRule != null">
+        order_rule,
+      </if>
+      <if test="manualUrl != null">
+        manual_url,
+      </if>
+      <if test="sizeUrl != null">
+        size_url,
+      </if>
+      <if test="orderRuleUrl != null">
+        order_rule_url,
+      </if>
+      <if test="objectUrl != null">
+        object_url,
+      </if>
+      <if test="chartUrl != null">
+        chart_url,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="qaCode != null">
+        #{qaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdClassId != null">
+        #{pdClassId,jdbcType=BIGINT},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="ohm != null">
+        #{ohm,jdbcType=VARCHAR},
+      </if>
+      <if test="tan != null">
+        #{tan,jdbcType=VARCHAR},
+      </if>
+      <if test="otherParam != null">
+        #{otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRule != null">
+        #{orderRule,jdbcType=VARCHAR},
+      </if>
+      <if test="manualUrl != null">
+        #{manualUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeUrl != null">
+        #{sizeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRuleUrl != null">
+        #{orderRuleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="objectUrl != null">
+        #{objectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="chartUrl != null">
+        #{chartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chk.pdms.pd.domain.PdModelExample" resultType="java.lang.Long">
+    select count(*) from pd_model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pd_model
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qaCode != null">
+        qa_code = #{record.qaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdClassId != null">
+        pd_class_id = #{record.pdClassId,jdbcType=BIGINT},
+      </if>
+      <if test="record.voltage != null">
+        voltage = #{record.voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ohm != null">
+        ohm = #{record.ohm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tan != null">
+        tan = #{record.tan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherParam != null">
+        other_param = #{record.otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purpose != null">
+        purpose = #{record.purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feature != null">
+        feature = #{record.feature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contact != null">
+        contact = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRule != null">
+        order_rule = #{record.orderRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manualUrl != null">
+        manual_url = #{record.manualUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sizeUrl != null">
+        size_url = #{record.sizeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRuleUrl != null">
+        order_rule_url = #{record.orderRuleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectUrl != null">
+        object_url = #{record.objectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chartUrl != null">
+        chart_url = #{record.chartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null">
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pd_model
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      qa_code = #{record.qaCode,jdbcType=VARCHAR},
+      pd_class_id = #{record.pdClassId,jdbcType=BIGINT},
+      voltage = #{record.voltage,jdbcType=VARCHAR},
+      ohm = #{record.ohm,jdbcType=VARCHAR},
+      tan = #{record.tan,jdbcType=VARCHAR},
+      other_param = #{record.otherParam,jdbcType=VARCHAR},
+      purpose = #{record.purpose,jdbcType=VARCHAR},
+      feature = #{record.feature,jdbcType=VARCHAR},
+      contact = #{record.contact,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      order_rule = #{record.orderRule,jdbcType=VARCHAR},
+      manual_url = #{record.manualUrl,jdbcType=VARCHAR},
+      size_url = #{record.sizeUrl,jdbcType=VARCHAR},
+      order_rule_url = #{record.orderRuleUrl,jdbcType=VARCHAR},
+      object_url = #{record.objectUrl,jdbcType=VARCHAR},
+      chart_url = #{record.chartUrl,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.pd.domain.PdModel">
+    update pd_model
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="qaCode != null">
+        qa_code = #{qaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pdClassId != null">
+        pd_class_id = #{pdClassId,jdbcType=BIGINT},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="ohm != null">
+        ohm = #{ohm,jdbcType=VARCHAR},
+      </if>
+      <if test="tan != null">
+        tan = #{tan,jdbcType=VARCHAR},
+      </if>
+      <if test="otherParam != null">
+        other_param = #{otherParam,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRule != null">
+        order_rule = #{orderRule,jdbcType=VARCHAR},
+      </if>
+      <if test="manualUrl != null">
+        manual_url = #{manualUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sizeUrl != null">
+        size_url = #{sizeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRuleUrl != null">
+        order_rule_url = #{orderRuleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="objectUrl != null">
+        object_url = #{objectUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="chartUrl != null">
+        chart_url = #{chartUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.pd.domain.PdModel">
+    update pd_model
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      qa_code = #{qaCode,jdbcType=VARCHAR},
+      pd_class_id = #{pdClassId,jdbcType=BIGINT},
+      voltage = #{voltage,jdbcType=VARCHAR},
+      ohm = #{ohm,jdbcType=VARCHAR},
+      tan = #{tan,jdbcType=VARCHAR},
+      other_param = #{otherParam,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      order_rule = #{orderRule,jdbcType=VARCHAR},
+      manual_url = #{manualUrl,jdbcType=VARCHAR},
+      size_url = #{sizeUrl,jdbcType=VARCHAR},
+      order_rule_url = #{orderRuleUrl,jdbcType=VARCHAR},
+      object_url = #{objectUrl,jdbcType=VARCHAR},
+      chart_url = #{chartUrl,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.pd.domain.PdModelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pd_model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

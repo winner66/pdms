@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" type="hidden" th:value="${flow.id}">
+                    <input name="orderId" type="hidden" th:value="${flow.orderId}">
+                    <input name="opUserId" type="hidden" th:value="${flow.opUserId}">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">当前处理人</label>
+                        <div class="col-sm-5">
+                            <input name="opUser" class="form-control" type="text" th:value="${flow.opUser}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">处理状态<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <select id="status" name="status" data-placeholder="请选择" class="form-control chosen-select"
+                                     tabindex="2" style="width: 100%">
+<!--                                <option value="">请选择</option>-->
+                                <option value="1">指定下一处理人</option>
+                                <option value="9">结束清单流程</option>
+                            </select>
+                        </div>
+                        <label id="opLabel" class="col-sm-1 control-label">下一处理人<span style="color:red">*</span></label>
+                        <div id="opDiv" class="col-sm-5">
+                            <input id="nextOpUser" name="nextOpUser" type="hidden" value="">
+                            <select id="nextOpUserId" name="nextOpUserId" data-placeholder="请选择" class="form-control" tabindex="2" style="width:100%">
+                                <option value="">请选择</option>
+                                <option th:each="o:${users}" th:value="${o.userId}" th:text="${o.name}" th:selected="${o.userId eq nextOpUserId}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">处理结果<span style="color:red">*</span></label>
+                        <div class="col-sm-11">
+                            <textarea name="opDesc" class="form-control" type="text"
+                                      th:text="${flow.opDesc}" maxlength="300"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+<!--                        <div class="columns pull-right">-->
+<!--                            <button class="btn btn-success" onclick="reLoad()">查询</button>-->
+<!--                        </div>-->
+<!--                        <div class="columns pull-left">-->
+<!--                            <label class="">处理流程</label>-->
+<!--                        </div>-->
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="orderId" th:value="${orderId}"/>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/order/edit-flow.js"></script>
+</body>
+
+</html>

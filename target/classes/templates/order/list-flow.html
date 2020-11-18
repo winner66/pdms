@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+<!--                        <div class="columns pull-right">-->
+<!--                            <button class="btn btn-success" onclick="reLoad()">查询</button>-->
+<!--                        </div>-->
+<!--                        <div class="columns pull-left">-->
+<!--                            <label class="">处理流程</label>-->
+<!--                        </div>-->
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="orderId" th:value="${orderId}"/>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/order/list-flow.js"></script>
+</body>
+
+</html>

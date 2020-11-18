@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="dataForm" enctype="multipart/form-data">
+                        <input id="pId" name="pId" type="hidden" th:value="${clz.pId}"/>
+                        <input id="id" name="id" type="hidden" th:value="${clz.id}"/>
+                        <input id="level" name="level" type="hidden" th:value="${clz.level}"/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">上级分类</label>
+                            <div class="col-sm-8">
+                                <input id="" name="" class="form-control" type="text" th:value="${pName}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">层级<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="text" disabled
+                                       th:value="${clz.level}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">名称<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="name" name="name" class="form-control" type="text" th:value="${clz.name}"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">显示名称<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="url" name="showName" class="form-control" type="text" th:value="${clz.showName}">
+                            </div>
+                        </div>
+                        <div class="form-group" th:if="${clz.level} == 3">
+                            <label class="col-sm-3 control-label">二级分类-等级<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <select id="qaGp" name="qaGp" data-placeholder="请选择" class="form-control" tabindex="2" style="width:100%">
+                                    <option value>请选择质量等级</option>
+                                    <option th:each="qa:${qagps}" th:value="${qa}" th:text="${qa}" th:selected="${qa eq clz.qaGp}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">序号<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="idx" name="idx" class="form-control" type="text"
+                                       th:value="${clz.idx}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图标</label>
+                            <div class="col-sm-6">
+                                <input id="iconUrl" name="iconUrl" type="hidden" th:value="${clz.iconUrl}"/>
+                                <input id="showIcon" class="form-control" th:value="${clz.showIcon}" placeholder="建议100*100像素,透明背景图片"
+                                       readonly style="cursor: pointer" onclick="$('#iconUrl').val() ? window.open($('#iconUrl').val(),'_blank'): '';">
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="iconImg">
+                                    <span class="btn btn-warning">点击上传</span>
+                                    <input type="file" id="iconImg" name="iconImg" accept="image/png" style="display: none" onchange="$('#showIcon').val(this.files[0].name)">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/pd/class/edit.js"></script>
+</body>
+
+</html>

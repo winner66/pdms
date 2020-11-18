@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm" enctype="multipart/form-data">
+                    <!--                <form class="form-horizontal m-t" id="dataForm">-->
+                    <input name="id" th:value="${model.id}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">产品名称<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="name" class="form-control" type="text" th:value="${model.name}">
+                        </div>
+                        <label class="col-sm-1 control-label">产品型号<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="code" class="form-control" type="text" th:value="${model.code}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">产品分类<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input id="pdClassId" name="pdClassId" th:value="${model.pdClassId}" type="hidden">
+                            <input id="pcName" name="pcName" class="form-control" type="text" placeholder="产品分类"
+                                   onclick="openClass()" th:value="${model.pcName}" style="cursor: pointer;" readonly>
+                        </div>
+                        <label class="col-sm-1 control-label">分厂</label>
+                        <div class="col-sm-5">
+                            <input name="company" class="form-control" type="text" th:value="${model.company}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">质量等级<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input id="hqaCode" th:value="${model.qaCode}" type="hidden">
+                            <select id="qaCode" name="qaCode" data-placeholder="请选择质量等级 (按CTRL多选)" class="form-control" tabindex="2" style="width:100%" multiple>
+                                <option th:each="o:${quality}" th:value="${o.code}" th:text="${o.code}" th:selected="${o.code eq model.qaCode}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">介质耐电压</label>
+                        <div class="col-sm-11">
+                            <input name="voltage" class="form-control" type="text" th:value="${model.voltage}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">绝缘电阻</label>
+                        <div class="col-sm-11">
+                            <input name="ohm" class="form-control" type="text" th:value="${model.ohm}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">损耗角正切</label>
+                        <div class="col-sm-11">
+                            <input name="tan" class="form-control" type="text" th:value="${model.tan}">
+                        </div>
+                    </div>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label class="col-sm-1 control-label">其他参数</label>-->
+                    <!--                        <div class="col-sm-11">-->
+                    <!--                            <textarea name="name" class="form-control" type="text" th:text="${model.otherParam}"></textarea>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">用途</label>
+                        <div class="col-sm-11">
+                            <textarea name="purpose" class="form-control" type="text"
+                                      th:text="${model.purpose}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">产品特点</label>
+                        <div class="col-sm-11">
+                            <textarea name="feature" class="form-control" type="text"
+                                      th:text="${model.feature}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">技术联系人</label>
+                        <div class="col-sm-5">
+                            <input name="contact" class="form-control" type="text" th:value="${model.contact}">
+                        </div>
+                        <label class="col-sm-1 control-label">联系方式</label>
+                        <div class="col-sm-5">
+                            <input name="phone" class="form-control" type="text" th:value="${model.phone}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">订货标识</label>
+                        <div class="col-sm-11">
+                            <input id="orderRule" name="orderRule" class="form-control" type="hidden"
+                                   th:value="${model.orderRule}">
+                            <input id="formatOR" class="form-control" type="text" th:value="${model.formatOR}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-11">
+                            <div th:each="o,stat:${model.ors}" th:class="${stat.odd} ? 'col-sm-2' : 'col-sm-1'">
+                                <!--                            <div th:each="o,stat:${model.ors}" th:class="${stat.odd} ? 'col-sm-2' : 'col-sm-1'">-->
+                                <!--                                <select name="or" data-placeholder="" class="form-control" tabindex="2" style="width:100%;" th:styleappend="${stat.odd} ? 'color:royalblue': 'color:turquoise'">-->
+                                <select name="or" data-placeholder="" class="form-control" tabindex="2"
+                                        style="width:100%;" th:classappend="${stat.odd} ? '_type' : '_cut'">
+                                    <option th:if="${stat.odd}" value=""></option>
+                                    <option th:if="${stat.odd}" th:each="t:${type}" th:value="${t.value}"
+                                            th:text="${t.name}" th:selected="${t.value eq o}"></option>
+                                    <option th:if="${stat.even}" th:each="t:${cut}" th:value="${t.value}"
+                                            th:text="${t.name}" th:selected="${t.value eq o}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">订货标识图</label>
+                        <div class="col-sm-5">
+                            <input id="orderRuleUrl" name="orderRuleUrl" type="hidden" th:value="${model.orderRuleUrl}"/>
+                            <input id="showOrderRuleImg" class="form-control" th:value="${model.showOrderRuleImg}"
+                                   readonly style="cursor: pointer"
+                                   onclick="$('#orderRuleUrl').val() ? window.open($('#orderRuleUrl').val(),'_blank'): '';">
+                        </div>
+                        <div class="col-sm-5">
+                                <span class="btn btn-warning"
+                                      onclick="$('#showOrderRuleImg').val(''); $('#orderRuleUrl').val('');">删除文件</span>
+                            <label for="orderRuleImg">
+                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>
+                                <input type="file" id="orderRuleImg" name="orderRuleImg"
+                                       accept="image/gif,image/jpeg,image/jpg,image/png" style="display: none"
+                                       onchange="$('#showOrderRuleImg').val(this.files[0].name)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" th:if="${#lists.size(model.ors2)} > 1">
+                        <label class="col-sm-1 control-label">订货标识2</label>
+                        <div class="col-sm-11">
+                            <input id="orderRule2" name="orderRule2" class="form-control" type="hidden"
+                                   th:value="${model.orderRule2}">
+                            <input id="formatOR2" class="form-control" type="text" th:value="${model.formatOR2}"
+                                   readonly>
+                        </div>
+                    </div>
+                    <div class="form-group" th:if="${#lists.size(model.ors2)} > 1">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-11">
+                            <div th:each="o2,stat:${model.ors2}" th:class="${stat.odd} ? 'col-sm-2' : 'col-sm-1'">
+                                <!--                            <div th:each="o,stat:${model.ors}" th:class="${stat.odd} ? 'col-sm-2' : 'col-sm-1'">-->
+                                <!--                                <select name="or" data-placeholder="" class="form-control" tabindex="2" style="width:100%;" th:styleappend="${stat.odd} ? 'color:royalblue': 'color:turquoise'">-->
+                                <select name="or2" data-placeholder="" class="form-control" tabindex="2"
+                                        style="width:100%;" th:classappend="${stat.odd} ? '_type' : '_cut'">
+                                    <option th:if="${stat.odd}" value=""></option>
+                                    <option th:if="${stat.odd}" th:each="t:${type}" th:value="${t.value}"
+                                            th:text="${t.name}" th:selected="${t.value eq o2}"></option>
+                                    <option th:if="${stat.even}" th:each="t:${cut}" th:value="${t.value}"
+                                            th:text="${t.name}" th:selected="${t.value eq o2}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" th:if="${#lists.size(model.ors2)} > 1">
+                        <label class="col-sm-1 control-label">订货标识图2</label>
+                        <div class="col-sm-5">
+                            <input id="orderRuleUrl2" name="orderRuleUrl2" type="hidden" th:value="${model.orderRuleUrl2}"/>
+                            <input id="showOrderRuleImg2" class="form-control" th:value="${model.showOrderRuleImg2}"
+                                   readonly style="cursor: pointer"
+                                   onclick="$('#orderRuleUrl2').val() ? window.open($('#orderRuleUrl2').val(),'_blank'): '';">
+                        </div>
+                        <div class="col-sm-5">
+                                <span class="btn btn-warning"
+                                      onclick="$('#showOrderRuleImg2').val(''); $('#orderRuleUrl2').val('');">删除文件</span>
+                            <label for="orderRuleImg2">
+                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>
+                                <input type="file" id="orderRuleImg2" name="orderRuleImg2"
+                                       accept="image/gif,image/jpeg,image/jpg,image/png" style="display: none"
+                                       onchange="$('#showOrderRuleImg2').val(this.files[0].name)">
+                            </label>
+                        </div>
+                    </div>
+
+<!--                    <div class="form-group">-->
+<!--                        <label class="col-sm-1 control-label"></label>-->
+<!--                        <div class="col-sm-5">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="col-sm-1 control-label">产品手册</label>-->
+<!--                        <div class="col-sm-5">-->
+<!--                            <input id="manualUrl" name="manualUrl" type="hidden" th:value="${model.manualUrl}"/>-->
+<!--                            <input id="showManual" class="form-control" th:value="${model.showManual}"-->
+<!--                                   readonly style="cursor: pointer"-->
+<!--                                   onclick="$('#manualUrl').val() ? window.open($('#manualUrl').val(),'_blank'): '';">-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-5">-->
+<!--                            <span class="btn btn-warning" onclick="$('#showManual').val(''); $('#manualUrl').val('');">删除文件</span>-->
+<!--                            <label for="manual">-->
+<!--                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>-->
+<!--                                <input type="file" id="manual" name="manual" accept="application/pdf"-->
+<!--                                       style="display: none" onchange="$('#showManual').val(this.files[0].name)">-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">实物图</label>
+                        <div class="col-sm-5">
+                            <input id="objectUrl1" name="objectUrl1" type="hidden" th:value="${model.objectUrl1}"/>
+                            <input id="showObjectImg1" class="form-control" th:value="${model.showObjectImg1}"
+                                   readonly style="cursor: pointer"
+                                   onclick="$('#objectUrl1').val() ? window.open($('#objectUrl1').val(),'_blank'): '';">
+                        </div>
+                        <div class="col-sm-5">
+                                <span class="btn btn-warning"
+                                      onclick="$('#showObjectImg1').val(''); $('#objectUrl1').val('');">删除文件</span>
+                            <label for="objectImg1">
+                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>
+                                <input type="file" id="objectImg1" name="objectImg1"
+                                       accept="image/gif,image/jpeg,image/jpg,image/png" style="display: none"
+                                       onchange="$('#showObjectImg1').val(this.files[0].name)">
+                            </label>
+                        </div>
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label class="col-sm-1 control-label">实物图片2</label>-->
+<!--                        <div class="col-sm-5">-->
+<!--                            <input id="objectUrl2" name="objectUrl2" type="hidden" th:value="${model.objectUrl2}"/>-->
+<!--                            <input id="showObjectImg2" class="form-control" th:value="${model.showObjectImg2}"-->
+<!--                                   readonly style="cursor: pointer"-->
+<!--                                   onclick="$('#objectUrl2').val() ? window.open($('#objectUrl2').val(),'_blank'): '';">-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-5">-->
+<!--                                <span class="btn btn-warning"-->
+<!--                                      onclick="$('#showObjectImg2').val(''); $('#objectUrl2').val('');">删除文件</span>-->
+<!--                            <label for="objectImg2">-->
+<!--                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>-->
+<!--                                <input type="file" id="objectImg2" name="objectImg2"-->
+<!--                                       accept="image/gif,image/jpeg,image/jpg,image/png" style="display: none"-->
+<!--                                       onchange="$('#showObjectImg2').val(this.files[0].name)">-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label class="col-sm-1 control-label">实物图片3</label>-->
+<!--                        <div class="col-sm-5">-->
+<!--                            <input id="objectUrl3" name="objectUrl3" type="hidden" th:value="${model.objectUrl3}"/>-->
+<!--                            <input id="showObjectImg3" class="form-control" th:value="${model.showObjectImg3}"-->
+<!--                                   readonly style="cursor: pointer"-->
+<!--                                   onclick="$('#objectUrl3').val() ? window.open($('#objectUrl3').val(),'_blank'): '';">-->
+<!--                        </div>-->
+<!--                        <div class="col-sm-5">-->
+<!--                                <span class="btn btn-warning"-->
+<!--                                      onclick="$('#showObjectImg3').val(''); $('#objectUrl3').val('');">删除文件</span>-->
+<!--                            <label for="objectImg3">-->
+<!--                                <span class="btn btn-warning" title="上传文件最大2M">点击上传</span>-->
+<!--                                <input type="file" id="objectImg3" name="objectImg3"-->
+<!--                                       accept="image/gif,image/jpeg,image/jpg,image/png" style="display: none"-->
+<!--                                       onchange="$('#showObjectImg3').val(this.files[0].name)">-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:include="include::footer"></div>
+
+    <script type="text/javascript" src="/js/appjs/pd/model/edit.js">
+    </script>
+</body>
+</html>

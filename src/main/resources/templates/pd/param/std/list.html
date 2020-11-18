@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+                        <input id="mode" type="hidden" th:value="${mode}">
+                        <div class="columns pull-left" th:if="${mode} eq 'page'">
+                            <button type="button" class="btn  btn-primary" onclick="add()">
+                                <i class="fa fa-plus hidden" aria-hidden="true"></i>添加
+                            </button>
+                        </div>
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="code" name="code" type="text" class="form-control" placeholder="名称/代码">
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select  name="gp" id="gp" data-placeholder="所有分类" class="form-control chosen-select"
+                                    tabindex="2" style="width: 100%">
+                                <option value="">所有分类</option>
+                                <option th:each="gp:${gps}" th:value="${gp.value}" th:text="${gp.value}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/pd/param/std/list.js"></script>
+</body>
+
+</html>

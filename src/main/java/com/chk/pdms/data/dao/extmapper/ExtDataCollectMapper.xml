@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.data.dao.extmapper.ExtDataCollectMapper">
+
+    <select id="list" resultType="com.chk.pdms.data.vo.DcVo">
+        SELECT
+        data as data,
+        count(1) as total
+        FROM
+        data_collect
+        WHERE
+        1=1
+        AND page = #{dc.page}
+        AND event = #{dc.event}
+        <if test="dc.startDate != null">
+            AND date &gt;= #{dc.startDate}
+        </if>
+        <if test="dc.endDate != null">
+            AND date &lt;= #{dc.endDate}
+        </if>
+        GROUP BY data
+        ORDER BY total DESC, data DESC
+    </select>
+
+    <select id="listDate" resultType="com.chk.pdms.data.vo.DcVo">
+        SELECT
+        data as data,
+        date as date,
+        count(1) as total
+        FROM
+        data_collect
+        WHERE
+        1=1
+        AND page = #{dc.page}
+        AND event = #{dc.event}
+        <if test="dc.startDate != null">
+            AND date &gt;= #{dc.startDate}
+        </if>
+        <if test="dc.endDate != null">
+            AND date &lt;= #{dc.endDate}
+        </if>
+        GROUP BY date, data
+        ORDER BY date DESC, total DESC, data DESC
+    </select>
+</mapper>

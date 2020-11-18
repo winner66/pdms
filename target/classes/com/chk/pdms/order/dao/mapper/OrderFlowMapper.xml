@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.order.dao.mapper.OrderFlowMapper">
+  <resultMap id="BaseResultMap" type="com.chk.pdms.order.domain.OrderFlow">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="op_user_id" jdbcType="BIGINT" property="opUserId" />
+    <result column="op_user" jdbcType="VARCHAR" property="opUser" />
+    <result column="op_desc" jdbcType="VARCHAR" property="opDesc" />
+    <result column="op_datetime" jdbcType="TIMESTAMP" property="opDatetime" />
+    <result column="idx" jdbcType="INTEGER" property="idx" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_id, op_user_id, op_user, op_desc, op_datetime, idx
+  </sql>
+  <select id="selectByExample" parameterType="com.chk.pdms.order.domain.OrderFlowExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_flow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_flow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_flow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chk.pdms.order.domain.OrderFlowExample">
+    delete from order_flow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chk.pdms.order.domain.OrderFlow">
+    insert into order_flow (id, order_id, op_user_id, 
+      op_user, op_desc, op_datetime, 
+      idx)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{opUserId,jdbcType=BIGINT}, 
+      #{opUser,jdbcType=VARCHAR}, #{opDesc,jdbcType=VARCHAR}, #{opDatetime,jdbcType=TIMESTAMP}, 
+      #{idx,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chk.pdms.order.domain.OrderFlow">
+    insert into order_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="opUserId != null">
+        op_user_id,
+      </if>
+      <if test="opUser != null">
+        op_user,
+      </if>
+      <if test="opDesc != null">
+        op_desc,
+      </if>
+      <if test="opDatetime != null">
+        op_datetime,
+      </if>
+      <if test="idx != null">
+        idx,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="opUserId != null">
+        #{opUserId,jdbcType=BIGINT},
+      </if>
+      <if test="opUser != null">
+        #{opUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opDesc != null">
+        #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opDatetime != null">
+        #{opDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idx != null">
+        #{idx,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chk.pdms.order.domain.OrderFlowExample" resultType="java.lang.Long">
+    select count(*) from order_flow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order_flow
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.opUserId != null">
+        op_user_id = #{record.opUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.opUser != null">
+        op_user = #{record.opUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opDesc != null">
+        op_desc = #{record.opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opDatetime != null">
+        op_datetime = #{record.opDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order_flow
+    set id = #{record.id,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      op_user_id = #{record.opUserId,jdbcType=BIGINT},
+      op_user = #{record.opUser,jdbcType=VARCHAR},
+      op_desc = #{record.opDesc,jdbcType=VARCHAR},
+      op_datetime = #{record.opDatetime,jdbcType=TIMESTAMP},
+      idx = #{record.idx,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.order.domain.OrderFlow">
+    update order_flow
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="opUserId != null">
+        op_user_id = #{opUserId,jdbcType=BIGINT},
+      </if>
+      <if test="opUser != null">
+        op_user = #{opUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opDesc != null">
+        op_desc = #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opDatetime != null">
+        op_datetime = #{opDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idx != null">
+        idx = #{idx,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.order.domain.OrderFlow">
+    update order_flow
+    set order_id = #{orderId,jdbcType=BIGINT},
+      op_user_id = #{opUserId,jdbcType=BIGINT},
+      op_user = #{opUser,jdbcType=VARCHAR},
+      op_desc = #{opDesc,jdbcType=VARCHAR},
+      op_datetime = #{opDatetime,jdbcType=TIMESTAMP},
+      idx = #{idx,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.order.domain.OrderFlowExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_flow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

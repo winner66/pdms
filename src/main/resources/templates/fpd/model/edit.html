@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${model.id}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">产品名称<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="name" class="form-control" type="text" th:value="${model.name}">
+                        </div>
+                        <label class="col-sm-1 control-label">产品型号<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="code" class="form-control" type="text" th:value="${model.code}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">序号<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="idx" class="form-control" type="text" th:value="${model.idx}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">型号规则</label>
+                        <div class="col-sm-11">
+                            <input id="orderRule" name="orderRule" class="form-control" type="hidden"
+                                   th:value="${model.orderRule}">
+                            <input id="orderRuleBit" name="orderRuleBit" class="form-control" type="hidden"
+                                   th:value="${model.orderRuleBit}">
+                            <input id="orderRulePos" name="orderRulePos" class="form-control" type="hidden"
+                                   th:value="${model.orderRulePos}">
+                            <input id="formatOR" class="form-control" type="text" th:value="${model.formatOR}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-11">
+                            <label class="col-sm-3 control-label" style="text-align: center">参数</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">分割符</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">起始位</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">长度</label>
+                            <label class="col-sm-3 control-label" style="text-align: center">参数</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">分割符</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">起始位</label>
+                            <label class="col-sm-1 control-label" style="text-align: center">长度</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-11">
+                            <!--                            <div th:each="o,stat:${model.ors}" class="col-sm-2">-->
+                            <div th:each="o,stat:${model.ors}"
+                                 th:class="${stat.index} % 4 == 0 ? 'col-sm-3' : 'col-sm-1'">
+                                <select th:if="${stat.index} % 4 == 0" name="or" data-placeholder=""
+                                        class="form-control _type" tabindex="1" style="width:100%;">
+                                    <option value=""></option>
+                                    <option th:each="t:${type}" th:value="${t.value}" th:text="${t.name}"
+                                            th:selected="${t.value eq o}"></option>
+                                </select>
+                                <select th:if="${stat.index} % 4 == 1" name="or" data-placeholder=""
+                                        class="form-control _cut" tabindex="1" style="width:100%;">
+                                    <option th:each="t:${cut}" th:value="${t.value}" th:text="${t.name}"
+                                            th:selected="${t.value eq o}"></option>
+                                </select>
+                                <select th:if="${stat.index} % 4 == 2" name="pos" data-placeholder=""
+                                        class="form-control" tabindex="1" style="width:100%;">
+                                    <option value=""></option>
+                                    <option th:each="t:${pos}" th:value="${t}" th:text="${t}"
+                                            th:selected="${t eq o}"></option>
+                                </select>
+                                <select th:if="${stat.index} % 4 == 3" name="bit" data-placeholder=""
+                                        class="form-control" tabindex="1" style="width:100%;">
+                                    <option value=""></option>
+                                    <!--                                    <option th:each="t:${bit}" th:value="${t}" th:text="${t}" th:selected="${t eq model.bits[stat.index / 3]}"></option>-->
+                                    <option th:each="t:${bit}" th:value="${t}" th:text="${t}"
+                                            th:selected="${t eq o}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/fpd/model/edit.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${map.id}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品型号<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <select id="fpdModelId" name="fpdModelId" data-placeholder="请选择产品型号" class="form-control chosen-select"
+                                    tabindex="2" style="width: 100%">
+                                <option value="">请选择产品型号</option>
+                                <option th:each="m:${model}" th:value="${m.id}" th:text="${m.name}" th:selected="${m.id eq map.fpdModelId}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">参数类型<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <select id="paramType" name="paramType" data-placeholder="请选择参数类型" class="form-control chosen-select"
+                                    tabindex="2" style="width: 100%">
+                                <option value="">请选择参数类型</option>
+                                <option th:each="t:${type}" th:value="${t.value}" th:text="${t.name}" th:selected="${t.value eq map.paramType}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">国外参数<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input name="fcode" class="form-control" type="text" th:value="${map.fcode}">
+                        </div>
+                        <label class="col-sm-2 control-label">宏科参数<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <input name="code" class="form-control" type="text" th:value="${map.code}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/fpd/map/edit.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${contact.id}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">名称<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="name" class="form-control" type="text" th:value="${contact.name}">
+                        </div>
+                        <label class="col-sm-1 control-label">类型<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <select name="type" data-placeholder="请选择类型" class="form-control" tabindex="2">
+                                <option></option>
+                                <option th:each="o:${types}" th:value="${o}" th:text="${o}" th:selected="${o eq contact.type}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">地址</label>
+                        <div class="col-sm-5">
+                            <input name="address" class="form-control" type="text" th:value="${contact.address}">
+                        </div>
+                        <label class="col-sm-1 control-label">邮编</label>
+                        <div class="col-sm-5">
+                            <input name="postCode" class="form-control" type="text" th:value="${contact.postCode}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">电话标题1</label>
+                        <div class="col-sm-5">
+                            <input name="phoneTitle1" class="form-control" type="text"
+                                   th:value="${contact.phoneTitle1}">
+                        </div>
+                        <label class="col-sm-1 control-label">电话1</label>
+                        <div class="col-sm-5">
+                            <input name="phone1" class="form-control" type="text" th:value="${contact.phone1}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">电话标题2</label>
+                        <div class="col-sm-5">
+                            <input name="phoneTitle2" class="form-control" type="text"
+                                   th:value="${contact.phoneTitle2}">
+                        </div>
+                        <label class="col-sm-1 control-label">电话2</label>
+                        <div class="col-sm-5">
+                            <input name="phone2" class="form-control" type="text" th:value="${contact.phone2}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">传真标题</label>
+                        <div class="col-sm-5">
+                            <input name="faxTitle" class="form-control" type="text" th:value="${contact.faxTitle}">
+                        </div>
+                        <label class="col-sm-1 control-label">传真</label>
+                        <div class="col-sm-5">
+                            <input name="fax" class="form-control" type="text" th:value="${contact.fax}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">网站</label>
+                        <div class="col-sm-5">
+                            <input name="website" class="form-control" type="text" th:value="${contact.website}">
+                        </div>
+                        <label class="col-sm-1 control-label">Email</label>
+                        <div class="col-sm-5">
+                            <input name="email" class="form-control" type="text" th:value="${contact.email}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">联系人标题</label>
+                        <div class="col-sm-5">
+                            <input name="contactTitle" class="form-control" type="text"
+                                   th:value="${contact.contactTitle}">
+                        </div>
+                        <label class="col-sm-1 control-label">联系人姓名</label>
+                        <div class="col-sm-5">
+                            <input name="contactName" class="form-control" type="text"
+                                   th:value="${contact.contactName}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">联系人电话</label>
+                        <div class="col-sm-5">
+                            <input name="contactPhone" class="form-control" type="text"
+                                   th:value="${contact.contactPhone}">
+                        </div>
+                        <label class="col-sm-1 control-label">序号</label>
+                        <div class="col-sm-5">
+                            <input name="idx" class="form-control" type="text" th:value="${contact.idx}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">纬度</label>
+                        <div class="col-sm-5">
+                            <input name="lat" class="form-control" type="text" th:value="${contact.lat}">
+                        </div>
+                        <label class="col-sm-1 control-label">经度</label>
+                        <div class="col-sm-5">
+                            <input name="lng" class="form-control" type="text" th:value="${contact.lng}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">所属大区</label>
+                        <div class="col-sm-5">
+                            <select name="area" data-placeholder="请选择所属大区" class="form-control" tabindex="2">
+                                <option></option>
+                                <option th:each="o:${areas}" th:value="${o.name}" th:text="${o.name}" th:selected="${o.name eq contact.area}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+
+<script type="text/javascript" src="/js/appjs/cm/contact/edit.js">
+</script>
+</body>
+</html>

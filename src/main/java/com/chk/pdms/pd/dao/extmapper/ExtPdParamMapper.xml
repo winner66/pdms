@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd.dao.extmapper.ExtPdParamMapper">
+    <select id="list" resultType="com.chk.pdms.pd.domain.PdParam">
+        select
+        *
+        from pd_param
+        where 1=1
+        <if test="param.code != null">
+            AND (code like CONCAT('%',#{param.code},'%') or name like CONCAT('%',#{param.code},'%'))
+        </if>
+        <if test="param.type != null">
+            AND (type = #{param.type})
+        </if>
+        <if test="param.gp != null">
+            AND (gp = #{param.gp})
+        </if>
+        order by idx asc
+    </select>
+
+    <select id="listByType" resultType="com.chk.pdms.pd.domain.PdParam">
+        select
+        *
+        from pd_param
+        where 1=1
+        <if test="param.code != null">
+            AND (code like CONCAT('%',#{param.code},'%') or name like CONCAT('%',#{param.code},'%'))
+        </if>
+        <if test="types != null">
+            AND type in
+            <foreach item="item" index="index" collection="types" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by type asc, idx asc
+    </select>
+
+    <select id="listGp" resultType="com.chk.pdms.pd.domain.PdParam">
+        select
+        *
+        from pd_param
+        where 1=1
+        AND (type = #{type})
+        group by gp
+        order by idx asc
+    </select>
+
+    <select id="list4Info" resultType="com.chk.pdms.pd.domain.PdParam">
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '质量等级'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '封装及外形尺寸'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '温度特性/系数'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电压'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电容'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '精度/容量偏差'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '引出端形式'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电极材料代码'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电容数量'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电路形式'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '工作温度范围'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '引线材质'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '引线长短'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '电流系列'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '端头结构'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '包装方式'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '引脚形状'
+        order by idx asc
+    </select>
+</mapper>

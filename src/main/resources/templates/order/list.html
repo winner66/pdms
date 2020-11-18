@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+                        <div class="columns pull-left">
+                            <button type="button" class="btn  btn-primary" style="margin-left: 20px" onclick="exportFlow()">
+                                <i class="fa fa-plus hidden" aria-hidden="true">
+                                </i>导出清单
+                            </button>
+                        </div>
+
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <select id="status" data-placeholder="状态" class="form-control chosen-select"
+                                    tabindex="2" style="width: 100%">
+                                <option value="">全部状态</option>
+                                <option value="1">处理中</option>
+                                <option value="9">完成</option>
+                            </select>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input type="text" class="laydate-icon form-control" id="endDate"
+                                   placeholder="结束时间"
+                                   onclick="laydate()"
+                                   style="background-color: #fff;" readonly="readonly"/>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input type="text" class="laydate-icon form-control" id="startDate"
+                                   placeholder="开始时间"
+                                   onclick="laydate()"
+                                   style="background-color: #fff;" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/order/list.js"></script>
+</body>
+
+</html>

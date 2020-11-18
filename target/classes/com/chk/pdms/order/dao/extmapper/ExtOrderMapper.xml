@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.order.dao.extmapper.ExtOrderMapper">
+    <select id="listExportVo" resultType="com.chk.pdms.order.vo.OrderFlowExportVo">
+        select
+        o.*, if(o.status=1,'处理中','完成') as orderStatus, o.op_user as order_op_user,
+        of.*, of.op_user as flow_op_user
+        from orders o left join order_flow of on o.id = of.order_id
+        where 1=1
+        <if test="startDate != null">
+            and o.create_time >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            and o.create_time &lt;= #{endDate}
+        </if>
+        <if test="status != null">
+            and o.status = #{status}
+        </if>
+        order by o.id asc, of.id asc
+    </select>
+</mapper>

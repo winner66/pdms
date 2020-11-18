@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.fpd.dao.extmapper.ExtFpdMapMapper">
+    <select id="list" resultType="com.chk.pdms.fpd.vo.FpdMapVo">
+        select
+        fm.name as fmName,
+        fm.code as fmCode,
+        m.id,
+        m.fpd_model_id,
+        m.param_type,
+        m.fcode,
+        m.code
+        from fpd_map m
+        left join fpd_model fm on m.fpd_model_id = fm.id
+        where 1=1
+        <if test="fmId != null">
+            AND m.fpd_model_id = #{fmId}
+        </if>
+        order by id desc
+    </select>
+</mapper>
