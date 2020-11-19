@@ -28,7 +28,9 @@ public class DictService {
     public List<DictDO> list(Map<String, Object> map) {
         return dictMapper.list(map);
     }
-
+    public List<DictDO> listAll() {
+        return dictMapper.listAll();
+    }
 
     public int count(Map<String, Object> map) {
         return dictMapper.count(map);
@@ -106,4 +108,14 @@ public class DictService {
         return dictMapper.list(param);
     }
 
+    public Boolean delete(Long id) {
+        DictDO dictDO=dictMapper.get(id);
+//        判断是否有下级
+
+        if (dictDO==null) {
+            return false;
+        }
+        dictMapper.remove(id);
+        return true;
+    }
 }

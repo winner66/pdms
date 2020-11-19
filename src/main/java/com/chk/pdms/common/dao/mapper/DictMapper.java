@@ -20,7 +20,10 @@ public interface DictMapper {
 	DictDO get(Long id);
 
 	List<DictDO> list(Map<String, Object> map);
+	List<DictDO> listAll();
 
+	List<DictDO> hasNext(Long id);
+	List<DictDO> Next(Long id);
 	int count(Map<String, Object> map);
 
 	int save(DictDO dict);
@@ -32,4 +35,6 @@ public interface DictMapper {
 	int batchRemove(Long[] ids);
 
 	List<DictDO> listType();
+
+
 }

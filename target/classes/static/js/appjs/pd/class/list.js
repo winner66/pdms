@@ -92,6 +92,7 @@ var load = function () {
                             var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="get(' + item.id + ')"><i class="fa fa-edit"></i></a> ';
                             var p = '';
                             if (item.level < 3){
+                                console.log(item)
                                 p = '<a class="btn btn-success btn-sm" href="#" mce_href="#" title="添加子分类" onclick="add(' + item.id + ')"><i class="fa fa-plus"></i></a> ';
                             }
                             var d = '<a class="btn btn-warning btn-sm " href="#" title="删除"  mce_href="#" onclick="del(' + item.id + ')"><i class="fa fa-remove"></i></a> ';

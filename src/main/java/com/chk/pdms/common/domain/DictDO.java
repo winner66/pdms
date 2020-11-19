@@ -43,7 +43,7 @@ public class DictDO implements Serializable {
 	//删除标记
 	private String delFlag;
 	//	类型编码
-	private  Long  typeCode;
+	private  Integer  level;
 
 	/**
 	 * 设置：编号
@@ -58,18 +58,14 @@ public class DictDO implements Serializable {
 		return id;
 	}
 
-	/**
-	 * 设置：类型编码
-	 */
-	public void setTypeCode(Long id) {
-		this.typeCode = id;
+	public Integer getLevel() {
+		return level;
 	}
-	/**
-	 * 获取：类型编码
-	 */
-	public Long getTypeCode() {
-		return typeCode;
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
+
 	/**
 	 * 设置：标签名
 	 */

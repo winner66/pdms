@@ -4,33 +4,30 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		update();
 	}
 });
-function save() {
+function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/common/dictType/save",
-		data : $('#signupForm').serialize(), // 你的formid
+		url : "/common/dictType/update",
+		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
-			parent.layer.alert("网络超时");
+			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
 				parent.reLoad();
-				var index = parent.layer.getFrameIndex(window.name);
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
-
 			} else {
 				parent.layer.alert(data.msg)
 			}
-
 		}
 	});
-
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
@@ -38,11 +35,18 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			}
+			},
+			sort:{
+				required : true,
+				number: "请输入合法的数字",
+			},
 		},
 		messages : {
 			name : {
 				required : icon + "请输入名字"
+			},
+			sort : {
+				required : icon+"请输入合法的数字"
 			}
 		}
 	})

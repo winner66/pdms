@@ -5,13 +5,13 @@
 
 	<select id="get" resultType="com.chk.pdms.common.domain.DictDO">
 		select
-		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`type_code`
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`level`
 		from sys_dict where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.chk.pdms.common.domain.DictDO">
 		select
-		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`type_code`
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`level`
 		from sys_dict
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
@@ -27,7 +27,7 @@
 			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
-			<if test="typeCode != null and typeCode != ''">and type_code = #{typeCode}</if>
+			<if test="level != null and level != ''">and level = #{level}</if>
 		</where>
 		<choose>
 			<when test="orderSort != null and orderSort.trim() != ''">
@@ -40,6 +40,17 @@
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
+	</select>
+
+	<select id="listAll" resultType="com.chk.pdms.common.domain.DictDO">
+			select
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`level`
+		from sys_dict  order by sort
+	</select>
+	<select id="hasNext" resultType="com.chk.pdms.common.domain.DictDO">
+	select
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`,`level`
+		from sys_dict  order by sort  where parent_id = #{parentId}
 	</select>
 
 	<select id="count" resultType="int">
@@ -58,7 +69,7 @@
 			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
 			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
 			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
-			<if test="typeCode != null and typeCode != ''">and type_code = #{typeCode}</if>
+			<if test="level != null and level != ''">and level = #{level}</if>
 		</where>
 	</select>
 
@@ -78,7 +89,7 @@
 		`update_date`,
 		`remarks`,
 		`del_flag`,
-		`type_code`
+		`level`
 		)
 		values
 		(
@@ -94,7 +105,7 @@
 		#{updateDate},
 		#{remarks},
 		#{delFlag},
-		#{typeCode}
+		#{level}
 		)
 	</insert>
 
@@ -113,7 +124,7 @@
 			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
 			<if test="remarks != null">`remarks` = #{remarks}, </if>
 			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
-			<if test="typeCode != null">`type_code` = #{typeCode}</if>
+			<if test="level != null">`level` = #{levele}</if>
 		</set>
 		where id = #{id}
 	</update>

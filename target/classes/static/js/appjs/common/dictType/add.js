@@ -8,6 +8,7 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -38,12 +39,23 @@ function validateRule() {
 		rules : {
 			name : {
 				required : true
-			}
+			},
+			type : {
+				required : true
+			},
+			sort:{
+				required : true,
+				number: "请输入合法的数字",
+			},
 		},
 		messages : {
 			name : {
 				required : icon + "请输入名字"
+			},
+			sort : {
+				required : icon+"请输入合法的数字"
 			}
 		}
 	})
+
 }
