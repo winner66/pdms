@@ -41,7 +41,7 @@ public class PdModelVo extends PdModel {
     private String objectUrl2;
 
     private String objectUrl3;
-
+    //订货标识 选择项
     private List<String> ors = new ArrayList<>();
 
     private List<String> ors2 = new ArrayList<>();

@@ -1,11 +1,19 @@
 var prefix = "/pd/model";
 
 $().ready(function () {
+
     validateRule();
     loadSelect();
     initOrderRuleSelect();
     initOrderRuleSelect2();
 });
+// int res = permissionService.searchPermission(staff.getId(),permissionName);
+// model.addAttribute("res",res)
+
+// var testdata=[[${model}]];
+// console.log(testdata);
+
+
 
 $.validator.setDefaults({
     submitHandler: function () {
@@ -17,6 +25,7 @@ function save() {
     // var data = serializeNotNull($('#dataForm').serialize());
     //空字段都是""
     var data = new FormData($('#dataForm')[0]);
+
     $.ajax({
         cache: false,
         type: "POST",
@@ -86,6 +95,7 @@ var openClass = function () {
 }
 
 function loadSelect(){
+
     $("#qaCode").chosen({
         maxHeight: 200,
         // search_contains: true,
@@ -131,6 +141,7 @@ function initOrderRuleSelect() {
         $('#formatOR').val(formatVal);
         console.debug(val);
         console.debug(formatVal);
+        console.log(formatVal);
     });
 }
 

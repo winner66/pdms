@@ -3,6 +3,7 @@ package com.chk.pdms.pd.domain;
 import java.io.Serializable;
 
 public class PdInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
 
     private Long pdModelId;
@@ -52,8 +53,298 @@ public class PdInfo implements Serializable {
     private String pin;
 
     private String searchKey;
+    //    介电常数 @1.9G
+    private String permittivityBy1_9G;
+    //    介电常数 @15G
+    private String permittivityBy15G;
+    //    介电损耗@1.9G
+    private String dielectricLossBy1_9G;
+    //    介电常数 @15G
+    private String dielectricLossBy20G;
+    //    抗弯强度
+    private String flexureStrength;
+    //    绝缘电阻
+    private String insulationResistance;
+    //    击穿电压
+    private String breakdownVoltage;
+    //    通带损耗 （all）
+    private String passBandInsertionLoss;
+    //3dB截止频率
+    private String cutOffFrequency;
+    //    阻带(all)
+    private  String stopBand;
+    //    电压驻波比 通带1.5:1
+    private  String  vswrPassBand;
+    //    电压驻波比    阻带
+    private String vswrStopBand;
+    //    频率范围
+    private String frequencyRange;
+    //    隔离度 *
+    private String isolation;
+    //    插入损耗
+    private  String insertionLoss;
+    //    相位平衡度
+    private String phaseBalance;
+    //    幅度平衡度
+    private String  amplitudeBalance;
+    //   驻波*
+    private  String  vswr;
+    //    功率容量
+    private  String powerCapacity;
+    //    带内纹波
+    private  String ripple;
+    //    带外抑制
+    private  String  outOfBandRejection;
+    //    其他要求
+    private  String other;
+    //    通带范围
+    private  String passBandRange;
+    //       中心频率
+    private  String centerFrequency;
+    //   带宽
+    private  String bandwidth;
+    //    材料代码 陶瓷介质基片
+    private String materialCode;
+    //    长宽代码 陶瓷介质基片
+    private String lengthWidthCode;
+    //    厚度代码 陶瓷介质基片
+    private String thicknessCode;
+    //    表面代码 陶瓷介质基片
+    private String surfaceCode;
 
-    private static final long serialVersionUID = 1L;
+    public String getPermittivityBy1_9G() {
+        return permittivityBy1_9G;
+    }
+
+    public void setPermittivityBy1_9G(String permittivityBy1_9G) {
+        this.permittivityBy1_9G = permittivityBy1_9G;
+    }
+
+    public String getPermittivityBy15G() {
+        return permittivityBy15G;
+    }
+
+    public void setPermittivityBy15G(String permittivityBy15G) {
+        this.permittivityBy15G = permittivityBy15G;
+    }
+
+    public String getDielectricLossBy1_9G() {
+        return dielectricLossBy1_9G;
+    }
+
+    public void setDielectricLossBy1_9G(String dielectricLossBy1_9G) {
+        this.dielectricLossBy1_9G = dielectricLossBy1_9G;
+    }
+
+    public String getDielectricLossBy20G() {
+        return dielectricLossBy20G;
+    }
+
+    public void setDielectricLossBy20G(String dielectricLossBy20G) {
+        this.dielectricLossBy20G = dielectricLossBy20G;
+    }
+
+    public String getFlexureStrength() {
+        return flexureStrength;
+    }
+
+    public void setFlexureStrength(String flexureStrength) {
+        this.flexureStrength = flexureStrength;
+    }
+
+    public String getInsulationResistance() {
+        return insulationResistance;
+    }
+
+    public void setInsulationResistance(String insulationResistance) {
+        this.insulationResistance = insulationResistance;
+    }
+
+    public String getBreakdownVoltage() {
+        return breakdownVoltage;
+    }
+
+    public void setBreakdownVoltage(String breakdownVoltage) {
+        this.breakdownVoltage = breakdownVoltage;
+    }
+
+    public String getPassBandInsertionLoss() {
+        return passBandInsertionLoss;
+    }
+
+    public void setPassBandInsertionLoss(String passBandInsertionLoss) {
+        this.passBandInsertionLoss = passBandInsertionLoss;
+    }
+
+    public String getCutOffFrequency() {
+        return cutOffFrequency;
+    }
+
+    public void setCutOffFrequency(String cutOffFrequency) {
+        this.cutOffFrequency = cutOffFrequency;
+    }
+
+    public String getStopBand() {
+        return stopBand;
+    }
+
+    public void setStopBand(String stopBand) {
+        this.stopBand = stopBand;
+    }
+
+    public String getVswrPassBand() {
+        return vswrPassBand;
+    }
+
+    public void setVswrPassBand(String vswrPassBand) {
+        this.vswrPassBand = vswrPassBand;
+    }
+
+    public String getVswrStopBand() {
+        return vswrStopBand;
+    }
+
+    public void setVswrStopBand(String vswrStopBand) {
+        this.vswrStopBand = vswrStopBand;
+    }
+
+    public String getFrequencyRange() {
+        return frequencyRange;
+    }
+
+    public void setFrequencyRange(String frequencyRange) {
+        this.frequencyRange = frequencyRange;
+    }
+
+    public String getIsolation() {
+        return isolation;
+    }
+
+    public void setIsolation(String isolation) {
+        this.isolation = isolation;
+    }
+
+    public String getInsertionLoss() {
+        return insertionLoss;
+    }
+
+    public void setInsertionLoss(String insertionLoss) {
+        this.insertionLoss = insertionLoss;
+    }
+
+    public String getPhaseBalance() {
+        return phaseBalance;
+    }
+
+    public void setPhaseBalance(String phaseBalance) {
+        phaseBalance = phaseBalance;
+    }
+
+    public String getAmplitudeBalance() {
+        return amplitudeBalance;
+    }
+
+    public void setAmplitudeBalance(String amplitudeBalance) {
+        this.amplitudeBalance = amplitudeBalance;
+    }
+
+    public String getVswr() {
+        return vswr;
+    }
+
+    public void setVswr(String vswr) {
+        this.vswr = vswr;
+    }
+
+    public String getPowerCapacity() {
+        return powerCapacity;
+    }
+
+    public void setPowerCapacity(String powerCapacity) {
+        this.powerCapacity = powerCapacity;
+    }
+
+    public String getRipple() {
+        return ripple;
+    }
+
+    public void setRipple(String ripple) {
+        this.ripple = ripple;
+    }
+
+    public String getOutOfBandRejection() {
+        return outOfBandRejection;
+    }
+
+    public void setOutOfBandRejection(String outOfBandRejection) {
+        this.outOfBandRejection = outOfBandRejection;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public String getPassBandRange() {
+        return passBandRange;
+    }
+
+    public void setPassBandRange(String passBandRange) {
+        this.passBandRange = passBandRange;
+    }
+
+    public String getCenterFrequency() {
+        return centerFrequency;
+    }
+
+    public void setCenterFrequency(String centerFrequency) {
+        this.centerFrequency = centerFrequency;
+    }
+
+    public String getBandwidth() {
+        return bandwidth;
+    }
+
+    public void setBandwidth(String bandwidth) {
+        this.bandwidth = bandwidth;
+    }
+
+    public String getMaterialCode() {
+        return materialCode;
+    }
+
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
+    }
+
+    public String getLengthWidthCode() {
+        return lengthWidthCode;
+    }
+
+    public void setLengthWidthCode(String lengthWidthCode) {
+        this.lengthWidthCode = lengthWidthCode;
+    }
+
+    public String getThicknessCode() {
+        return thicknessCode;
+    }
+
+    public void setThicknessCode(String thicknessCode) {
+        this.thicknessCode = thicknessCode;
+    }
+
+    public String getSurfaceCode() {
+        return surfaceCode;
+    }
+
+    public void setSurfaceCode(String surfaceCode) {
+        this.surfaceCode = surfaceCode;
+    }
+
+
 
     public Long getId() {
         return id;

@@ -94,10 +94,28 @@ public class ImportService {
 //        穿心
         List<HeartVo> heartVos = EasyExcel.read(path).head(HeartVo.class).sheet(HeartVo.sheet).doReadSync();
 
+
+
+//       LBPF
+        List<PDHKLBPFInfoVo> LBPFVos = EasyExcel.read(path).head(PDHKLBPFInfoVo.class).sheet(PDHKLBPFInfoVo.sheet).doReadSync();
+//       LLPE
+        List<PDHKLLPEInfoVo> LLPEVos = EasyExcel.read(path).head(PDHKLLPEInfoVo.class).sheet(PDHKLLPEInfoVo.sheet).doReadSync();
+//        LHPF
+        List<PDLHPFInfoVo> LHPFVos = EasyExcel.read(path).head(PDLHPFInfoVo.class).sheet(PDLHPFInfoVo.sheet).doReadSync();
+//        JLTC
+        List<PDJLTCInfoVo> JLTCVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
+
+        //      陶瓷
+        List<PDCSInfoVo> CSVos = EasyExcel.read(path).head(PDCSInfoVo.class).sheet(PDCSInfoVo.sheet).doReadSync();
+//        瓷料
+        List<PDPorcelainInfoVo> PorcelainVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
+//       生瓷带
+        List<PDRawPorcelainWithInfoVo> RawPorcelainWithVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
+
         //增量导入不处理型号
         //importModel(path, clear, dataRuleVos,pinVo,mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
 
-        Map<String, Object> map = castService.castPdInfo(dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
+        Map<String, Object> map = castService.castPdInfo(dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos,LBPFVos,LLPEVos,LHPFVos,JLTCVos);
         Set<String> noModelInfo = (Set<String>) map.get("noModelInfo");
         if(noModelInfo.size() > 0){
             result.put("code", "1000");

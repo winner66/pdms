@@ -1,7 +1,7 @@
 package com.chk.pdms.data.dao.mapper;
 
 import com.chk.pdms.data.domain.DataCollect;
-import com.chk.pdms.data.domain.DataCollectExample;
+import com.chk.pdms.data.vo.DataCollectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

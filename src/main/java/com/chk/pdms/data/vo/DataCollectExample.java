@@ -1,4 +1,4 @@
-package com.chk.pdms.data.domain;
+package com.chk.pdms.data.vo;
 
 import java.util.ArrayList;
 import java.util.Date;

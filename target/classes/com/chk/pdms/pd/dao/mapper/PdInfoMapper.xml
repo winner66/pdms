@@ -27,6 +27,34 @@
     <result column="pack_type" jdbcType="VARCHAR" property="packType" />
     <result column="pin" jdbcType="VARCHAR" property="pin" />
     <result column="search_key" jdbcType="VARCHAR" property="searchKey" />
+    <result column="surface_code" jdbcType="VARCHAR" property="surfaceCode" />
+    <result column="thickness_code" jdbcType="VARCHAR" property="thicknessCode" />
+    <result column="length_width_code" jdbcType="VARCHAR" property="lengthWidthCode" />
+    <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="center_frequency" jdbcType="VARCHAR" property="centerFrequency" />
+    <result column="pass_band_range" jdbcType="VARCHAR" property="passBandRange" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="out_of_band_rejection" jdbcType="VARCHAR" property="outOfBandRejection" />
+    <result column="ripple" jdbcType="VARCHAR" property="ripple" />
+    <result column="power_capacity" jdbcType="VARCHAR" property="powerCapacity" />
+    <result column="vswr" jdbcType="VARCHAR" property="vswr" />
+    <result column="amplitude_balance" jdbcType="VARCHAR" property="amplitudeBalance" />
+    <result column="phase_balance" jdbcType="VARCHAR" property="phaseBalance" />
+    <result column="insertion_loss" jdbcType="VARCHAR" property="insertionLoss" />
+    <result column="isolation" jdbcType="VARCHAR" property="isolation" />
+    <result column="frequency_range" jdbcType="VARCHAR" property="frequencyRange" />
+    <result column="vswr_stop_band" jdbcType="VARCHAR" property="vswrStopBand" />
+    <result column="vswr_pass_Band" jdbcType="VARCHAR" property="vswrPassBand" />
+    <result column="stop_band" jdbcType="VARCHAR" property="stopBand" />
+    <result column="cut_off_frequency" jdbcType="VARCHAR" property="cutOffFrequency" />
+    <result column="pass_band_insertion_loss" jdbcType="VARCHAR" property="passBandInsertionLoss" />
+    <result column="breakdown_voltage" jdbcType="VARCHAR" property="breakdownVoltage" />
+    <result column="insulation_resistance" jdbcType="VARCHAR" property="insulationResistance" />
+    <result column="flexure_strength" jdbcType="VARCHAR" property="flexureStrength" />
+    <result column="dielectric_loss_by20G" jdbcType="VARCHAR" property="dielectricLossBy20G" />
+    <result column="dielectric_loss_by1_9G" jdbcType="VARCHAR" property="dielectricLossBy1_9G" />
+    <result column="permittivity_by15G" jdbcType="VARCHAR" property="permittivityBy15G" />
+    <result column="permittivity_by1_9G" jdbcType="VARCHAR" property="permittivityBy1_9G" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,7 +117,16 @@
   <sql id="Base_Column_List">
     id, pd_model_id, std, quality, model, size, temperature, voltage, capacity_min, capacity_max, 
     capacity_min_idx, capacity_max_idx, tolerance, outlet, elec_code, cap_num, elec_type, 
-    temper_range, wire_ma, wire_size, elec_ser, soc_str, pack_type, pin, search_key
+    temper_range, wire_ma, wire_size, elec_ser, soc_str, pack_type, pin, search_key,
+  </sql>
+
+  <sql id="ext_Column_List">
+    breakdown_voltage,insulation_vesistance, flexure_strength,dielectricLoss_by20G,    dielectricLoss_by1_9G,
+    permittivity_by15G,permittivity_by1_9G,vswr_pass_band,    vswr_stop_band,stop_band,
+    cut_off_frequency,pass_band_insertion_loss,isolation,insertion_loss,    phase_balance,
+    amplitude_balance,vswr,power_capacity,pass_band_range,ripple,
+    out_of_band_rejection,    other,center_frequency,bandwidth,surface_code,
+    thickness_code,length_width_code,material_code,  frequency_range
   </sql>
   <select id="selectByExample" parameterType="com.chk.pdms.pd.domain.PdInfoExample" resultMap="BaseResultMap">
     select
@@ -97,6 +134,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
+    <include refid="ext_Column_List" />
     from pd_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -108,6 +146,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    <include refid="ext_Column_List" />
     from pd_info
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -530,6 +569,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
+    <include refid="ext_Column_List" />
     from pd_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

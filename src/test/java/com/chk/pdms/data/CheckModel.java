@@ -37,6 +37,7 @@ public class CheckModel {
         Set<String> set6 = new HashSet<>();
         Set<String> set7 = new HashSet<>();
         Set<String> set8 = new HashSet<>();
+
         for (DataRuleVo vo : dataRuleVos) {
             set1.add(vo.getModel() + "|" + vo.getStd());
         }

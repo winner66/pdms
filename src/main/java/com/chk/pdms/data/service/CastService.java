@@ -342,7 +342,7 @@ public class CastService {
         }
     }
 
-    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos) {
+    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos,List<PDHKLBPFInfoVo>LBPFVos,List<PDHKLLPEInfoVo>LLPEVos,List<PDLHPFInfoVo>LHPFVos,List<PDJLTCInfoVo>JLTCVos) {
         HashMap<String, Object> result = new HashMap<>();
         List<PdInfo> infos = new ArrayList<>();
         result.put("pdInfo", infos);
@@ -378,6 +378,23 @@ public class CastService {
             PdInfo info = castPdInfo(vo);
             addInfo(infos, info);
         }
+        for (PDHKLBPFInfoVo vo :LBPFVos) {
+            PdInfo info = castPdInfo(vo);
+            addInfo(infos, info);
+        }
+        for (PDHKLLPEInfoVo vo : LLPEVos) {
+            PdInfo info = castPdInfo(vo);
+            addInfo(infos, info);
+        }
+        for (PDLHPFInfoVo vo : LHPFVos) {
+            PdInfo info = castPdInfo(vo);
+            addInfo(infos, info);
+        }
+        for (PDJLTCInfoVo vo : JLTCVos) {
+            PdInfo info = castPdInfo(vo);
+            addInfo(infos, info);
+        }
+
 
         Set<String> set = new LinkedHashSet<>();
         result.put("noModelInfo", set);
@@ -751,6 +768,34 @@ public class CastService {
 
     @SneakyThrows
     public PdInfo castPdInfo(HeartVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDJLTCInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDLHPFInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDHKLLPEInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDHKLBPFInfoVo vo) {
         PdInfo pdInfo = new PdInfo();
         BeanUtils.copyProperties(pdInfo, vo);
         addV(pdInfo);
