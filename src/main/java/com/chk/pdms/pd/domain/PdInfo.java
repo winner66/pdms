@@ -237,7 +237,7 @@ public class PdInfo implements Serializable {
     }
 
     public void setPhaseBalance(String phaseBalance) {
-        phaseBalance = phaseBalance;
+        this.phaseBalance = phaseBalance;
     }
 
     public String getAmplitudeBalance() {
@@ -548,39 +548,122 @@ public class PdInfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", pdModelId=").append(pdModelId);
-        sb.append(", std=").append(std);
-        sb.append(", quality=").append(quality);
-        sb.append(", model=").append(model);
-        sb.append(", size=").append(size);
-        sb.append(", temperature=").append(temperature);
-        sb.append(", voltage=").append(voltage);
-        sb.append(", capacityMin=").append(capacityMin);
-        sb.append(", capacityMax=").append(capacityMax);
-        sb.append(", capacityMinIdx=").append(capacityMinIdx);
-        sb.append(", capacityMaxIdx=").append(capacityMaxIdx);
-        sb.append(", tolerance=").append(tolerance);
-        sb.append(", outlet=").append(outlet);
-        sb.append(", elecCode=").append(elecCode);
-        sb.append(", capNum=").append(capNum);
-        sb.append(", elecType=").append(elecType);
-        sb.append(", temperRange=").append(temperRange);
-        sb.append(", wireMa=").append(wireMa);
-        sb.append(", wireSize=").append(wireSize);
-        sb.append(", elecSer=").append(elecSer);
-        sb.append(", socStr=").append(socStr);
-        sb.append(", packType=").append(packType);
-        sb.append(", pin=").append(pin);
-        sb.append(", searchKey=").append(searchKey);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "PdInfo{" +
+                "id=" + id +
+                ", pdModelId=" + pdModelId +
+                ", std='" + std + '\'' +
+                ", quality='" + quality + '\'' +
+                ", model='" + model + '\'' +
+                ", size='" + size + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", voltage='" + voltage + '\'' +
+                ", capacityMin='" + capacityMin + '\'' +
+                ", capacityMax='" + capacityMax + '\'' +
+                ", capacityMinIdx=" + capacityMinIdx +
+                ", capacityMaxIdx=" + capacityMaxIdx +
+                ", tolerance='" + tolerance + '\'' +
+                ", outlet='" + outlet + '\'' +
+                ", elecCode='" + elecCode + '\'' +
+                ", capNum='" + capNum + '\'' +
+                ", elecType='" + elecType + '\'' +
+                ", temperRange='" + temperRange + '\'' +
+                ", wireMa='" + wireMa + '\'' +
+                ", wireSize='" + wireSize + '\'' +
+                ", elecSer='" + elecSer + '\'' +
+                ", socStr='" + socStr + '\'' +
+                ", packType='" + packType + '\'' +
+                ", pin='" + pin + '\'' +
+                ", searchKey='" + searchKey + '\'' +
+                ", permittivityBy1_9G='" + permittivityBy1_9G + '\'' +
+                ", permittivityBy15G='" + permittivityBy15G + '\'' +
+                ", dielectricLossBy1_9G='" + dielectricLossBy1_9G + '\'' +
+                ", dielectricLossBy20G='" + dielectricLossBy20G + '\'' +
+                ", flexureStrength='" + flexureStrength + '\'' +
+                ", insulationResistance='" + insulationResistance + '\'' +
+                ", breakdownVoltage='" + breakdownVoltage + '\'' +
+                ", passBandInsertionLoss='" + passBandInsertionLoss + '\'' +
+                ", cutOffFrequency='" + cutOffFrequency + '\'' +
+                ", stopBand='" + stopBand + '\'' +
+                ", vswrPassBand='" + vswrPassBand + '\'' +
+                ", vswrStopBand='" + vswrStopBand + '\'' +
+                ", frequencyRange='" + frequencyRange + '\'' +
+                ", isolation='" + isolation + '\'' +
+                ", insertionLoss='" + insertionLoss + '\'' +
+                ", phaseBalance='" + phaseBalance + '\'' +
+                ", amplitudeBalance='" + amplitudeBalance + '\'' +
+                ", vswr='" + vswr + '\'' +
+                ", powerCapacity='" + powerCapacity + '\'' +
+                ", ripple='" + ripple + '\'' +
+                ", outOfBandRejection='" + outOfBandRejection + '\'' +
+                ", other='" + other + '\'' +
+                ", passBandRange='" + passBandRange + '\'' +
+                ", centerFrequency='" + centerFrequency + '\'' +
+                ", bandwidth='" + bandwidth + '\'' +
+                ", materialCode='" + materialCode + '\'' +
+                ", lengthWidthCode='" + lengthWidthCode + '\'' +
+                ", thicknessCode='" + thicknessCode + '\'' +
+                ", surfaceCode='" + surfaceCode + '\'' +
+                '}';
     }
+
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getClass().getSimpleName());
+//        sb.append(" [");
+//        sb.append("Hash = ").append(hashCode());
+//        sb.append(", id=").append(id);
+//        sb.append(", pdModelId=").append(pdModelId);
+//        sb.append(", std=").append(std);
+//        sb.append(", quality=").append(quality);
+//        sb.append(", model=").append(model);
+//        sb.append(", size=").append(size);
+//        sb.append(", temperature=").append(temperature);
+//        sb.append(", voltage=").append(voltage);
+//        sb.append(", capacityMin=").append(capacityMin);
+//        sb.append(", capacityMax=").append(capacityMax);
+//        sb.append(", capacityMinIdx=").append(capacityMinIdx);
+//        sb.append(", capacityMaxIdx=").append(capacityMaxIdx);
+//        sb.append(", tolerance=").append(tolerance);
+//        sb.append(", outlet=").append(outlet);
+//        sb.append(", elecCode=").append(elecCode);
+//        sb.append(", capNum=").append(capNum);
+//        sb.append(", elecType=").append(elecType);
+//        sb.append(", temperRange=").append(temperRange);
+//        sb.append(", wireMa=").append(wireMa);
+//        sb.append(", wireSize=").append(wireSize);
+//        sb.append(", elecSer=").append(elecSer);
+//        sb.append(", socStr=").append(socStr);
+//        sb.append(", packType=").append(packType);
+//        sb.append(", pin=").append(pin);
+//        sb.append(", searchKey=").append(searchKey);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//
+//
+//        sb.append("]");
+//        return sb.toString();
+//    }
 
     @Override
     public boolean equals(Object that) {

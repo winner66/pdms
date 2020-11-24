@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, page, event, data, uid, date
   </sql>
-  <select id="selectByExample" parameterType="com.chk.pdms.data.domain.DataCollectExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.chk.pdms.data.vo.DataCollectExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,7 +94,7 @@
     delete from data_collect
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.chk.pdms.data.domain.DataCollectExample">
+  <delete id="deleteByExample" parameterType="com.chk.pdms.data.vo.DataCollectExample">
     delete from data_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.chk.pdms.data.domain.DataCollectExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.chk.pdms.data.vo.DataCollectExample" resultType="java.lang.Long">
     select count(*) from data_collect
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -223,7 +223,7 @@
       date = #{date,jdbcType=DATE}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.data.domain.DataCollectExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.data.vo.DataCollectExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

@@ -1,5 +1,6 @@
 package com.chk.pdms.common.dao.mapper;
 
+import com.chk.pdms.common.domain.DictDO;
 import com.chk.pdms.common.domain.SysDictType;
 import com.chk.pdms.common.domain.SysDictTypeExample;
 import java.util.List;
@@ -31,7 +32,7 @@ public interface SysDictTypeMapper {
 
     int updateByPrimaryKey(SysDictType record);
 
-
     int batchRemove(Long[] ids);
-    List<SysDictType> list();
+
+    List<SysDictType> listType();
 }

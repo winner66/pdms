@@ -1,5 +1,6 @@
 package com.chk.pdms.data.service;
 
+import com.chk.pdms.common.constat.IsModelEnum;
 import com.chk.pdms.common.vo.ParamType;
 import com.chk.pdms.data.dao.DataDao;
 import com.chk.pdms.data.vo.*;
@@ -31,6 +32,39 @@ public class CastService {
 
     @Autowired
     private PdInfoService infoService;
+
+
+
+//    @PostConstruct
+//    public void init() {
+//        // some init function
+//        this.modelMap= buildModelMap();
+//        this.set= new LinkedHashSet<>();
+//
+//    }
+
+    /**
+     * 判断 某info 数据库里是否有该产品系列
+     */
+    public void isModel(Set<String> set, Map<String, PdModel>modelMap, PdInfo info, IsModelEnum  type) {
+        String modelCode = info.getModel() + "|" + info.getStd() + "|" + info.getQuality();
+        PdModel model = modelMap.get(modelCode);
+        if( type.getValue()==1){
+            //TODO  有型号
+            if (model != null ) {
+                info.setPdModelId(model.getId());
+            }else {
+        //    插入的产品没有对应的系列（code/）
+                set.add(modelCode);
+            }
+        }else{
+//            不需要
+        }
+
+    }
+
+
+
 
     public List<PdModel> castPdModel(List<ModelVo> vos, List<DataRuleVo> dataRuleVos, List<PinVo> pinVo, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos) {
         Map<String, String> ruleMap = new HashMap<>();
@@ -342,75 +376,101 @@ public class CastService {
         }
     }
 
-    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos,List<PDHKLBPFInfoVo>LBPFVos,List<PDHKLLPEInfoVo>LLPEVos,List<PDLHPFInfoVo>LHPFVos,List<PDJLTCInfoVo>JLTCVos) {
+    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos, List<PDHKLBPFInfoVo>LBPFVos, List<PDHKLLPFInfoVo>LLPEVos, List<PDLHPFInfoVo>LHPFVos, List<PDJLTCInfoVo>JLTCVos, List<PDCSInfoVo> pdcsInfoVos, List<PDPorcelainInfoVo> pdPorcelainInfoVos, List<PDSizingMaterialInfoVo> pdSizingMaterialInfoVos , List<PDRawPorcelainWithInfoVo> rawPorcelainWithInfoVos) {
         HashMap<String, Object> result = new HashMap<>();
         List<PdInfo> infos = new ArrayList<>();
         result.put("pdInfo", infos);
+        Map<String, PdModel> modelMap = buildModelMap();
+        Set<String> set = new LinkedHashSet<>();
+
         for (DataRuleVo vo : dataRuleVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (PinVo vo : pinVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
+
         }
         for (MutilVo vo : mutilVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (SingleVo vo : singleVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (HKIVo vo : hkiVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (ThreeVo vo : threeVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (TerVo vo : terVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
+
             addInfo(infos, info);
         }
         for (HeartVo vo : heartVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (PDHKLBPFInfoVo vo :LBPFVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
-        for (PDHKLLPEInfoVo vo : LLPEVos) {
+        for (PDHKLLPFInfoVo vo : LLPEVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (PDLHPFInfoVo vo : LHPFVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
         for (PDJLTCInfoVo vo : JLTCVos) {
             PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.hasModel);
+            addInfo(infos, info);
+        }
+        for(PDCSInfoVo vo : pdcsInfoVos) {
+            PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.notModel);
+            addInfo(infos, info);
+        }
+        for (PDRawPorcelainWithInfoVo  vo: rawPorcelainWithInfoVos) {
+            PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.notModel);
+            addInfo(infos, info);
+        }
+        for (PDSizingMaterialInfoVo vo : pdSizingMaterialInfoVos) {
+            PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.notModel);
+            addInfo(infos, info);
+        }
+        for (PDPorcelainInfoVo vo : pdPorcelainInfoVos) {
+            PdInfo info = castPdInfo(vo);
+            isModel(set,modelMap,info,IsModelEnum.notModel);
             addInfo(infos, info);
         }
 
 
-        Set<String> set = new LinkedHashSet<>();
+
+
+
         result.put("noModelInfo", set);
-        //init modelId
-        Map<String, PdModel> modelMap = buildModelMap();
-        for (PdInfo info : infos) {
-            String modelCode = info.getModel() + "|" + info.getStd() + "|" + info.getQuality();
-            PdModel model = modelMap.get(modelCode);
-            //TODO ???
-            if (model != null) {
-                info.setPdModelId(model.getId());
-            }else{
-//                插入的产品没有对应的系列（code/）
-                set.add(modelCode);
-            }
-        }
         if (set.size() > 0){
             log.error("无对应型号的产品");
         }
@@ -420,6 +480,7 @@ public class CastService {
         if (set.size() > 0){
             return result;
         }
+
 
         List<PdParam> capacities = dataDao.listParam(ParamType.capacity.value());
         //init capacity idx
@@ -788,7 +849,7 @@ public class CastService {
         return pdInfo;
     }
     @SneakyThrows
-    public PdInfo castPdInfo(PDHKLLPEInfoVo vo) {
+    public PdInfo castPdInfo(PDHKLLPFInfoVo vo) {
         PdInfo pdInfo = new PdInfo();
         BeanUtils.copyProperties(pdInfo, vo);
         addV(pdInfo);
@@ -801,4 +862,33 @@ public class CastService {
         addV(pdInfo);
         return pdInfo;
     }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDCSInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDPorcelainInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDRawPorcelainWithInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+    @SneakyThrows
+    public PdInfo castPdInfo(PDSizingMaterialInfoVo vo) {
+        PdInfo pdInfo = new PdInfo();
+        BeanUtils.copyProperties(pdInfo, vo);
+        addV(pdInfo);
+        return pdInfo;
+    }
+
 }

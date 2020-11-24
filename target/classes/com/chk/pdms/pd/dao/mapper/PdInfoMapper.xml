@@ -55,6 +55,23 @@
     <result column="dielectric_loss_by1_9G" jdbcType="VARCHAR" property="dielectricLossBy1_9G" />
     <result column="permittivity_by15G" jdbcType="VARCHAR" property="permittivityBy15G" />
     <result column="permittivity_by1_9G" jdbcType="VARCHAR" property="permittivityBy1_9G" />
+
+    <result column="dielectric_strength" jdbcType="VARCHAR" property="dielectricStrength" />
+    <result column="insulation_resistance_by125" jdbcType="VARCHAR" property="insulationResistanceBy125" />
+    <result column="insulation_resistance_by25" jdbcType="VARCHAR" property="insulationResistanceBy25" />
+    <result column="temperature_alteration_ratio" jdbcType="VARCHAR" property="temperatureAlterationRatio" />
+    <result column="dielectric_loss_by1MHz" jdbcType="VARCHAR" property="dielectricLossBy1MHz" />
+    <result column="permittivity" jdbcType="VARCHAR" property="permittivity" />
+    <result column="powder_density" jdbcType="VARCHAR" property="powderDensity" />
+    <result column="specific_surfaceArea" jdbcType="VARCHAR" property="specificSurfacearea" />
+    <result column="d90" jdbcType="VARCHAR" property="D90" />
+    <result column="d50" jdbcType="VARCHAR" property="D50" />
+    <result column="d10" jdbcType="VARCHAR" property="D10" />
+    <result column="sintering_temperature" jdbcType="VARCHAR" property="sinteringTemperature" />
+    <result column="soaking_time" jdbcType="VARCHAR" property="soakingTime" />
+    <result column="performance" jdbcType="VARCHAR" property="performance" />
+    <result column="pad_metallurgy" jdbcType="VARCHAR" property="padMetallurgy" />
+
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -126,7 +143,11 @@
     cut_off_frequency,pass_band_insertion_loss,isolation,insertion_loss,    phase_balance,
     amplitude_balance,vswr,power_capacity,pass_band_range,ripple,
     out_of_band_rejection,    other,center_frequency,bandwidth,surface_code,
-    thickness_code,length_width_code,material_code,  frequency_range
+    thickness_code,length_width_code,material_code,  frequency_range,dielectric_strength,
+    insulation_resistance_by125, insulation_resistance_by25,   temperature_alteration_ratio, dielectric_loss_by1MHz, permittivity,
+    powder_density,     specific_surfaceArea, d90, d50, d10,
+    sintering_temperature, soaking_time, performance,
+
   </sql>
   <select id="selectByExample" parameterType="com.chk.pdms.pd.domain.PdInfoExample" resultMap="BaseResultMap">
     select

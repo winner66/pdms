@@ -30,7 +30,7 @@ public class DictTypeService {
     }
 
     public List<SysDictType> list() {
-        return sysDictTypeMapper.list();
+        return sysDictTypeMapper.listType();
     }
 
 }

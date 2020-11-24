@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 //HKLLPE产品类型
 @Data
-public class PDHKLLPEInfoVo  {
+public class PDHKLLPFInfoVo {
 
     @ExcelIgnore
     public static String sheet = "LLPE";

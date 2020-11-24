@@ -8,7 +8,6 @@ import com.chk.pdms.pd.domain.PdInfo;
 import com.chk.pdms.pd.domain.PdModel;
 import com.chk.pdms.pd.domain.PdParam;
 import com.chk.pdms.pd.vo.PdInfoVo;
-import lombok.SneakyThrows;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
@@ -17,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.*;
 
 @Service
@@ -99,7 +95,7 @@ public class ImportService {
 //       LBPF
         List<PDHKLBPFInfoVo> LBPFVos = EasyExcel.read(path).head(PDHKLBPFInfoVo.class).sheet(PDHKLBPFInfoVo.sheet).doReadSync();
 //       LLPE
-        List<PDHKLLPEInfoVo> LLPEVos = EasyExcel.read(path).head(PDHKLLPEInfoVo.class).sheet(PDHKLLPEInfoVo.sheet).doReadSync();
+        List<PDHKLLPFInfoVo> LLPEVos = EasyExcel.read(path).head(PDHKLLPFInfoVo.class).sheet(PDHKLLPFInfoVo.sheet).doReadSync();
 //        LHPF
         List<PDLHPFInfoVo> LHPFVos = EasyExcel.read(path).head(PDLHPFInfoVo.class).sheet(PDLHPFInfoVo.sheet).doReadSync();
 //        JLTC
@@ -109,13 +105,15 @@ public class ImportService {
         List<PDCSInfoVo> CSVos = EasyExcel.read(path).head(PDCSInfoVo.class).sheet(PDCSInfoVo.sheet).doReadSync();
 //        瓷料
         List<PDPorcelainInfoVo> PorcelainVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
+//        浆料
+        List<PDSizingMaterialInfoVo> pdSizingMaterialInfoVos = EasyExcel.read(path).head(PDSizingMaterialInfoVo.class).sheet(PDSizingMaterialInfoVo.sheet).doReadSync();
 //       生瓷带
         List<PDRawPorcelainWithInfoVo> RawPorcelainWithVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
 
         //增量导入不处理型号
         //importModel(path, clear, dataRuleVos,pinVo,mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
 
-        Map<String, Object> map = castService.castPdInfo(dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos,LBPFVos,LLPEVos,LHPFVos,JLTCVos);
+        Map<String, Object> map = castService.castPdInfo(dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos,LBPFVos,LLPEVos,LHPFVos,JLTCVos,CSVos,PorcelainVos, pdSizingMaterialInfoVos,RawPorcelainWithVos);
         Set<String> noModelInfo = (Set<String>) map.get("noModelInfo");
         if(noModelInfo.size() > 0){
             result.put("code", "1000");
