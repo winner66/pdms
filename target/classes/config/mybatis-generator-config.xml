@@ -32,16 +32,16 @@
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <javaModelGenerator targetPackage="com.chk.pd.dao.Info.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.chk.pdms.dao.Info.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.chk.pd.dao.Info.mapper" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.chk.pdms.dao.Info.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chk.pd.dao.Info.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chk.pdms.dao.Info.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
@@ -51,43 +51,9 @@
         <!--        <table tableName="pd_info"></table>-->
         <!--        <table tableName="pd_param"></table>-->
 
-        <table tableName="pd_info">
+        <table tableName="sys_dict">
         </table>
 
-<!--        <javaModelGenerator targetPackage="com.chk.pdms.common.domain" targetProject="src/main/java">-->
-<!--            <property name="enableSubPackages" value="true"/>-->
-<!--            <property name="trimStrings" value="true"/>-->
-<!--        </javaModelGenerator>-->
 
-<!--        <sqlMapGenerator targetPackage="com.chk.pdms.common.dao.mapper" targetProject="src/main/java">-->
-<!--            <property name="enableSubPackages" value="true"/>-->
-<!--        </sqlMapGenerator>-->
-
-<!--        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chk.pdms.common.dao.mapper" targetProject="src/main/java">-->
-<!--            <property name="enableSubPackages" value="true"/>-->
-<!--        </javaClientGenerator>-->
-
-<!--        <table tableName="pd_class">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="pd_class_qa">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="pd_model">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="pd_info">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="pd_param">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-        <!--        <table tableName="pd_param"></table>-->
-        <!--        <table tableName="fpd_map"></table>-->
-<!--                <table tableName="order_flow"></table>-->
-<!--                <table tableName="orders"></table>-->
-
-<!--                        <table tableName="sys_dict_type"></table>-->
-<!--                        <table tableName="orders"></table>-->
     </context>
 </generatorConfiguration>

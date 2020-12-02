@@ -10,7 +10,7 @@ public class ThreeVo {
     public static String sheet = "三端";
 
     @ExcelIgnore
-    public  String orderRule = "质量等级| |产品型号|-|封装及外形尺寸|-|温度特性/系数|-|电压|-|电容||精度/容量偏差|-|电流系列||端头结构||包装方式|-|执行标准";
+    public String orderRule = "质量等级| |产品型号|-|封装及外形尺寸|-|温度特性/系数|-|电压|-|电容||精度/容量偏差|-|电流系列||端头结构||包装方式|-|执行标准";
 
     @ExcelProperty(value = "执行标准")
     private String std;

@@ -1,11 +1,10 @@
 package com.chk.pdms.pd.controller;
 
-import com.alibaba.excel.EasyExcel;
 import com.chk.pdms.common.utils.R;
 import com.chk.pdms.common.vo.Page;
 import com.chk.pdms.common.vo.PageReq;
 import com.chk.pdms.common.vo.ParamType;
-import com.chk.pdms.data.vo.DataRuleVo;
+import com.chk.pdms.data.service.PdExportExcelService;
 import com.chk.pdms.pd.domain.PdInfo;
 import com.chk.pdms.pd.domain.PdParam;
 import com.chk.pdms.pd.service.PdInfoService;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,6 +28,8 @@ public class PdInfoController {
 
     @Autowired
     private PdInfoService infoService;
+    @Autowired
+    private PdExportExcelService excel;
 
     @Autowired
     private PdParamService paramService;
@@ -126,6 +128,11 @@ public class PdInfoController {
         }
         selectedSize = selectedSize == null ? new ArrayList<>() : selectedSize;
         model.addAttribute("selectedSize", selectedSize);
+    }
+
+    @PostMapping("/test/printByEasyExcel")
+    public void printByEasyExcel( HttpServletResponse response) throws IOException {
+        excel.printByEasyExcel(response);
     }
 
 

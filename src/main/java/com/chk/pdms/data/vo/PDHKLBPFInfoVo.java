@@ -5,8 +5,9 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 //LBPF
 import java.io.Serializable;
+
 @Data
-public class PDHKLBPFInfoVo   {
+public class PDHKLBPFInfoVo {
     @ExcelIgnore
     public static String sheet = "LBPF";
     @ExcelIgnore
@@ -20,23 +21,23 @@ public class PDHKLBPFInfoVo   {
     private String quality;
 
     @ExcelProperty(value = "中心频率")
-    private  String centerFrequency;
+    private String centerFrequency;
 
     @ExcelProperty(value = "带宽")
-    private  String bandwidth;
+    private String bandwidth;
 
     @ExcelProperty(value = "封装格式(尺寸代码)")
-    private  String size;
+    private String size;
     //    插入损耗
     @ExcelProperty(value = "插入损耗")
-    private  String insertionLoss;
+    private String insertionLoss;
     //    带内纹波
     @ExcelProperty(value = "带内纹波")
-    private  String ripple;
+    private String ripple;
     //    带外抑制
     @ExcelProperty(value = "带外抑制")
-    private  String  outOfBandRejection;
+    private String outOfBandRejection;
     //    电压驻波比
     @ExcelProperty(value = "电压驻波比")
-    private  String  vswr;
+    private String vswr;
 }

@@ -14,9 +14,9 @@ public class PDSizingMaterialInfoVo {
     @ExcelProperty(value = "产品型号")
     private String pdname;
 
-    @ExcelProperty(value ="金属成分")
+    @ExcelProperty(value = "金属成分")
     private String padMetallurgy;
-//    烧结温度
+    //    烧结温度
     @ExcelProperty(value = "烧结温度")
     private String sinteringTemperature;
 

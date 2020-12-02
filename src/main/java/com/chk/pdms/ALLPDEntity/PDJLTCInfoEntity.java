@@ -17,7 +17,7 @@ public class PDJLTCInfoEntity  implements Serializable {
 
     private String quality;
 
-//    频率范围
+//    频率范围 （搜索字）
     private String frequencyRange;
 //    隔离度 *
     private String isolation;

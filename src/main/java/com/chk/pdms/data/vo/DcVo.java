@@ -17,7 +17,7 @@ public class DcVo extends DataCollect {
     private String dateStr;
 
     public String getDateStr() {
-        if (this.getDate() != null){
+        if (this.getDate() != null) {
             return new DateTime(this.getDate()).toString("yyyy-MM-dd");
         }
         return "";

@@ -1,6 +1,11 @@
 package com.chk.pdms.pd.domain;
 
+import com.chk.pdms.pd.vo.CasRsp;
+import com.chk.pdms.pd.vo.SelRsp;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PdInfo implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -19,6 +24,8 @@ public class PdInfo implements Serializable {
     private String temperature;
 
     private String voltage;
+    //        容量具体值
+    private String capacity;
 
     private String capacityMin;
 
@@ -111,6 +118,74 @@ public class PdInfo implements Serializable {
     private String thicknessCode;
     //    表面代码 陶瓷介质基片
     private String surfaceCode;
+
+    private List<CasRsp> capacities = new ArrayList<>();
+
+    private List<SelRsp> tolerances = new ArrayList<>();
+
+    private List<SelRsp> outlets = new ArrayList<>();
+
+    private List<SelRsp> wireMas = new ArrayList<>();
+
+    private List<SelRsp> wireSizes = new ArrayList<>();
+
+    private List<SelRsp> pins = new ArrayList<>();
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public List<CasRsp> getCapacities() {
+        return capacities;
+    }
+
+    public void setCapacities(List<CasRsp> capacities) {
+        this.capacities = capacities;
+    }
+
+    public List<SelRsp> getTolerances() {
+        return tolerances;
+    }
+
+    public void setTolerances(List<SelRsp> tolerances) {
+        this.tolerances = tolerances;
+    }
+
+    public List<SelRsp> getOutlets() {
+        return outlets;
+    }
+
+    public void setOutlets(List<SelRsp> outlets) {
+        this.outlets = outlets;
+    }
+
+    public List<SelRsp> getWireMas() {
+        return wireMas;
+    }
+
+    public void setWireMas(List<SelRsp> wireMas) {
+        this.wireMas = wireMas;
+    }
+
+    public List<SelRsp> getWireSizes() {
+        return wireSizes;
+    }
+
+    public void setWireSizes(List<SelRsp> wireSizes) {
+        this.wireSizes = wireSizes;
+    }
+
+    public List<SelRsp> getPins() {
+        return pins;
+    }
+
+    public void setPins(List<SelRsp> pins) {
+        this.pins = pins;
+    }
 
     public String getPermittivityBy1_9G() {
         return permittivityBy1_9G;

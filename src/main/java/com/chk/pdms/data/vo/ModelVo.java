@@ -32,7 +32,8 @@ public class ModelVo {
     @ExcelProperty(value = "是否新品")
     private String isNew;
     @ExcelProperty(value = "其他参数")
-    private String otherParam;;
+    private String otherParam;
+    ;
     @ExcelProperty(value = "用途")
     private String purpose;
     @ExcelProperty(value = "产品特点")

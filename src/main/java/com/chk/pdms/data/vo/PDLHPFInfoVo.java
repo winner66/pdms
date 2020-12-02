@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+
 @Data
 public class PDLHPFInfoVo {
 
@@ -31,17 +32,17 @@ public class PDLHPFInfoVo {
     private String cutOffFrequency;
     //    阻带(>=40dB)
     @ExcelProperty(value = "阻带(>=40dB)")
-    private  String stopBandUp40;
+    private String stopBandUp40;
     //    阻带(>=20dB)
     @ExcelProperty(value = "阻带(>=20dB)")
-    private  String stopBandUp20;
+    private String stopBandUp20;
     //    电压驻波比 通带1.5:1
     @ExcelProperty(value = "电压驻波比 通带1.5:1")
-    private  String  vswrPassBand;
+    private String vswrPassBand;
     //    电压驻波比    阻带
     @ExcelProperty(value = "电压驻波比    阻带")
     private String vswrStopBand;
     //封装类型
     @ExcelProperty(value = "封装类型")
-    private  String size;
+    private String size;
 }

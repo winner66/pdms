@@ -5,6 +5,8 @@ import com.chk.pdms.common.domain.DictDO;
 import java.util.List;
 import java.util.Map;
 
+import com.chk.pdms.common.domain.DictExample;
+
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -36,5 +38,6 @@ public interface DictMapper {
 
 	List<DictDO> listType();
 
+	List<DictDO> selectByExample(DictExample example);
 
 }

@@ -27,6 +27,7 @@
     <result column="pack_type" jdbcType="VARCHAR" property="packType" />
     <result column="pin" jdbcType="VARCHAR" property="pin" />
     <result column="search_key" jdbcType="VARCHAR" property="searchKey" />
+
     <result column="surface_code" jdbcType="VARCHAR" property="surfaceCode" />
     <result column="thickness_code" jdbcType="VARCHAR" property="thicknessCode" />
     <result column="length_width_code" jdbcType="VARCHAR" property="lengthWidthCode" />
@@ -71,6 +72,8 @@
     <result column="soaking_time" jdbcType="VARCHAR" property="soakingTime" />
     <result column="performance" jdbcType="VARCHAR" property="performance" />
     <result column="pad_metallurgy" jdbcType="VARCHAR" property="padMetallurgy" />
+
+    <result column="searchType" jdbcType="INTEGER" property="search_type"/>
 
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -138,7 +141,7 @@
   </sql>
 
   <sql id="ext_Column_List">
-    breakdown_voltage,insulation_vesistance, flexure_strength,dielectricLoss_by20G,    dielectricLoss_by1_9G,
+    breakdown_voltage,insulation_resistance,flexure_strength,dielectric_loss_by20G,   dielectric_loss_by1_9G,
     permittivity_by15G,permittivity_by1_9G,vswr_pass_band,    vswr_stop_band,stop_band,
     cut_off_frequency,pass_band_insertion_loss,isolation,insertion_loss,    phase_balance,
     amplitude_balance,vswr,power_capacity,pass_band_range,ripple,
@@ -146,7 +149,7 @@
     thickness_code,length_width_code,material_code,  frequency_range,dielectric_strength,
     insulation_resistance_by125, insulation_resistance_by25,   temperature_alteration_ratio, dielectric_loss_by1MHz, permittivity,
     powder_density,     specific_surfaceArea, d90, d50, d10,
-    sintering_temperature, soaking_time, performance,
+    sintering_temperature, soaking_time, performance,pad_metallurgy,search_type
 
   </sql>
   <select id="selectByExample" parameterType="com.chk.pdms.pd.domain.PdInfoExample" resultMap="BaseResultMap">

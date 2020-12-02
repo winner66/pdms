@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PdClassService {
@@ -32,6 +29,40 @@ public class PdClassService {
     public List<PdClass> list() {
         List<PdClass> pdClasses = pdClassDao.list();
         return pdClasses;
+    }
+//    查询一级class所有的子class（页）  (得到三级class)
+    public List<PdClass> list(Long id) {
+        PdClass Class = pdClassDao.getClassMapper().selectByPrimaryKey(id);
+
+        List<PdClass> pdClasses = pdClassDao.list();
+        List<PdClass> resulet = pdClassDao.list();
+        Set<Long> set = new HashSet<>();
+        for (PdClass pdClass : pdClasses) {
+            if (pdClass.getLevel() == 2&&pdClass.getpId()==id) {
+                set.add(pdClass.getId());
+            }
+        }
+        for (PdClass pdClass : pdClasses) {
+            if (pdClass.getLevel() == 3&&set.contains(pdClass.getpId())) {
+                resulet.add(pdClass);
+            }
+        }
+        return resulet;
+    }
+
+    //    查询二级class所有的子class（页）
+    public List<PdClass> list2(Long id) {
+        PdClass Class = pdClassDao.getClassMapper().selectByPrimaryKey(id);
+        List<PdClass> pdClasses = pdClassDao.list();
+        List<PdClass> resulet = pdClassDao.list();
+        Set<Long> set = new HashSet<>();
+
+        for (PdClass pdClass : pdClasses) {
+            if (pdClass.getLevel() == 3&&pdClass.getpId()==id) {
+                resulet.add(pdClass);
+            }
+        }
+        return resulet;
     }
 
     public List<Tree<PdClass>> tree() {

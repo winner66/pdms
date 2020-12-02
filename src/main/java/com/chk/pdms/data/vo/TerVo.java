@@ -10,7 +10,7 @@ public class TerVo {
     public static String sheet = "接线端子";
 
     @ExcelIgnore
-    public  String orderRule = "质量等级| |产品型号||电压|-|封装及外形尺寸|-|执行标准";
+    public String orderRule = "质量等级| |产品型号||电压|-|封装及外形尺寸|-|执行标准";
 
     @ExcelProperty(value = "执行标准")
     private String std;

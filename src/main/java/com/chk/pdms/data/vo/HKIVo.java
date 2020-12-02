@@ -10,7 +10,7 @@ public class HKIVo {
     public static String sheet = "HKI";
 
     @ExcelIgnore
-    public  String orderRule = "质量等级| |产品型号|-|封装及外形尺寸||电压||电路形式|-|电容||精度/容量偏差|-|工作温度范围|-|引线材质||引线长短|-|执行标准";
+    public String orderRule = "质量等级| |产品型号|-|封装及外形尺寸||电压||电路形式|-|电容||精度/容量偏差|-|工作温度范围|-|引线材质||引线长短|-|执行标准";
 
     @ExcelProperty(value = "执行标准")
     private String std;

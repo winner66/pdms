@@ -5,15 +5,16 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+
 @Data
-public class PDCSInfoVo  {
-//    private static final long serialVersionUID = 1L;
+public class PDCSInfoVo {
+    //    private static final long serialVersionUID = 1L;
     @ExcelIgnore
     public static String sheet = "CS";
     @ExcelIgnore
-    private  static  String pix="CS";
+    private static String pix = "CS";
     @ExcelIgnore
-    private String orderRule = "CS| |材料代码| | 长宽代码";
+    private String orderRule = "陶瓷基片||材料牌号||长宽代码||厚度代码||表面特性";
 
     //    产品型号(材料-长宽-厚度-表面)
     @ExcelProperty(value = "产品型号")

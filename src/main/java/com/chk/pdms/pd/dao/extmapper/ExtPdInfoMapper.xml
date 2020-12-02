@@ -13,6 +13,9 @@
         </if>
         order by id desc
     </select>
+    <select id="listAll" resultType="com.chk.pdms.pd.domain.PdInfo">
+        select * from  pd_info  order by id desc
+    </select>
 
     <select id="listFt" resultType="com.chk.pdms.pd.vo.PdFtVo">
         select

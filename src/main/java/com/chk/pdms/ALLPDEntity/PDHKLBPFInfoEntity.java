@@ -22,8 +22,6 @@ public class PDHKLBPFInfoEntity implements Serializable {
 
 
     private  String centerFrequency;
-
-
     private  String bandwidth;
 
 

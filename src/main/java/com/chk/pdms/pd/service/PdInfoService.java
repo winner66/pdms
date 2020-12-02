@@ -1,20 +1,20 @@
 package com.chk.pdms.pd.service;
 
 import com.alibaba.excel.EasyExcel;
+import com.chk.pdms.common.domain.DictDO;
+import com.chk.pdms.common.dao.dictDao;
 import com.chk.pdms.common.utils.FileUtil;
 import com.chk.pdms.common.utils.IKUtil;
 import com.chk.pdms.common.vo.Page;
 import com.chk.pdms.common.vo.PageReq;
 import com.chk.pdms.common.vo.ParamType;
+import com.chk.pdms.data.ExportPdDetailReq;
 import com.chk.pdms.data.service.ImportService;
 import com.chk.pdms.pd.dao.PdClassDao;
 import com.chk.pdms.pd.dao.PdInfoDao;
 import com.chk.pdms.pd.dao.PdModelDao;
 import com.chk.pdms.pd.dao.PdParamDao;
-import com.chk.pdms.pd.domain.PdClass;
-import com.chk.pdms.pd.domain.PdInfo;
-import com.chk.pdms.pd.domain.PdModel;
-import com.chk.pdms.pd.domain.PdParam;
+import com.chk.pdms.pd.domain.*;
 import com.chk.pdms.pd.vo.*;
 import com.github.pagehelper.PageHelper;
 import lombok.SneakyThrows;
@@ -39,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PdInfoService {
@@ -60,6 +61,12 @@ public class PdInfoService {
     @Autowired
     private ImportService importService;
 
+    @Autowired
+    private PdClassService pdClassService;
+    @Autowired
+    private dictDao dict;
+
+
     @Value("${virtual.filePath}")
     private String filePath;
 
@@ -80,6 +87,101 @@ public class PdInfoService {
         vo.setPdClassId(model.getPdClassId());
         BeanUtils.copyProperties(vo, info);
         return vo;
+    }
+
+    /**
+     * 获取某系列的产品集合list
+     * @param modelId
+     * @return
+     */
+    @SneakyThrows
+    public List<PdInfo> getPdsByModelId(Long modelId) {
+        PdInfoExample infoExample= new PdInfoExample();
+        infoExample.createCriteria().andPdModelIdEqualTo(modelId);
+        List<PdInfo> vo = infoDao.getInfoMapper().selectByExample(infoExample);
+        return vo;
+    }
+    public PdDetail getPdDetail(ExportPdDetailReq req) {
+        PdInfo pdInfo = infoDao.getInfoMapper().selectByPrimaryKey(req.getId());
+
+        PdModel pdModel = modelDao.getModelMapper().selectByPrimaryKey(pdInfo.getPdModelId());
+
+        PdClass pdClass = classDao.getClassMapper().selectByPrimaryKey(pdModel.getPdClassId());
+
+        PdParam size = pdParamDao.getSize(pdInfo.getStd(), pdInfo.getSize());
+        PdParam quality = pdParamDao.getPdParam(ParamType.quality.value(), pdInfo.getQuality());
+        PdParam temperature = pdParamDao.getPdParam(ParamType.temperature.value(), pdInfo.getTemperature());
+
+        List<PdParam> tolerances = getTolerance(req, pdInfo);
+        List<PdParam> outlets = getOutlet(req, pdInfo);
+        List<PdParam> capacities = getCapacity(req, pdInfo);
+        /**
+         * 返回""
+         */
+        String pdf=getpdf("");
+
+        PdDetail detail = new PdDetail(pdClass, pdf, pdModel, pdInfo, size, quality, temperature, tolerances, outlets, capacities, req);
+        return detail;
+    }
+
+    private String getpdf(String className) {
+
+        List<DictDO> dicts = dict.listByType("打开PDF的产品分类");
+//        对应名称
+        List<DictDO> dict2 = dict.listByType("应用指南");
+//        1.
+//        2.
+//        3.
+        Map<String,DictDO> pdfClz = new HashMap();
+        for (DictDO dictitem : dicts) {
+            pdfClz.put(dictitem.getName(), dictitem);
+        }
+
+        if (pdfClz.containsKey(className)) {
+          return pdfClz.get(className).getValue();
+        } else {
+
+            return "";
+        }
+
+    }
+
+    private List<PdParam> getTolerance(ExportPdDetailReq req, PdInfo pdInfo) {
+        List<PdParam> tolerances = new ArrayList<>();
+        if (StringUtils.isNotBlank(pdInfo.getTolerance())) {
+            List<String> codes;
+            if (StringUtils.isNotBlank(req.getTolerance())){
+                codes = Arrays.asList(new String[]{req.getTolerance()});
+            }else{
+                codes = Arrays.asList(StringUtils.split(pdInfo.getTolerance(), ";"));
+            }
+            tolerances = pdParamDao.getPdParam(ParamType.tolerance.value(), codes);
+        }
+        return tolerances;
+    }
+
+    private List<PdParam> getOutlet(ExportPdDetailReq  req, PdInfo pdInfo) {
+        List<PdParam> outlets = new ArrayList<>();
+        if (StringUtils.isNotBlank(pdInfo.getOutlet())) {
+            List<String> codes;
+            if (StringUtils.isNotBlank(req.getOutlet())){
+                codes = Arrays.asList(new String[]{req.getOutlet()});
+            }else{
+                codes = Arrays.asList(StringUtils.split(pdInfo.getOutlet(), ";"));
+            }
+            outlets = pdParamDao.getPdParam(ParamType.outlet.value(), codes);
+        }
+        return outlets;
+    }
+
+    private List<PdParam> getCapacity(ExportPdDetailReq  req, PdInfo pdInfo) {
+        List<PdParam> capacities;
+        if (StringUtils.isNotBlank(req.getCapacity())){
+            capacities = pdParamDao.getCapacities(Integer.valueOf(req.getCapacity()), Integer.valueOf(req.getCapacity()));
+        }else{
+            capacities = pdParamDao.getCapacities(pdInfo.getCapacityMinIdx(), pdInfo.getCapacityMaxIdx());
+        }
+        return capacities;
     }
 
     @Transactional
@@ -255,6 +357,76 @@ public class PdInfoService {
             dataFile.delete();
         }
         return rsp;
+    }
+
+    public List<PdInfo> getAll() {
+        return infoDao.getExtInfoMapper().listAll();
+    }
+
+    public List<PdInfo> getLTCC() {
+        List<PdInfo> res=new ArrayList<>();
+        Set<Long> pdModelList;
+        PdModelExample modelExample= new PdModelExample();
+        List<Long> pdclass= new ArrayList<>();
+
+        pdclass= pdClassService.list(3L).stream().map(r->r.getId()).collect(Collectors.toList());
+
+        modelExample.createCriteria().andPdClassIdIn(pdclass);
+        pdModelList= modelDao.getModelMapper().selectByExample(modelExample).stream().map(r->r.getId()).collect(Collectors.toSet());
+
+
+        List<PdInfo> pdInfoList= infoDao.getExtInfoMapper().listAll();
+
+        for(int i=0;i<pdInfoList.size();i++){
+           if(pdModelList.contains(pdInfoList.get(i).getPdModelId())){
+               res.add(pdInfoList.get(i));
+           }
+        }
+        return res;
+    }
+    public List<PdInfo> getEMI() {
+        List<PdInfo> res=new ArrayList<>();
+        Set<Long> pdModelList;
+        PdModelExample modelExample= new PdModelExample();
+        List<Long> pdclass= new ArrayList<>();
+
+//        pdclass= pdClassService.list(2L).stream().map(r->r.getId()).collect(Collectors.toList());
+        pdclass= pdClassService.list2(4L).stream().map(r->r.getId()).collect(Collectors.toList());
+
+        modelExample.createCriteria().andPdClassIdIn(pdclass);
+        pdModelList= modelDao.getModelMapper().selectByExample(modelExample).stream().map(r->r.getId()).collect(Collectors.toSet());
+
+
+        List<PdInfo> pdInfoList= infoDao.getExtInfoMapper().listAll();
+
+        for(int i=0;i<pdInfoList.size();i++){
+            if(pdModelList.contains(pdInfoList.get(i).getPdModelId())){
+                res.add(pdInfoList.get(i));
+            }
+        }
+        return res;
+    }
+
+    public List<PdInfo> getPorcelainDielectric() {
+        List<PdInfo> res=new ArrayList<>();
+        Set<Long> pdModelList;
+        PdModelExample modelExample= new PdModelExample();
+        List<Long> pdclass= new ArrayList<>();
+
+        pdclass= pdClassService.list(1L).stream().map(r->r.getId()).collect(Collectors.toList());
+
+        modelExample.createCriteria().andPdClassIdIn(pdclass);
+        pdModelList= modelDao.getModelMapper().selectByExample(modelExample).stream().map(r->r.getId()).collect(Collectors.toSet());
+
+
+        List<PdInfo> pdInfoList= infoDao.getExtInfoMapper().listAll();
+
+        for(int i=0;i<pdInfoList.size();i++){
+            if(pdModelList.contains(pdInfoList.get(i).getPdModelId())){
+                res.add(pdInfoList.get(i));
+            }
+        }
+        return res;
     }
 
 //    @Deprecated

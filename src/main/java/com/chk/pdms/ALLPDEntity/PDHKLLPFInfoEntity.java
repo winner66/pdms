@@ -17,7 +17,7 @@ public class PDHKLLPFInfoEntity implements Serializable {
     private String std;
 
     private String quality;
-//    通带范围
+//    通带范围 （搜索字段）
 
     private  String passBandRange;
 

@@ -18,8 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/pd/param")
@@ -106,6 +108,7 @@ public class PdParamController {
 //        }
         return prefix + "/" + path + "/edit";
     }
+//
 
     @ResponseBody
     @PostMapping("/{path}/save")
@@ -122,4 +125,6 @@ public class PdParamController {
         this.paramService.delete(id);
         return R.ok();
     }
+
+
 }

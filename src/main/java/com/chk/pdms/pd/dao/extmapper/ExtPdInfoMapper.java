@@ -18,4 +18,5 @@ public interface ExtPdInfoMapper {
     @Deprecated
     public void insert(@Param("infos")List<PdInfo> pdInfos);
 
+    List<PdInfo> listAll();
 }

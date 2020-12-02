@@ -194,7 +194,7 @@
     </if>
   </select>
 
- 
+
 
   <select id="batchRemove">
     delete from sys_dict_type where id in

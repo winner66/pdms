@@ -21,47 +21,47 @@ public class PDHKLLPFInfoVo {
     private String std;
     @ExcelProperty(value = "质量等级")
     private String quality;
-//    通带范围
+    //    通带范围
     @ExcelProperty(value = "通带范围")
-    private  String passBandRange;
+    private String passBandRange;
 
-//封装格式
+    //封装格式
     @ExcelProperty(value = "封装格式")
-    private  String size;
-//    插入损耗
+    private String size;
+    //    插入损耗
     @ExcelProperty(value = "插入损耗")
-    private  String insertionLoss;
-//3dB截止频率
+    private String insertionLoss;
+    //3dB截止频率
     @ExcelProperty(value = "3dB截止频率")
-    private  String cutOffFrequency;
-//    阻带(>=20dB)
+    private String cutOffFrequency;
+    //    阻带(>=20dB)
     @ExcelProperty(value = "阻带(>=20dB)")
-    private  String stopBandUP20;
-//    阻带(=30dB)
+    private String stopBandUP20;
+    //    阻带(=30dB)
     @ExcelProperty(value = "阻带(=30dB)")
-    private  String stopBandON30;
-//    阻带(=40dB)
+    private String stopBandON30;
+    //    阻带(=40dB)
     @ExcelProperty(value = "阻带(=40dB)")
-    private  String stopBandOn40;
-//    阻带(20dB*)
+    private String stopBandOn40;
+    //    阻带(20dB*)
     @ExcelProperty(value = "阻带(20dB*)")
-    private  String stopBandOn20;
-//    电压驻波比
+    private String stopBandOn20;
+    //    电压驻波比
     @ExcelProperty(value = "电压驻波比")
-    private  String  vswr;
-//    功率容量
+    private String vswr;
+    //    功率容量
     @ExcelProperty(value = "功率容量")
-    private  String  powerCapacity;
+    private String powerCapacity;
 
-//    定制类低通
+    //    定制类低通
 //    带内纹波
     @ExcelProperty(value = "带内纹波")
-    private  String ripple;
-//    带外抑制
+    private String ripple;
+    //    带外抑制
     @ExcelProperty(value = "带外抑制")
-    private  String  outOfBandRejection;
-//    其他要求
+    private String outOfBandRejection;
+    //    其他要求
     @ExcelProperty(value = "其他要求")
-    private  String other;
+    private String other;
 
 }
