@@ -33,10 +33,15 @@ public class PdParamDao {
 
     public List<PdParam> getCapacities(Integer minIdx, Integer maxIdx) {
         PdParamExample exp = new PdParamExample();
-        exp.createCriteria().andTypeEqualTo(ParamType.capacity.value()).andIdxBetween(minIdx, maxIdx);
-//        exp.setOrderByClause("idx asc");
+        if( minIdx!=null&&maxIdx!=null){
+            exp.createCriteria().andTypeEqualTo(ParamType.capacity.value()).andIdxBetween(minIdx, maxIdx);
+        }else{
+
+        }
         List<PdParam> pdParams = paramMapper.selectByExample(exp);
         return pdParams;
+
+
     }
     public PdParam getSize(String std, String code){
         if (StringUtils.isBlank(std) || StringUtils.isBlank(code)){

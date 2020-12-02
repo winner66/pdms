@@ -109,6 +109,30 @@ public class EasyExcelUtil {
 //        out.close();
 //        System.out.println("报表导出结束时间:"+ new Date()+";写入耗时: "+(System.currentTimeMillis()-exportStartTime)+"ms" );
     }
+// 浏览器中调用
+//    public static<T> void writeExcelWin( List<T> data, String fileName, Class clazz) throws Exception {
+//        long exportStartTime = System.currentTimeMillis();
+//
+//
+//        List<List<T>> lists = ExcelSheetSplitList.splitList(data,MAXROWS); // 分割的集合
+//
+//        OutputStream out = getOutputStream(fileName, response);
+//        ExcelWriterBuilder excelWriterBuilder = EasyExcel.write(fileName,  clazz).excelType(ExcelTypeEnum.XLSX).registerWriteHandler(getDefaultHorizontalCellStyleStrategy());
+//        ExcelWriter excelWriter = excelWriterBuilder.build();
+//        ExcelWriterSheetBuilder excelWriterSheetBuilder;
+//        WriteSheet writeSheet;
+//        for (int i =1;i<=lists.size();i++){
+//            excelWriterSheetBuilder = new ExcelWriterSheetBuilder(excelWriter);
+//            excelWriterSheetBuilder.sheetNo(i);
+//            excelWriterSheetBuilder.sheetName("sheet"+i);
+//            writeSheet = excelWriterSheetBuilder.build();
+//            excelWriter.write(lists.get(i-1),writeSheet);
+//        }
+////        out.flush();
+//        excelWriter.finish();
+////        out.close();
+////        System.out.println("报表导出结束时间:"+ new Date()+";写入耗时: "+(System.currentTimeMillis()-exportStartTime)+"ms" );
+//    }
 
 
     private static OutputStream getOutputStream(String fileName, HttpServletResponse response) throws Exception {

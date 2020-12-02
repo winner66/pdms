@@ -27,9 +27,8 @@ public class exportTest {
 //        EasyExcel.write(fileName, PdDetailExcel.class).sheet("模板2").doWrite(excel.data2());
 
         try {
-//            EasyExcelUtil.writeExcel(excel.data(),fileName, PdDetailExcel.class);
-//            PdDetail pdDetail= new PdDetail();
-            List<PdDetailExcel> data=excel.getModelExcel(133L);
+
+            List<PdDetailExcel> data=excel.getExcelList();
 
 
             EasyExcelUtil.writeExcel(data,fileName, PdDetailExcel.class);
@@ -37,16 +36,6 @@ public class exportTest {
             e.printStackTrace();
         }
 
-//        ExcelWriter excelWriter = EasyExcel.write(fileName).build();
-//
-//        //这里 需要指定写用哪个class去写
-//        WriteSheet writeSheet1 = EasyExcel.writerSheet(0, "模板1").head(PdDetailExcel.class).build();
-//
-//        excelWriter.write(excel.data1(), writeSheet1);
-//        WriteSheet writeSheet = EasyExcel.writerSheet(1, "模板2").head(PdDetailExcel.class).build();
-//        excelWriter.write(excel.data2(), writeSheet);
-//        //千万别忘记finish 会帮忙关闭流
-//        excelWriter.finish();
 
     }
 

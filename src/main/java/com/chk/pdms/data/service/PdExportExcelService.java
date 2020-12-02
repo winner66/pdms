@@ -5,11 +5,11 @@ import com.chk.pdms.common.vo.ParamType;
 import com.chk.pdms.data.utils.EasyExcelUtil;
 import com.chk.pdms.data.PdDetailExcel;
 import com.chk.pdms.data.ExportPdDetailReq;
+import com.chk.pdms.pd.dao.PdClassDao;
+import com.chk.pdms.pd.dao.PdInfoDao;
+import com.chk.pdms.pd.dao.PdModelDao;
 import com.chk.pdms.pd.dao.PdParamDao;
-import com.chk.pdms.pd.domain.PdDetail;
-import com.chk.pdms.pd.domain.PdInfo;
-import com.chk.pdms.pd.domain.PdModel;
-import com.chk.pdms.pd.domain.PdParam;
+import com.chk.pdms.pd.domain.*;
 import com.chk.pdms.pd.service.PdInfoService;
 import com.chk.pdms.pd.service.PdModelService;
 import com.chk.pdms.pd.vo.CasRsp;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -36,6 +37,8 @@ public class PdExportExcelService {
 
     @Autowired
     private PdParamDao pdParamDao;
+
+
 
     /**
      * 从数据库中读取数据
@@ -320,10 +323,8 @@ public class PdExportExcelService {
                                     pdDetail.setCode(setRule(pd,pdModel,req));
                                     list.add(pdDetail) ;
                                 }
-
                             }
                         }
-
                     }else{
                         for(int tt=0;tt<pd.getOutlets().size();tt++){
 
@@ -332,7 +333,6 @@ public class PdExportExcelService {
                                     pdDetail.setCode(setRule(pd,pdModel,req));
                                     list.add(pdDetail) ;
                         }
-
                     }
                 }else{
                     if(capacities.size()>0){
@@ -347,28 +347,13 @@ public class PdExportExcelService {
                                 pdDetail.setCode(setRule(pd,pdModel,req));
                                 list.add(pdDetail) ;
                             }
-
                         }
-
 
                     }else{
 
                     }
                 }
             }
-
-
-
-
-
-
-//
-//
-//            user.setAllStd("100"+i);
-//            user.setName("name_"+i);
-//            user.setClassName("dfs");
-//            user.setCode("address_"+ i);
-//            user.setQuality("sdfs");
 
         }
         return list ;
@@ -541,10 +526,11 @@ public class PdExportExcelService {
         return list ;
     }
 
-    public  List<PdDetailExcel> getModelExcel(Long Id){
+    public  List<PdDetailExcel> getExcelList(){
         List<PdDetailExcel> res = new ArrayList<PdDetailExcel>() ;
         List<PdInfo>   pdInfoList= new ArrayList<>();
         List<PdDetail> pdDetailList= new ArrayList<>();
+        pdInfoList= pdInfoService.getPorcelainDielectric();
         for (PdInfo info: pdInfoList
              ) {
             ExportPdDetailReq req= new ExportPdDetailReq();
@@ -732,12 +718,12 @@ public class PdExportExcelService {
             capacities = pdParamDao.getCapacities(Integer.valueOf(req.getCapacity()), Integer.valueOf(req.getCapacity()));
         }else{
 
-            if(pdInfo.getId()!=37480){
+
                 if(pdInfo.getCapacityMinIdx()!=null&& pdInfo.getCapacityMaxIdx()!=null){
                     capacities = pdParamDao.getCapacities(pdInfo.getCapacityMinIdx(), pdInfo.getCapacityMaxIdx());
                 }
 
-            }
+
 
         }
         return capacities;
