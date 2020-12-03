@@ -22,13 +22,18 @@ public class exportTest {
 
     @Test
     public  void inTest(){
-        String fileName = "d:/v049.xlsx" ;
+        String fileName = "d:/vEMI.xlsx"    ;
 //        EasyExcel.write(fileName, PdDetailExcel.class).sheet("模板1").doWrite(excel.data1());
 //        EasyExcel.write(fileName, PdDetailExcel.class).sheet("模板2").doWrite(excel.data2());
 
         try {
             List<PdDetailExcel> data=excel.getExcelList();
-            EasyExcelUtil.writeExcel(data,fileName, PdDetailExcel.class);
+
+            if(data.size()>0){
+                EasyExcelUtil.writeExcel(data,fileName, PdDetailExcel.class);
+            }else{
+                System.out.println("没有数据");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

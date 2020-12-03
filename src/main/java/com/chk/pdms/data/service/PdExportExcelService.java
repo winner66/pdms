@@ -530,11 +530,13 @@ public class PdExportExcelService {
         List<PdDetailExcel> res = new ArrayList<PdDetailExcel>() ;
         List<PdInfo>   pdInfoList= new ArrayList<>();
         List<PdDetail> pdDetailList= new ArrayList<>();
-//        pdInfoList= pdInfoService.getEMI();
-        pdInfoList= pdInfoService.getPdsByModelId(49L);
+        pdInfoList= pdInfoService.getEMI();
+//        pdInfoList= pdInfoService.getPdsByModelId(5L);
 //        PdInfo infos= new PdInfo();
 //        infos.setId(33448L);
 //        pdInfoList.add(infos);
+        System.out.println( "pdInfoList:");
+        System.out.println( pdInfoList.size());
         for (PdInfo info: pdInfoList
              ) {
             ExportPdDetailReq req= new ExportPdDetailReq();
@@ -546,10 +548,12 @@ public class PdExportExcelService {
 
         for (PdDetail detail: pdDetailList
         ) {
-            List<PdDetailExcel> tem= getPdExcelList(detail);
+            List<PdDetailExcel> tem = getPdExcelList(detail);
             res.addAll(tem);
 
         }
+        System.out.println( "PdDetailExcel:");
+        System.out.println(  res.size());
         return  res;
 
     }
@@ -572,7 +576,8 @@ public class PdExportExcelService {
         pdDetailExcel.setName(detail.getPdModel().getName());
 
         List<String> list = detail.getCodeString();
-
+        System.out.println( "ruleList:");
+        System.out.println(  list.size());
         try{
             for (String order:list   ) {
                 PdDetailExcel excel=new PdDetailExcel();

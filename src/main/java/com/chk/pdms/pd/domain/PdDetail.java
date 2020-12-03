@@ -352,9 +352,6 @@ public class PdDetail {
                              }
                          }else{
                              pis="";
-                             for(int k3=0;k3<pinsSize;k3++){
-                                 pis=pins.get(k3);
-
                                  if(winmasSize>0){
                                      for(int k4=0;k4<winmasSize;k4++){
                                          win=winmas.get(k4);
@@ -423,7 +420,7 @@ public class PdDetail {
                                      }
 
                                  }
-                             }
+
                          }
 
                      }
@@ -875,12 +872,29 @@ public class PdDetail {
 
       private  String ruleCode( String rule,              String toler,    String pis,       String outs,  String win,       String winsiz,       String capa){
         String res= rule;
-        res=replace(res, ParamType.tolerance.value(), toler);
-          res=replace(res, ParamType.pin.value(), pis);
-          res=replace(res, ParamType.outlet.value(), outs);
-          res=replace(res, ParamType.wireMa.value(), win);
-          res=replace(res, ParamType.wireSize.value(), winsiz);
-          res=replace(res, ParamType.capacity.value(), capa);
+          if(!"".equals(capa)){
+              res=replace(res, ParamType.capacity.value(), capa);
+          }
+          if(!"".equals(winsiz)){
+              res=replace(res, ParamType.wireSize.value(), winsiz);
+
+          }
+          if(!"".equals( win)){
+              res=replace(res, ParamType.wireMa.value(),win);
+          }
+          if(!"".equals(outs)){
+              res=replace(res, ParamType.outlet.value(), outs);
+          } if(!"".equals(pis)){
+              res=replace(res, ParamType.pin.value(), pis);
+          }
+          if(!"".equals(toler)){
+              res=replace(res, ParamType.tolerance.value(), toler);
+          }
+
+
+
+
+
         return  res;
 
       }

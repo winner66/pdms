@@ -97,6 +97,10 @@ public class EasyExcelUtil {
         ExcelWriter excelWriter = excelWriterBuilder.build();
         ExcelWriterSheetBuilder excelWriterSheetBuilder;
         WriteSheet writeSheet;
+        System.out.println("!!!!!!!!!!!!");
+        System.out.println(data.size());
+        System.out.println(lists.size());
+
         for (int i =1;i<=lists.size();i++){
             excelWriterSheetBuilder = new ExcelWriterSheetBuilder(excelWriter);
             excelWriterSheetBuilder.sheetNo(i);
