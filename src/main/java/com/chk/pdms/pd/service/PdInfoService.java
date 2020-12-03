@@ -428,7 +428,13 @@ public class PdInfoService {
         }
         return res;
     }
-
+    public List<PdInfo> getPdinfoModel(Long modelId){
+        List<PdInfo> res=new ArrayList<>();
+        PdInfoExample example= new PdInfoExample();
+        example.createCriteria().andPdModelIdEqualTo(modelId);
+        res= infoDao.getInfoMapper().selectByExample(example);
+        return  res;
+    }
 //    @Deprecated
 //    @SneakyThrows
 //    @Transactional

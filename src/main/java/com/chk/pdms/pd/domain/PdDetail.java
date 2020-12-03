@@ -271,7 +271,7 @@ public class PdDetail {
          //暴力
          if(tolerancesSize>0){
              for(int k1=0;k1<tolerancesSize;k1++){
-                 toler=tolerances.get(k1);
+                 toler=tolerances.get(k1).trim();
 
                  if(outletsSize>0){
                      for(int k2=0;k2<outletsSize;k2++){
@@ -504,9 +504,6 @@ public class PdDetail {
                          }
                      }else{
                          pis="";
-                         for(int k3=0;k3<pinsSize;k3++){
-                             pis=pins.get(k3);
-
                              if(winmasSize>0){
                                  for(int k4=0;k4<winmasSize;k4++){
                                      win=winmas.get(k4);
@@ -575,7 +572,7 @@ public class PdDetail {
                                  }
 
                              }
-                         }
+
                      }
                  }
              }
@@ -654,8 +651,7 @@ public class PdDetail {
                          }
                      }else{
                          pis="";
-                         for(int k3=0;k3<pinsSize;k3++){
-                             pis=pins.get(k3);
+
 
                              if(winmasSize>0){
                                  for(int k4=0;k4<winmasSize;k4++){
@@ -717,7 +713,7 @@ public class PdDetail {
                                  }
 
                              }
-                         }
+
                      }
 
                  }

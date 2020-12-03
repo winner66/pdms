@@ -22,15 +22,12 @@ public class exportTest {
 
     @Test
     public  void inTest(){
-        String fileName = "d:/v01.xlsx" ;
+        String fileName = "d:/v049.xlsx" ;
 //        EasyExcel.write(fileName, PdDetailExcel.class).sheet("模板1").doWrite(excel.data1());
 //        EasyExcel.write(fileName, PdDetailExcel.class).sheet("模板2").doWrite(excel.data2());
 
         try {
-
             List<PdDetailExcel> data=excel.getExcelList();
-
-
             EasyExcelUtil.writeExcel(data,fileName, PdDetailExcel.class);
         } catch (Exception e) {
             e.printStackTrace();

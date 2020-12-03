@@ -530,7 +530,11 @@ public class PdExportExcelService {
         List<PdDetailExcel> res = new ArrayList<PdDetailExcel>() ;
         List<PdInfo>   pdInfoList= new ArrayList<>();
         List<PdDetail> pdDetailList= new ArrayList<>();
-        pdInfoList= pdInfoService.getPorcelainDielectric();
+//        pdInfoList= pdInfoService.getEMI();
+        pdInfoList= pdInfoService.getPdsByModelId(49L);
+//        PdInfo infos= new PdInfo();
+//        infos.setId(33448L);
+//        pdInfoList.add(infos);
         for (PdInfo info: pdInfoList
              ) {
             ExportPdDetailReq req= new ExportPdDetailReq();
@@ -573,6 +577,7 @@ public class PdExportExcelService {
             for (String order:list   ) {
                 PdDetailExcel excel=new PdDetailExcel();
                 BeanUtils.copyProperties(excel, pdDetailExcel);
+//                BeanUtils.cop
                 excel.setCode(order);
                 res.add(excel);
 
