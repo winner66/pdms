@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 
@@ -37,6 +38,8 @@ public class PdExportExcelService {
 
     @Autowired
     private PdParamDao pdParamDao;
+
+    private  static Long  MAXCount=10000*100L;
 
 
 
@@ -526,10 +529,11 @@ public class PdExportExcelService {
         return list ;
     }
 
-    public  List<PdDetailExcel> getExcelList(){
+    public  void  getExcelList(String fileName) throws Exception {
         List<PdDetailExcel> res = new ArrayList<PdDetailExcel>() ;
         List<PdInfo>   pdInfoList= new ArrayList<>();
         List<PdDetail> pdDetailList= new ArrayList<>();
+        AtomicInteger atomicInteger= new AtomicInteger(1);
         pdInfoList= pdInfoService.getEMI();
 //        pdInfoList= pdInfoService.getPdsByModelId(5L);
 //        PdInfo infos= new PdInfo();
@@ -549,12 +553,33 @@ public class PdExportExcelService {
         for (PdDetail detail: pdDetailList
         ) {
             List<PdDetailExcel> tem = getPdExcelList(detail);
-            res.addAll(tem);
+            if(tem.size()+res.size()> MAXCount){
+//                保存数据
+
+                try {
+                    EasyExcelUtil.writeExcel(res,fileName+atomicInteger.get(), PdDetailExcel.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.gc();
+                res= new ArrayList<PdDetailExcel>() ;
+                atomicInteger.set(atomicInteger.get()+1);
+
+            }
+            else{
+                res.addAll(tem);
+            }
 
         }
         System.out.println( "PdDetailExcel:");
         System.out.println(  res.size());
-        return  res;
+        if(res.size()>0){
+            try {
+                EasyExcelUtil.writeExcel(res,fileName, PdDetailExcel.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 //    某产品的导出
@@ -579,11 +604,14 @@ public class PdExportExcelService {
         System.out.println( "ruleList:");
         System.out.println(  list.size());
         try{
+            System.gc();
             for (String order:list   ) {
                 PdDetailExcel excel=new PdDetailExcel();
+
                 BeanUtils.copyProperties(excel, pdDetailExcel);
 //                BeanUtils.cop
                 excel.setCode(order);
+//                if()
                 res.add(excel);
 
             }

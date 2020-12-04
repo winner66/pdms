@@ -21,8 +21,8 @@ import java.util.List;
 
 public class EasyExcelUtil {
 
-
-    private static final int MAXROWS = 1000000;
+  //一个sheet 10万条数据
+    private static final int MAXROWS = 100000;
 
 
     /**
@@ -93,7 +93,7 @@ public class EasyExcelUtil {
         List<List<T>> lists = ExcelSheetSplitList.splitList(data,MAXROWS); // 分割的集合
 
 //        OutputStream out = getOutputStream(fileName, response);
-        ExcelWriterBuilder excelWriterBuilder = EasyExcel.write(fileName,  clazz).excelType(ExcelTypeEnum.XLSX).registerWriteHandler(getDefaultHorizontalCellStyleStrategy());
+        ExcelWriterBuilder excelWriterBuilder = EasyExcel.write(fileName+".xlsx",  clazz).excelType(ExcelTypeEnum.XLSX).registerWriteHandler(getDefaultHorizontalCellStyleStrategy());
         ExcelWriter excelWriter = excelWriterBuilder.build();
         ExcelWriterSheetBuilder excelWriterSheetBuilder;
         WriteSheet writeSheet;
