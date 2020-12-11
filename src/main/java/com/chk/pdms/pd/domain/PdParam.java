@@ -18,8 +18,19 @@ public class PdParam implements Serializable {
     private String rel;
 
     private String descr;
+    private String  level;
 
     private static final long serialVersionUID = 1L;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+
 
     public Long getId() {
         return id;
