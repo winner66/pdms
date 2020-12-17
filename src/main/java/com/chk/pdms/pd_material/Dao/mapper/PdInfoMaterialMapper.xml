@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd_material.Dao.mapper.PdInfoMaterialMapper">
+  <resultMap id="BaseResultMap" type="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pd_model_id" jdbcType="INTEGER" property="pdModelId" />
+    <result column="std" jdbcType="VARCHAR" property="std" />
+    <result column="quality" jdbcType="VARCHAR" property="quality" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="search_key" jdbcType="VARCHAR" property="searchKey" />
+    <result column="surface_code" jdbcType="VARCHAR" property="surfaceCode" />
+    <result column="thickness_code" jdbcType="VARCHAR" property="thicknessCode" />
+    <result column="length_width_code" jdbcType="VARCHAR" property="lengthWidthCode" />
+    <result column="material_code" jdbcType="VARCHAR" property="materialCode" />
+    <result column="center_frequency" jdbcType="VARCHAR" property="centerFrequency" />
+    <result column="pass_band_range" jdbcType="VARCHAR" property="passBandRange" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="ripple" jdbcType="VARCHAR" property="ripple" />
+    <result column="power_capacity" jdbcType="VARCHAR" property="powerCapacity" />
+    <result column="vswr" jdbcType="VARCHAR" property="vswr" />
+    <result column="amplitude_balance" jdbcType="VARCHAR" property="amplitudeBalance" />
+    <result column="phase_balance" jdbcType="VARCHAR" property="phaseBalance" />
+    <result column="insertion_loss" jdbcType="VARCHAR" property="insertionLoss" />
+    <result column="isolation" jdbcType="VARCHAR" property="isolation" />
+    <result column="frequency_range" jdbcType="VARCHAR" property="frequencyRange" />
+    <result column="vswr_stop_band" jdbcType="VARCHAR" property="vswrStopBand" />
+    <result column="vswr_pass_Band" jdbcType="VARCHAR" property="vswrPassBand" />
+    <result column="stop_band_by20" jdbcType="VARCHAR" property="stopBandBy20" />
+    <result column="cut_off_frequency" jdbcType="VARCHAR" property="cutOffFrequency" />
+    <result column="breakdown_voltage" jdbcType="VARCHAR" property="breakdownVoltage" />
+    <result column="insulation_resistance" jdbcType="VARCHAR" property="insulationResistance" />
+    <result column="flexure_strength" jdbcType="VARCHAR" property="flexureStrength" />
+    <result column="dielectric_loss_by20G" jdbcType="VARCHAR" property="dielectricLossBy20g" />
+    <result column="dielectric_loss_by1_9G" jdbcType="VARCHAR" property="dielectricLossBy19g" />
+    <result column="permittivity_by15G" jdbcType="VARCHAR" property="permittivityBy15g" />
+    <result column="permittivity_by1_9G" jdbcType="VARCHAR" property="permittivityBy19g" />
+    <result column="dielectric_strength" jdbcType="VARCHAR" property="dielectricStrength" />
+    <result column="insulation_resistance_by125" jdbcType="VARCHAR" property="insulationResistanceBy125" />
+    <result column="insulation_resistance_by25" jdbcType="VARCHAR" property="insulationResistanceBy25" />
+    <result column="temperature_alteration_ratio" jdbcType="VARCHAR" property="temperatureAlterationRatio" />
+    <result column="dielectric_loss_by1MHz" jdbcType="VARCHAR" property="dielectricLossBy1mhz" />
+    <result column="permittivity" jdbcType="VARCHAR" property="permittivity" />
+    <result column="powder_density" jdbcType="VARCHAR" property="powderDensity" />
+    <result column="specific_surfaceArea" jdbcType="VARCHAR" property="specificSurfacearea" />
+    <result column="d90" jdbcType="VARCHAR" property="d90" />
+    <result column="d50" jdbcType="VARCHAR" property="d50" />
+    <result column="d10" jdbcType="VARCHAR" property="d10" />
+    <result column="sintering_temperature" jdbcType="VARCHAR" property="sinteringTemperature" />
+    <result column="soaking_time" jdbcType="VARCHAR" property="soakingTime" />
+    <result column="performance" jdbcType="VARCHAR" property="performance" />
+    <result column="pad_metallurgy" jdbcType="VARCHAR" property="padMetallurgy" />
+    <result column="out_of_band_rejection1" jdbcType="VARCHAR" property="outOfBandRejection1" />
+    <result column="out_of_band_rejection2" jdbcType="VARCHAR" property="outOfBandRejection2" />
+    <result column="out_of_band_rejection3" jdbcType="VARCHAR" property="outOfBandRejection3" />
+    <result column="out_of_band_rejection4" jdbcType="VARCHAR" property="outOfBandRejection4" />
+    <result column="out_of_band_rejection5" jdbcType="VARCHAR" property="outOfBandRejection5" />
+    <result column="material_type" jdbcType="VARCHAR" property="materialType" />
+    <result column="rated_current" jdbcType="VARCHAR" property="ratedCurrent" />
+    <result column="bandwidth" jdbcType="VARCHAR" property="bandwidth" />
+    <result column="stop_band_by40" jdbcType="VARCHAR" property="stopBandBy40" />
+    <result column="pass_band_insertion_loss_by1_3" jdbcType="VARCHAR" property="passBandInsertionLossBy13" />
+    <result column="pass_band_insertion_loss_by2_0Typ" jdbcType="VARCHAR" property="passBandInsertionLossBy20typ" />
+    <result column="material_type2" jdbcType="VARCHAR" property="materialType2" />
+    <result column="basis_material" jdbcType="VARCHAR" property="basisMaterial" />
+    <result column="outlet" jdbcType="VARCHAR" property="outlet" />
+    <result column="evaluating_scope" jdbcType="VARCHAR" property="evaluatingScope" />
+    <result column="appearance" jdbcType="VARCHAR" property="appearance" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pd_model_id, std, quality, model, size, search_key, surface_code, thickness_code, 
+    length_width_code, material_code, center_frequency, pass_band_range, other, ripple, 
+    power_capacity, vswr, amplitude_balance, phase_balance, insertion_loss, isolation, 
+    frequency_range, vswr_stop_band, vswr_pass_Band, stop_band_by20, cut_off_frequency, 
+    breakdown_voltage, insulation_resistance, flexure_strength, dielectric_loss_by20G, 
+    dielectric_loss_by1_9G, permittivity_by15G, permittivity_by1_9G, dielectric_strength, 
+    insulation_resistance_by125, insulation_resistance_by25, temperature_alteration_ratio, 
+    dielectric_loss_by1MHz, permittivity, powder_density, specific_surfaceArea, d90, 
+    d50, d10, sintering_temperature, soaking_time, performance, pad_metallurgy, out_of_band_rejection1, 
+    out_of_band_rejection2, out_of_band_rejection3, out_of_band_rejection4, out_of_band_rejection5, 
+    material_type, rated_current, bandwidth, stop_band_by40, pass_band_insertion_loss_by1_3, 
+    pass_band_insertion_loss_by2_0Typ, material_type2, basis_material, outlet, evaluating_scope, 
+    appearance
+  </sql>
+  <select id="selectByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pd_info_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pd_info_material
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pd_info_material
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample">
+    delete from pd_info_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+    insert into pd_info_material (id, pd_model_id, std, 
+      quality, model, size, 
+      search_key, surface_code, thickness_code, 
+      length_width_code, material_code, center_frequency, 
+      pass_band_range, other, ripple, 
+      power_capacity, vswr, amplitude_balance, 
+      phase_balance, insertion_loss, isolation, 
+      frequency_range, vswr_stop_band, vswr_pass_Band, 
+      stop_band_by20, cut_off_frequency, breakdown_voltage, 
+      insulation_resistance, flexure_strength, 
+      dielectric_loss_by20G, dielectric_loss_by1_9G, 
+      permittivity_by15G, permittivity_by1_9G, dielectric_strength, 
+      insulation_resistance_by125, insulation_resistance_by25, 
+      temperature_alteration_ratio, dielectric_loss_by1MHz, 
+      permittivity, powder_density, specific_surfaceArea, 
+      d90, d50, d10, sintering_temperature, 
+      soaking_time, performance, pad_metallurgy, 
+      out_of_band_rejection1, out_of_band_rejection2, 
+      out_of_band_rejection3, out_of_band_rejection4, 
+      out_of_band_rejection5, material_type, rated_current, 
+      bandwidth, stop_band_by40, pass_band_insertion_loss_by1_3, 
+      pass_band_insertion_loss_by2_0Typ, material_type2, 
+      basis_material, outlet, evaluating_scope, 
+      appearance)
+    values (#{id,jdbcType=INTEGER}, #{pdModelId,jdbcType=INTEGER}, #{std,jdbcType=VARCHAR}, 
+      #{quality,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{searchKey,jdbcType=VARCHAR}, #{surfaceCode,jdbcType=VARCHAR}, #{thicknessCode,jdbcType=VARCHAR}, 
+      #{lengthWidthCode,jdbcType=VARCHAR}, #{materialCode,jdbcType=VARCHAR}, #{centerFrequency,jdbcType=VARCHAR}, 
+      #{passBandRange,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{ripple,jdbcType=VARCHAR}, 
+      #{powerCapacity,jdbcType=VARCHAR}, #{vswr,jdbcType=VARCHAR}, #{amplitudeBalance,jdbcType=VARCHAR}, 
+      #{phaseBalance,jdbcType=VARCHAR}, #{insertionLoss,jdbcType=VARCHAR}, #{isolation,jdbcType=VARCHAR}, 
+      #{frequencyRange,jdbcType=VARCHAR}, #{vswrStopBand,jdbcType=VARCHAR}, #{vswrPassBand,jdbcType=VARCHAR}, 
+      #{stopBandBy20,jdbcType=VARCHAR}, #{cutOffFrequency,jdbcType=VARCHAR}, #{breakdownVoltage,jdbcType=VARCHAR}, 
+      #{insulationResistance,jdbcType=VARCHAR}, #{flexureStrength,jdbcType=VARCHAR}, 
+      #{dielectricLossBy20g,jdbcType=VARCHAR}, #{dielectricLossBy19g,jdbcType=VARCHAR}, 
+      #{permittivityBy15g,jdbcType=VARCHAR}, #{permittivityBy19g,jdbcType=VARCHAR}, #{dielectricStrength,jdbcType=VARCHAR}, 
+      #{insulationResistanceBy125,jdbcType=VARCHAR}, #{insulationResistanceBy25,jdbcType=VARCHAR}, 
+      #{temperatureAlterationRatio,jdbcType=VARCHAR}, #{dielectricLossBy1mhz,jdbcType=VARCHAR}, 
+      #{permittivity,jdbcType=VARCHAR}, #{powderDensity,jdbcType=VARCHAR}, #{specificSurfacearea,jdbcType=VARCHAR}, 
+      #{d90,jdbcType=VARCHAR}, #{d50,jdbcType=VARCHAR}, #{d10,jdbcType=VARCHAR}, #{sinteringTemperature,jdbcType=VARCHAR}, 
+      #{soakingTime,jdbcType=VARCHAR}, #{performance,jdbcType=VARCHAR}, #{padMetallurgy,jdbcType=VARCHAR}, 
+      #{outOfBandRejection1,jdbcType=VARCHAR}, #{outOfBandRejection2,jdbcType=VARCHAR}, 
+      #{outOfBandRejection3,jdbcType=VARCHAR}, #{outOfBandRejection4,jdbcType=VARCHAR}, 
+      #{outOfBandRejection5,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{ratedCurrent,jdbcType=VARCHAR}, 
+      #{bandwidth,jdbcType=VARCHAR}, #{stopBandBy40,jdbcType=VARCHAR}, #{passBandInsertionLossBy13,jdbcType=VARCHAR}, 
+      #{passBandInsertionLossBy20typ,jdbcType=VARCHAR}, #{materialType2,jdbcType=VARCHAR}, 
+      #{basisMaterial,jdbcType=VARCHAR}, #{outlet,jdbcType=VARCHAR}, #{evaluatingScope,jdbcType=VARCHAR}, 
+      #{appearance,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+    insert into pd_info_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pdModelId != null">
+        pd_model_id,
+      </if>
+      <if test="std != null">
+        std,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="searchKey != null">
+        search_key,
+      </if>
+      <if test="surfaceCode != null">
+        surface_code,
+      </if>
+      <if test="thicknessCode != null">
+        thickness_code,
+      </if>
+      <if test="lengthWidthCode != null">
+        length_width_code,
+      </if>
+      <if test="materialCode != null">
+        material_code,
+      </if>
+      <if test="centerFrequency != null">
+        center_frequency,
+      </if>
+      <if test="passBandRange != null">
+        pass_band_range,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="ripple != null">
+        ripple,
+      </if>
+      <if test="powerCapacity != null">
+        power_capacity,
+      </if>
+      <if test="vswr != null">
+        vswr,
+      </if>
+      <if test="amplitudeBalance != null">
+        amplitude_balance,
+      </if>
+      <if test="phaseBalance != null">
+        phase_balance,
+      </if>
+      <if test="insertionLoss != null">
+        insertion_loss,
+      </if>
+      <if test="isolation != null">
+        isolation,
+      </if>
+      <if test="frequencyRange != null">
+        frequency_range,
+      </if>
+      <if test="vswrStopBand != null">
+        vswr_stop_band,
+      </if>
+      <if test="vswrPassBand != null">
+        vswr_pass_Band,
+      </if>
+      <if test="stopBandBy20 != null">
+        stop_band_by20,
+      </if>
+      <if test="cutOffFrequency != null">
+        cut_off_frequency,
+      </if>
+      <if test="breakdownVoltage != null">
+        breakdown_voltage,
+      </if>
+      <if test="insulationResistance != null">
+        insulation_resistance,
+      </if>
+      <if test="flexureStrength != null">
+        flexure_strength,
+      </if>
+      <if test="dielectricLossBy20g != null">
+        dielectric_loss_by20G,
+      </if>
+      <if test="dielectricLossBy19g != null">
+        dielectric_loss_by1_9G,
+      </if>
+      <if test="permittivityBy15g != null">
+        permittivity_by15G,
+      </if>
+      <if test="permittivityBy19g != null">
+        permittivity_by1_9G,
+      </if>
+      <if test="dielectricStrength != null">
+        dielectric_strength,
+      </if>
+      <if test="insulationResistanceBy125 != null">
+        insulation_resistance_by125,
+      </if>
+      <if test="insulationResistanceBy25 != null">
+        insulation_resistance_by25,
+      </if>
+      <if test="temperatureAlterationRatio != null">
+        temperature_alteration_ratio,
+      </if>
+      <if test="dielectricLossBy1mhz != null">
+        dielectric_loss_by1MHz,
+      </if>
+      <if test="permittivity != null">
+        permittivity,
+      </if>
+      <if test="powderDensity != null">
+        powder_density,
+      </if>
+      <if test="specificSurfacearea != null">
+        specific_surfaceArea,
+      </if>
+      <if test="d90 != null">
+        d90,
+      </if>
+      <if test="d50 != null">
+        d50,
+      </if>
+      <if test="d10 != null">
+        d10,
+      </if>
+      <if test="sinteringTemperature != null">
+        sintering_temperature,
+      </if>
+      <if test="soakingTime != null">
+        soaking_time,
+      </if>
+      <if test="performance != null">
+        performance,
+      </if>
+      <if test="padMetallurgy != null">
+        pad_metallurgy,
+      </if>
+      <if test="outOfBandRejection1 != null">
+        out_of_band_rejection1,
+      </if>
+      <if test="outOfBandRejection2 != null">
+        out_of_band_rejection2,
+      </if>
+      <if test="outOfBandRejection3 != null">
+        out_of_band_rejection3,
+      </if>
+      <if test="outOfBandRejection4 != null">
+        out_of_band_rejection4,
+      </if>
+      <if test="outOfBandRejection5 != null">
+        out_of_band_rejection5,
+      </if>
+      <if test="materialType != null">
+        material_type,
+      </if>
+      <if test="ratedCurrent != null">
+        rated_current,
+      </if>
+      <if test="bandwidth != null">
+        bandwidth,
+      </if>
+      <if test="stopBandBy40 != null">
+        stop_band_by40,
+      </if>
+      <if test="passBandInsertionLossBy13 != null">
+        pass_band_insertion_loss_by1_3,
+      </if>
+      <if test="passBandInsertionLossBy20typ != null">
+        pass_band_insertion_loss_by2_0Typ,
+      </if>
+      <if test="materialType2 != null">
+        material_type2,
+      </if>
+      <if test="basisMaterial != null">
+        basis_material,
+      </if>
+      <if test="outlet != null">
+        outlet,
+      </if>
+      <if test="evaluatingScope != null">
+        evaluating_scope,
+      </if>
+      <if test="appearance != null">
+        appearance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pdModelId != null">
+        #{pdModelId,jdbcType=INTEGER},
+      </if>
+      <if test="std != null">
+        #{std,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="searchKey != null">
+        #{searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="surfaceCode != null">
+        #{surfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="thicknessCode != null">
+        #{thicknessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lengthWidthCode != null">
+        #{lengthWidthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="centerFrequency != null">
+        #{centerFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandRange != null">
+        #{passBandRange,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="ripple != null">
+        #{ripple,jdbcType=VARCHAR},
+      </if>
+      <if test="powerCapacity != null">
+        #{powerCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="vswr != null">
+        #{vswr,jdbcType=VARCHAR},
+      </if>
+      <if test="amplitudeBalance != null">
+        #{amplitudeBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="phaseBalance != null">
+        #{phaseBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="insertionLoss != null">
+        #{insertionLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="isolation != null">
+        #{isolation,jdbcType=VARCHAR},
+      </if>
+      <if test="frequencyRange != null">
+        #{frequencyRange,jdbcType=VARCHAR},
+      </if>
+      <if test="vswrStopBand != null">
+        #{vswrStopBand,jdbcType=VARCHAR},
+      </if>
+      <if test="vswrPassBand != null">
+        #{vswrPassBand,jdbcType=VARCHAR},
+      </if>
+      <if test="stopBandBy20 != null">
+        #{stopBandBy20,jdbcType=VARCHAR},
+      </if>
+      <if test="cutOffFrequency != null">
+        #{cutOffFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="breakdownVoltage != null">
+        #{breakdownVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistance != null">
+        #{insulationResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="flexureStrength != null">
+        #{flexureStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy20g != null">
+        #{dielectricLossBy20g,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy19g != null">
+        #{dielectricLossBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivityBy15g != null">
+        #{permittivityBy15g,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivityBy19g != null">
+        #{permittivityBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricStrength != null">
+        #{dielectricStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistanceBy125 != null">
+        #{insulationResistanceBy125,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistanceBy25 != null">
+        #{insulationResistanceBy25,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureAlterationRatio != null">
+        #{temperatureAlterationRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy1mhz != null">
+        #{dielectricLossBy1mhz,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivity != null">
+        #{permittivity,jdbcType=VARCHAR},
+      </if>
+      <if test="powderDensity != null">
+        #{powderDensity,jdbcType=VARCHAR},
+      </if>
+      <if test="specificSurfacearea != null">
+        #{specificSurfacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="d90 != null">
+        #{d90,jdbcType=VARCHAR},
+      </if>
+      <if test="d50 != null">
+        #{d50,jdbcType=VARCHAR},
+      </if>
+      <if test="d10 != null">
+        #{d10,jdbcType=VARCHAR},
+      </if>
+      <if test="sinteringTemperature != null">
+        #{sinteringTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="soakingTime != null">
+        #{soakingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="performance != null">
+        #{performance,jdbcType=VARCHAR},
+      </if>
+      <if test="padMetallurgy != null">
+        #{padMetallurgy,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection1 != null">
+        #{outOfBandRejection1,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection2 != null">
+        #{outOfBandRejection2,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection3 != null">
+        #{outOfBandRejection3,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection4 != null">
+        #{outOfBandRejection4,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection5 != null">
+        #{outOfBandRejection5,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null">
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="ratedCurrent != null">
+        #{ratedCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="bandwidth != null">
+        #{bandwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="stopBandBy40 != null">
+        #{stopBandBy40,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandInsertionLossBy13 != null">
+        #{passBandInsertionLossBy13,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandInsertionLossBy20typ != null">
+        #{passBandInsertionLossBy20typ,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType2 != null">
+        #{materialType2,jdbcType=VARCHAR},
+      </if>
+      <if test="basisMaterial != null">
+        #{basisMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="outlet != null">
+        #{outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluatingScope != null">
+        #{evaluatingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="appearance != null">
+        #{appearance,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultType="java.lang.Long">
+    select count(*) from pd_info_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pd_info_material
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdModelId != null">
+        pd_model_id = #{record.pdModelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.std != null">
+        std = #{record.std,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quality != null">
+        quality = #{record.quality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.searchKey != null">
+        search_key = #{record.searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surfaceCode != null">
+        surface_code = #{record.surfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thicknessCode != null">
+        thickness_code = #{record.thicknessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lengthWidthCode != null">
+        length_width_code = #{record.lengthWidthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null">
+        material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.centerFrequency != null">
+        center_frequency = #{record.centerFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passBandRange != null">
+        pass_band_range = #{record.passBandRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.other != null">
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ripple != null">
+        ripple = #{record.ripple,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerCapacity != null">
+        power_capacity = #{record.powerCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vswr != null">
+        vswr = #{record.vswr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amplitudeBalance != null">
+        amplitude_balance = #{record.amplitudeBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phaseBalance != null">
+        phase_balance = #{record.phaseBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertionLoss != null">
+        insertion_loss = #{record.insertionLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isolation != null">
+        isolation = #{record.isolation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequencyRange != null">
+        frequency_range = #{record.frequencyRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vswrStopBand != null">
+        vswr_stop_band = #{record.vswrStopBand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vswrPassBand != null">
+        vswr_pass_Band = #{record.vswrPassBand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stopBandBy20 != null">
+        stop_band_by20 = #{record.stopBandBy20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cutOffFrequency != null">
+        cut_off_frequency = #{record.cutOffFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breakdownVoltage != null">
+        breakdown_voltage = #{record.breakdownVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insulationResistance != null">
+        insulation_resistance = #{record.insulationResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flexureStrength != null">
+        flexure_strength = #{record.flexureStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dielectricLossBy20g != null">
+        dielectric_loss_by20G = #{record.dielectricLossBy20g,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dielectricLossBy19g != null">
+        dielectric_loss_by1_9G = #{record.dielectricLossBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permittivityBy15g != null">
+        permittivity_by15G = #{record.permittivityBy15g,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permittivityBy19g != null">
+        permittivity_by1_9G = #{record.permittivityBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dielectricStrength != null">
+        dielectric_strength = #{record.dielectricStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insulationResistanceBy125 != null">
+        insulation_resistance_by125 = #{record.insulationResistanceBy125,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insulationResistanceBy25 != null">
+        insulation_resistance_by25 = #{record.insulationResistanceBy25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperatureAlterationRatio != null">
+        temperature_alteration_ratio = #{record.temperatureAlterationRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dielectricLossBy1mhz != null">
+        dielectric_loss_by1MHz = #{record.dielectricLossBy1mhz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.permittivity != null">
+        permittivity = #{record.permittivity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powderDensity != null">
+        powder_density = #{record.powderDensity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specificSurfacearea != null">
+        specific_surfaceArea = #{record.specificSurfacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d90 != null">
+        d90 = #{record.d90,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d50 != null">
+        d50 = #{record.d50,jdbcType=VARCHAR},
+      </if>
+      <if test="record.d10 != null">
+        d10 = #{record.d10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sinteringTemperature != null">
+        sintering_temperature = #{record.sinteringTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.soakingTime != null">
+        soaking_time = #{record.soakingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.performance != null">
+        performance = #{record.performance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.padMetallurgy != null">
+        pad_metallurgy = #{record.padMetallurgy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOfBandRejection1 != null">
+        out_of_band_rejection1 = #{record.outOfBandRejection1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOfBandRejection2 != null">
+        out_of_band_rejection2 = #{record.outOfBandRejection2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOfBandRejection3 != null">
+        out_of_band_rejection3 = #{record.outOfBandRejection3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOfBandRejection4 != null">
+        out_of_band_rejection4 = #{record.outOfBandRejection4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOfBandRejection5 != null">
+        out_of_band_rejection5 = #{record.outOfBandRejection5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType != null">
+        material_type = #{record.materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratedCurrent != null">
+        rated_current = #{record.ratedCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bandwidth != null">
+        bandwidth = #{record.bandwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stopBandBy40 != null">
+        stop_band_by40 = #{record.stopBandBy40,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passBandInsertionLossBy13 != null">
+        pass_band_insertion_loss_by1_3 = #{record.passBandInsertionLossBy13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passBandInsertionLossBy20typ != null">
+        pass_band_insertion_loss_by2_0Typ = #{record.passBandInsertionLossBy20typ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType2 != null">
+        material_type2 = #{record.materialType2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basisMaterial != null">
+        basis_material = #{record.basisMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outlet != null">
+        outlet = #{record.outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluatingScope != null">
+        evaluating_scope = #{record.evaluatingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appearance != null">
+        appearance = #{record.appearance,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pd_info_material
+    set id = #{record.id,jdbcType=INTEGER},
+      pd_model_id = #{record.pdModelId,jdbcType=INTEGER},
+      std = #{record.std,jdbcType=VARCHAR},
+      quality = #{record.quality,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      search_key = #{record.searchKey,jdbcType=VARCHAR},
+      surface_code = #{record.surfaceCode,jdbcType=VARCHAR},
+      thickness_code = #{record.thicknessCode,jdbcType=VARCHAR},
+      length_width_code = #{record.lengthWidthCode,jdbcType=VARCHAR},
+      material_code = #{record.materialCode,jdbcType=VARCHAR},
+      center_frequency = #{record.centerFrequency,jdbcType=VARCHAR},
+      pass_band_range = #{record.passBandRange,jdbcType=VARCHAR},
+      other = #{record.other,jdbcType=VARCHAR},
+      ripple = #{record.ripple,jdbcType=VARCHAR},
+      power_capacity = #{record.powerCapacity,jdbcType=VARCHAR},
+      vswr = #{record.vswr,jdbcType=VARCHAR},
+      amplitude_balance = #{record.amplitudeBalance,jdbcType=VARCHAR},
+      phase_balance = #{record.phaseBalance,jdbcType=VARCHAR},
+      insertion_loss = #{record.insertionLoss,jdbcType=VARCHAR},
+      isolation = #{record.isolation,jdbcType=VARCHAR},
+      frequency_range = #{record.frequencyRange,jdbcType=VARCHAR},
+      vswr_stop_band = #{record.vswrStopBand,jdbcType=VARCHAR},
+      vswr_pass_Band = #{record.vswrPassBand,jdbcType=VARCHAR},
+      stop_band_by20 = #{record.stopBandBy20,jdbcType=VARCHAR},
+      cut_off_frequency = #{record.cutOffFrequency,jdbcType=VARCHAR},
+      breakdown_voltage = #{record.breakdownVoltage,jdbcType=VARCHAR},
+      insulation_resistance = #{record.insulationResistance,jdbcType=VARCHAR},
+      flexure_strength = #{record.flexureStrength,jdbcType=VARCHAR},
+      dielectric_loss_by20G = #{record.dielectricLossBy20g,jdbcType=VARCHAR},
+      dielectric_loss_by1_9G = #{record.dielectricLossBy19g,jdbcType=VARCHAR},
+      permittivity_by15G = #{record.permittivityBy15g,jdbcType=VARCHAR},
+      permittivity_by1_9G = #{record.permittivityBy19g,jdbcType=VARCHAR},
+      dielectric_strength = #{record.dielectricStrength,jdbcType=VARCHAR},
+      insulation_resistance_by125 = #{record.insulationResistanceBy125,jdbcType=VARCHAR},
+      insulation_resistance_by25 = #{record.insulationResistanceBy25,jdbcType=VARCHAR},
+      temperature_alteration_ratio = #{record.temperatureAlterationRatio,jdbcType=VARCHAR},
+      dielectric_loss_by1MHz = #{record.dielectricLossBy1mhz,jdbcType=VARCHAR},
+      permittivity = #{record.permittivity,jdbcType=VARCHAR},
+      powder_density = #{record.powderDensity,jdbcType=VARCHAR},
+      specific_surfaceArea = #{record.specificSurfacearea,jdbcType=VARCHAR},
+      d90 = #{record.d90,jdbcType=VARCHAR},
+      d50 = #{record.d50,jdbcType=VARCHAR},
+      d10 = #{record.d10,jdbcType=VARCHAR},
+      sintering_temperature = #{record.sinteringTemperature,jdbcType=VARCHAR},
+      soaking_time = #{record.soakingTime,jdbcType=VARCHAR},
+      performance = #{record.performance,jdbcType=VARCHAR},
+      pad_metallurgy = #{record.padMetallurgy,jdbcType=VARCHAR},
+      out_of_band_rejection1 = #{record.outOfBandRejection1,jdbcType=VARCHAR},
+      out_of_band_rejection2 = #{record.outOfBandRejection2,jdbcType=VARCHAR},
+      out_of_band_rejection3 = #{record.outOfBandRejection3,jdbcType=VARCHAR},
+      out_of_band_rejection4 = #{record.outOfBandRejection4,jdbcType=VARCHAR},
+      out_of_band_rejection5 = #{record.outOfBandRejection5,jdbcType=VARCHAR},
+      material_type = #{record.materialType,jdbcType=VARCHAR},
+      rated_current = #{record.ratedCurrent,jdbcType=VARCHAR},
+      bandwidth = #{record.bandwidth,jdbcType=VARCHAR},
+      stop_band_by40 = #{record.stopBandBy40,jdbcType=VARCHAR},
+      pass_band_insertion_loss_by1_3 = #{record.passBandInsertionLossBy13,jdbcType=VARCHAR},
+      pass_band_insertion_loss_by2_0Typ = #{record.passBandInsertionLossBy20typ,jdbcType=VARCHAR},
+      material_type2 = #{record.materialType2,jdbcType=VARCHAR},
+      basis_material = #{record.basisMaterial,jdbcType=VARCHAR},
+      outlet = #{record.outlet,jdbcType=VARCHAR},
+      evaluating_scope = #{record.evaluatingScope,jdbcType=VARCHAR},
+      appearance = #{record.appearance,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+    update pd_info_material
+    <set>
+      <if test="pdModelId != null">
+        pd_model_id = #{pdModelId,jdbcType=INTEGER},
+      </if>
+      <if test="std != null">
+        std = #{std,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="searchKey != null">
+        search_key = #{searchKey,jdbcType=VARCHAR},
+      </if>
+      <if test="surfaceCode != null">
+        surface_code = #{surfaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="thicknessCode != null">
+        thickness_code = #{thicknessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lengthWidthCode != null">
+        length_width_code = #{lengthWidthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="centerFrequency != null">
+        center_frequency = #{centerFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandRange != null">
+        pass_band_range = #{passBandRange,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="ripple != null">
+        ripple = #{ripple,jdbcType=VARCHAR},
+      </if>
+      <if test="powerCapacity != null">
+        power_capacity = #{powerCapacity,jdbcType=VARCHAR},
+      </if>
+      <if test="vswr != null">
+        vswr = #{vswr,jdbcType=VARCHAR},
+      </if>
+      <if test="amplitudeBalance != null">
+        amplitude_balance = #{amplitudeBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="phaseBalance != null">
+        phase_balance = #{phaseBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="insertionLoss != null">
+        insertion_loss = #{insertionLoss,jdbcType=VARCHAR},
+      </if>
+      <if test="isolation != null">
+        isolation = #{isolation,jdbcType=VARCHAR},
+      </if>
+      <if test="frequencyRange != null">
+        frequency_range = #{frequencyRange,jdbcType=VARCHAR},
+      </if>
+      <if test="vswrStopBand != null">
+        vswr_stop_band = #{vswrStopBand,jdbcType=VARCHAR},
+      </if>
+      <if test="vswrPassBand != null">
+        vswr_pass_Band = #{vswrPassBand,jdbcType=VARCHAR},
+      </if>
+      <if test="stopBandBy20 != null">
+        stop_band_by20 = #{stopBandBy20,jdbcType=VARCHAR},
+      </if>
+      <if test="cutOffFrequency != null">
+        cut_off_frequency = #{cutOffFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="breakdownVoltage != null">
+        breakdown_voltage = #{breakdownVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistance != null">
+        insulation_resistance = #{insulationResistance,jdbcType=VARCHAR},
+      </if>
+      <if test="flexureStrength != null">
+        flexure_strength = #{flexureStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy20g != null">
+        dielectric_loss_by20G = #{dielectricLossBy20g,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy19g != null">
+        dielectric_loss_by1_9G = #{dielectricLossBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivityBy15g != null">
+        permittivity_by15G = #{permittivityBy15g,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivityBy19g != null">
+        permittivity_by1_9G = #{permittivityBy19g,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricStrength != null">
+        dielectric_strength = #{dielectricStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistanceBy125 != null">
+        insulation_resistance_by125 = #{insulationResistanceBy125,jdbcType=VARCHAR},
+      </if>
+      <if test="insulationResistanceBy25 != null">
+        insulation_resistance_by25 = #{insulationResistanceBy25,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureAlterationRatio != null">
+        temperature_alteration_ratio = #{temperatureAlterationRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="dielectricLossBy1mhz != null">
+        dielectric_loss_by1MHz = #{dielectricLossBy1mhz,jdbcType=VARCHAR},
+      </if>
+      <if test="permittivity != null">
+        permittivity = #{permittivity,jdbcType=VARCHAR},
+      </if>
+      <if test="powderDensity != null">
+        powder_density = #{powderDensity,jdbcType=VARCHAR},
+      </if>
+      <if test="specificSurfacearea != null">
+        specific_surfaceArea = #{specificSurfacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="d90 != null">
+        d90 = #{d90,jdbcType=VARCHAR},
+      </if>
+      <if test="d50 != null">
+        d50 = #{d50,jdbcType=VARCHAR},
+      </if>
+      <if test="d10 != null">
+        d10 = #{d10,jdbcType=VARCHAR},
+      </if>
+      <if test="sinteringTemperature != null">
+        sintering_temperature = #{sinteringTemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="soakingTime != null">
+        soaking_time = #{soakingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="performance != null">
+        performance = #{performance,jdbcType=VARCHAR},
+      </if>
+      <if test="padMetallurgy != null">
+        pad_metallurgy = #{padMetallurgy,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection1 != null">
+        out_of_band_rejection1 = #{outOfBandRejection1,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection2 != null">
+        out_of_band_rejection2 = #{outOfBandRejection2,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection3 != null">
+        out_of_band_rejection3 = #{outOfBandRejection3,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection4 != null">
+        out_of_band_rejection4 = #{outOfBandRejection4,jdbcType=VARCHAR},
+      </if>
+      <if test="outOfBandRejection5 != null">
+        out_of_band_rejection5 = #{outOfBandRejection5,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null">
+        material_type = #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="ratedCurrent != null">
+        rated_current = #{ratedCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="bandwidth != null">
+        bandwidth = #{bandwidth,jdbcType=VARCHAR},
+      </if>
+      <if test="stopBandBy40 != null">
+        stop_band_by40 = #{stopBandBy40,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandInsertionLossBy13 != null">
+        pass_band_insertion_loss_by1_3 = #{passBandInsertionLossBy13,jdbcType=VARCHAR},
+      </if>
+      <if test="passBandInsertionLossBy20typ != null">
+        pass_band_insertion_loss_by2_0Typ = #{passBandInsertionLossBy20typ,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType2 != null">
+        material_type2 = #{materialType2,jdbcType=VARCHAR},
+      </if>
+      <if test="basisMaterial != null">
+        basis_material = #{basisMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="outlet != null">
+        outlet = #{outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluatingScope != null">
+        evaluating_scope = #{evaluatingScope,jdbcType=VARCHAR},
+      </if>
+      <if test="appearance != null">
+        appearance = #{appearance,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+    update pd_info_material
+    set pd_model_id = #{pdModelId,jdbcType=INTEGER},
+      std = #{std,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      search_key = #{searchKey,jdbcType=VARCHAR},
+      surface_code = #{surfaceCode,jdbcType=VARCHAR},
+      thickness_code = #{thicknessCode,jdbcType=VARCHAR},
+      length_width_code = #{lengthWidthCode,jdbcType=VARCHAR},
+      material_code = #{materialCode,jdbcType=VARCHAR},
+      center_frequency = #{centerFrequency,jdbcType=VARCHAR},
+      pass_band_range = #{passBandRange,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      ripple = #{ripple,jdbcType=VARCHAR},
+      power_capacity = #{powerCapacity,jdbcType=VARCHAR},
+      vswr = #{vswr,jdbcType=VARCHAR},
+      amplitude_balance = #{amplitudeBalance,jdbcType=VARCHAR},
+      phase_balance = #{phaseBalance,jdbcType=VARCHAR},
+      insertion_loss = #{insertionLoss,jdbcType=VARCHAR},
+      isolation = #{isolation,jdbcType=VARCHAR},
+      frequency_range = #{frequencyRange,jdbcType=VARCHAR},
+      vswr_stop_band = #{vswrStopBand,jdbcType=VARCHAR},
+      vswr_pass_Band = #{vswrPassBand,jdbcType=VARCHAR},
+      stop_band_by20 = #{stopBandBy20,jdbcType=VARCHAR},
+      cut_off_frequency = #{cutOffFrequency,jdbcType=VARCHAR},
+      breakdown_voltage = #{breakdownVoltage,jdbcType=VARCHAR},
+      insulation_resistance = #{insulationResistance,jdbcType=VARCHAR},
+      flexure_strength = #{flexureStrength,jdbcType=VARCHAR},
+      dielectric_loss_by20G = #{dielectricLossBy20g,jdbcType=VARCHAR},
+      dielectric_loss_by1_9G = #{dielectricLossBy19g,jdbcType=VARCHAR},
+      permittivity_by15G = #{permittivityBy15g,jdbcType=VARCHAR},
+      permittivity_by1_9G = #{permittivityBy19g,jdbcType=VARCHAR},
+      dielectric_strength = #{dielectricStrength,jdbcType=VARCHAR},
+      insulation_resistance_by125 = #{insulationResistanceBy125,jdbcType=VARCHAR},
+      insulation_resistance_by25 = #{insulationResistanceBy25,jdbcType=VARCHAR},
+      temperature_alteration_ratio = #{temperatureAlterationRatio,jdbcType=VARCHAR},
+      dielectric_loss_by1MHz = #{dielectricLossBy1mhz,jdbcType=VARCHAR},
+      permittivity = #{permittivity,jdbcType=VARCHAR},
+      powder_density = #{powderDensity,jdbcType=VARCHAR},
+      specific_surfaceArea = #{specificSurfacearea,jdbcType=VARCHAR},
+      d90 = #{d90,jdbcType=VARCHAR},
+      d50 = #{d50,jdbcType=VARCHAR},
+      d10 = #{d10,jdbcType=VARCHAR},
+      sintering_temperature = #{sinteringTemperature,jdbcType=VARCHAR},
+      soaking_time = #{soakingTime,jdbcType=VARCHAR},
+      performance = #{performance,jdbcType=VARCHAR},
+      pad_metallurgy = #{padMetallurgy,jdbcType=VARCHAR},
+      out_of_band_rejection1 = #{outOfBandRejection1,jdbcType=VARCHAR},
+      out_of_band_rejection2 = #{outOfBandRejection2,jdbcType=VARCHAR},
+      out_of_band_rejection3 = #{outOfBandRejection3,jdbcType=VARCHAR},
+      out_of_band_rejection4 = #{outOfBandRejection4,jdbcType=VARCHAR},
+      out_of_band_rejection5 = #{outOfBandRejection5,jdbcType=VARCHAR},
+      material_type = #{materialType,jdbcType=VARCHAR},
+      rated_current = #{ratedCurrent,jdbcType=VARCHAR},
+      bandwidth = #{bandwidth,jdbcType=VARCHAR},
+      stop_band_by40 = #{stopBandBy40,jdbcType=VARCHAR},
+      pass_band_insertion_loss_by1_3 = #{passBandInsertionLossBy13,jdbcType=VARCHAR},
+      pass_band_insertion_loss_by2_0Typ = #{passBandInsertionLossBy20typ,jdbcType=VARCHAR},
+      material_type2 = #{materialType2,jdbcType=VARCHAR},
+      basis_material = #{basisMaterial,jdbcType=VARCHAR},
+      outlet = #{outlet,jdbcType=VARCHAR},
+      evaluating_scope = #{evaluatingScope,jdbcType=VARCHAR},
+      appearance = #{appearance,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pd_info_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

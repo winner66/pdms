@@ -10,6 +10,7 @@
     <result column="gp" jdbcType="VARCHAR" property="gp" />
     <result column="rel" jdbcType="VARCHAR" property="rel" />
     <result column="descr" jdbcType="VARCHAR" property="descr" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
