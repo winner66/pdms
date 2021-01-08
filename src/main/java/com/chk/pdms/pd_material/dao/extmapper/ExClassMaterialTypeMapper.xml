@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd_material.dao.extmapper.ExClassMaterialTypeMapper">
+
+  <select id="List" resultType="com.chk.pdms.pd_material.domain.ClassMaterialType">
+    select * from class_material_type;
+  </select>
+    <select id="getclassIdList" resultType="long">
+    select class_id from class_material_type;
+  </select>
+
+</mapper>

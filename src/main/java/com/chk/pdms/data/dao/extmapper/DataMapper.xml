@@ -151,4 +151,245 @@
         </if>
         limit 1
     </select>
+    <select id="getPdInfoMaterial" resultType="com.chk.pdms.pd_material.vo.PdMaterialVo">
+            select  * from   pd_info_material
+        where 1=1
+        <if test="infoMaterials.id != null">
+            and id = #{pd_info_material.id}
+        </if>
+
+        <if test="infoMaterials.pdModelId != null">
+            and  pd_model_id= #{pd_info_material.pd_model_id}
+        </if>
+        <if test="infoMaterials.std != null">
+            and std= #{pd_info_material.std}
+        </if>
+        <if test="infoMaterials.quality != null">
+            and   quality= #{pd_info_material.quality}
+        </if>
+        <if test="infoMaterials.model != null">
+            and model= #{pd_info_material.model}
+        </if>
+        <if test="infoMaterials.size != null">
+            and size= #{pd_info_material.size}
+        </if>
+        <if test="infoMaterials.searchKey != null">
+            and search_key= #{pd_info_material.search_key}
+        </if>
+        <if test="infoMaterials.surfaceCode != null">
+            and  surface_code= #{pd_info_material.surface_code}
+        </if>
+        <if test="infoMaterials.thicknessCode != null">
+            and thickness_code= #{pd_info_material.thickness_code}
+        </if>
+        <if test="infoMaterials.lengthWidthCode != null">
+            and   length_width_code= #{pd_info_material.length_width_code}
+        </if>
+        <if test="infoMaterials.materialCode != null">
+            and material_code= #{pd_info_material.material_code}
+        </if>
+        <if test="infoMaterials.centerFrequency != null">
+            and  center_frequency= #{pd_info_material.center_frequency}
+        </if>
+        <if test="infoMaterials.passBandRange != null">
+            and  pass_band_range= #{pd_info_material.pass_band_range}
+        </if>
+        <if test="infoMaterials.other != null">
+            and other= #{pd_info_material.other}
+        </if>
+        <if test="infoMaterials.ripple != null">
+            and  ripple= #{pd_info_material.ripple}
+        </if>
+        <if test="infoMaterials.powerCapacity != null">
+            and power_capacity= #{pd_info_material.power_capacity}
+        </if>
+        <if test="infoMaterials.vswr != null">
+            and vswr= #{pd_info_material.vswr}
+        </if>
+        <if test="infoMaterials.amplitudeBalance != null">
+            and  amplitude_balance= #{pd_info_material.amplitude_balance}
+        </if>
+        <if test="infoMaterials.phaseBalance != null">
+            and   phase_balance= #{pd_info_material.phase_balance}
+        </if>
+        <if test="infoMaterials.insertionLoss != null">
+            and   insertion_loss= #{pd_info_material.insertion_loss}
+        </if>
+        <if test="infoMaterials.isolation != null">
+            and   isolation= #{pd_info_material.isolation}
+        </if>
+        <if test="infoMaterials.frequencyRange != null">
+            and  frequency_range= #{pd_info_material.frequency_range}
+        </if>
+        <if test="infoMaterials.vswrStopBand != null">
+            and   vswr_stop_band= #{pd_info_material.vswr_stop_band}
+        </if>
+        <if test="infoMaterials.vswrPassBand != null">
+            and  vswr_pass_Band= #{pd_info_material.vswr_pass_Band}
+        </if>
+        <if test="infoMaterials.stopBandBy20 != null">
+            and  stop_band_by20= #{pd_info_material.stop_band_by20}
+        </if>
+        <if test="infoMaterials.cutOffFrequency != null">
+            and cut_off_frequency= #{pd_info_material.cut_off_frequency}
+        </if>
+        <if test="infoMaterials.breakdownVoltage != null">
+            and  breakdown_voltage= #{pd_info_material.breakdown_voltage}
+        </if>
+        <if test="infoMaterials.insulationResistance != null">
+            and  insulation_resistance= #{pd_info_material.insulation_resistance}
+        </if>
+        <if test="infoMaterials.flexureStrength != null">
+            and flexure_strength= #{pd_info_material.flexure_strength}
+        </if>
+        <if test="infoMaterials.dielectricLossBy20g != null">
+            and  dielectric_loss_by20G= #{pd_info_material.dielectric_loss_by20G}
+        </if>
+        <if test="infoMaterials.dielectricLossBy19g != null">
+            and   dielectric_loss_by1_9G= #{pd_info_material.dielectric_loss_by1_9G}
+        </if>
+        <if test="infoMaterials.permittivityBy15g != null">
+            and permittivity_by15G= #{pd_info_material.permittivity_by15G}
+        </if>
+        <if test="infoMaterials.permittivityBy19g != null">
+            and  permittivity_by1_9G= #{pd_info_material.permittivity_by1_9G}
+        </if>
+        <if test="infoMaterials.dielectricStrength != null">
+            and   dielectric_strength= #{pd_info_material.dielectric_strength}
+        </if>
+        <if test="infoMaterials.insulationResistanceBy125 != null">
+            and  insulation_resistance_by125= #{pd_info_material.insulation_resistance_by125}
+        </if>
+        <if test="infoMaterials.insulationResistanceBy25 != null">
+            and  insulation_resistance_by25= #{pd_info_material.insulation_resistance_by25}
+        </if>
+        <if test="infoMaterials.temperatureAlterationRatio != null">
+            and   temperature_alteration_ratio= #{pd_info_material.temperature_alteration_ratio}
+        </if>
+        <if test="infoMaterials.dielectricLossBy1mhz != null">
+            and dielectric_loss_by1MHz= #{pd_info_material.dielectric_loss_by1MHz}
+        </if>
+        <if test="infoMaterials.permittivity != null">
+            and permittivity= #{pd_info_material.permittivity}
+        </if>
+        <if test="infoMaterials.powderDensity != null">
+            and   powder_density= #{pd_info_material.powder_density}
+        </if>
+        <if test="infoMaterials.specificSurfacearea != null">
+            and  specific_surfaceArea= #{pd_info_material.specific_surfaceArea}
+        </if>
+        <if test="infoMaterials.d90 != null">
+            and   d90= #{pd_info_material. d90}
+        </if>
+        <if test="infoMaterials.d50 != null">
+            and   d50= #{pd_info_material.d50}
+        </if>
+        <if test="infoMaterials.d10 != null">
+            and  d10= #{pd_info_material.d10}
+        </if>
+        <if test="infoMaterials.sinteringTemperature != null">
+            and  sintering_temperature= #{pd_info_material.sintering_temperature}
+        </if>
+        <if test="soakingTime != null">
+            and   soaking_time= #{pd_info_material.soaking_time}
+        </if>
+        <if test="infoMaterials.performance != null">
+            and  performance= #{pd_info_material.performance=}
+        </if>
+        <if test="infoMaterials.padMetallurgy != null">
+            and   pad_metallurgy= #{pd_info_material.pad_metallurgy}
+        </if>
+        <if test="infoMaterials.outOfBandRejection1 != null">
+            and  out_of_band_rejection1= #{pd_info_material.out_of_band_rejection1}
+        </if>
+        <if test="infoMaterials.outOfBandRejection2 != null">
+            and   out_of_band_rejection2= #{pd_info_material.out_of_band_rejection2}
+        </if>
+        <if test="infoMaterials.outOfBandRejection3 != null">
+            and   out_of_band_rejection3= #{pd_info_material.out_of_band_rejection3}
+        </if>
+        <if test="infoMaterials.outOfBandRejection4 != null">
+            and  out_of_band_rejection4= #{pd_info_material.out_of_band_rejection4}
+        </if>
+        <if test="infoMaterials.outOfBandRejection5 != null">
+            and  out_of_band_rejection5= #{pd_info_material.out_of_band_rejection5}
+        </if>
+        <if test="infoMaterials.materialType != null">
+            and  material_type= #{pd_info_material.material_type}
+        </if>
+        <if test="infoMaterials.ratedCurrent != null">
+            and rated_current= #{pd_info_material.rated_current}
+        </if>
+        <if test="infoMaterials.bandwidth != null">
+            and  bandwidth= #{pd_info_material.bandwidth}
+        </if>
+        <if test="infoMaterials.stopBandBy40 != null">
+            and  stop_band_by40= #{pd_info_material.stop_band_by40}
+        </if>
+        <if test="infoMaterials.passBandInsertionLossBy13 != null">
+            and  pass_band_insertion_loss_by1_3= #{pd_info_material.pass_band_insertion_loss_by1_3}
+        </if>
+        <if test="infoMaterials.passBandInsertionLossBy20typ != null">
+            and   pass_band_insertion_loss_by2_0Typ= #{pd_info_material.pass_band_insertion_loss_by2_0Typ}
+        </if>
+        <if test="infoMaterials.materialType2 != null">
+            and  material_type2= #{pd_info_material.material_type2}
+        </if>
+        <if test="infoMaterials.basisMaterial != null">
+            and  basis_material= #{pd_info_material.basis_material}
+        </if>
+        <if test="infoMaterials.outlet != null">
+            and  outlet= #{pd_info_material.outlet}
+        </if>
+        <if test="infoMaterials.evaluatingScope != null">
+            and  evaluating_scope= #{pd_info_material. evaluating_scope}
+        </if>
+        <if test="infoMaterials.appearance != null">
+            and   appearance= #{pd_info_material.appearance}
+        </if>
+        <if test="infoMaterials.del != null">
+            and   del= #{pd_info_material. del}
+        </if>
+    </select>
+    <insert id="insertMaterialInfo" parameterType="java.util.List">
+        <foreach collection="infoMaterials" item="item" index="index" open="" close="" separator=";">
+            insert into pd_info_material ( id, pd_model_id, std, quality, model, size, search_key, surface_code, thickness_code,
+            length_width_code, material_code, center_frequency, pass_band_range, other, ripple,
+            power_capacity, vswr, amplitude_balance, phase_balance, insertion_loss, isolation,
+            frequency_range, vswr_stop_band, vswr_pass_Band, stop_band_by20, cut_off_frequency,
+            breakdown_voltage, insulation_resistance, flexure_strength, dielectric_loss_by20G,
+            dielectric_loss_by1_9G, permittivity_by15G, permittivity_by1_9G, dielectric_strength,
+            insulation_resistance_by125, insulation_resistance_by25, temperature_alteration_ratio,
+            dielectric_loss_by1MHz, permittivity, powder_density, specific_surfaceArea, d90,
+            d50, d10, sintering_temperature, soaking_time, performance, pad_metallurgy, out_of_band_rejection1,
+            out_of_band_rejection2, out_of_band_rejection3, out_of_band_rejection4, out_of_band_rejection5,
+            material_type, rated_current, bandwidth, stop_band_by40, pass_band_insertion_loss_by1_3,
+            pass_band_insertion_loss_by2_0Typ, material_type2, basis_material, outlet, evaluating_scope,
+            appearance, del)
+            values (#{item.id,jdbcType=INTEGER}, #{item.pdModelId,jdbcType=INTEGER}, #{item.std,jdbcType=VARCHAR},
+            #{item.quality,jdbcType=VARCHAR}, #{item.model,jdbcType=VARCHAR}, #{item.size,jdbcType=VARCHAR},
+            #{item.searchKey,jdbcType=VARCHAR}, #{item.surfaceCode,jdbcType=VARCHAR}, #{item.thicknessCode,jdbcType=VARCHAR},
+            #{item.lengthWidthCode,jdbcType=VARCHAR}, #{item.materialCode,jdbcType=VARCHAR}, #{item.centerFrequency,jdbcType=VARCHAR},
+            #{item.passBandRange,jdbcType=VARCHAR}, #{item.other,jdbcType=VARCHAR}, #{item.ripple,jdbcType=VARCHAR},
+            #{item.powerCapacity,jdbcType=VARCHAR}, #{item.vswr,jdbcType=VARCHAR}, #{item.amplitudeBalance,jdbcType=VARCHAR},
+            #{item.phaseBalance,jdbcType=VARCHAR}, #{item.insertionLoss,jdbcType=VARCHAR}, #{item.isolation,jdbcType=VARCHAR},
+            #{item.frequencyRange,jdbcType=VARCHAR}, #{item.vswrStopBand,jdbcType=VARCHAR}, #{item.vswrPassBand,jdbcType=VARCHAR},
+            #{item.stopBandBy20,jdbcType=VARCHAR}, #{item.cutOffFrequency,jdbcType=VARCHAR}, #{item.breakdownVoltage,jdbcType=VARCHAR},
+            #{item.insulationResistance,jdbcType=VARCHAR}, #{item.flexureStrength,jdbcType=VARCHAR},
+            #{item.dielectricLossBy20g,jdbcType=VARCHAR}, #{item.dielectricLossBy19g,jdbcType=VARCHAR},
+            #{item.permittivityBy15g,jdbcType=VARCHAR}, #{item.permittivityBy19g,jdbcType=VARCHAR}, #{item.dielectricStrength,jdbcType=VARCHAR},
+            #{item.insulationResistanceBy125,jdbcType=VARCHAR}, #{item.insulationResistanceBy25,jdbcType=VARCHAR},
+            #{item.temperatureAlterationRatio,jdbcType=VARCHAR}, #{item.dielectricLossBy1mhz,jdbcType=VARCHAR},
+            #{item.permittivity,jdbcType=VARCHAR}, #{item.powderDensity,jdbcType=VARCHAR}, #{item.specificSurfacearea,jdbcType=VARCHAR},
+            #{item.d90,jdbcType=VARCHAR}, #{item.d50,jdbcType=VARCHAR}, #{item.d10,jdbcType=VARCHAR}, #{item.sinteringTemperature,jdbcType=VARCHAR},
+            #{item.soakingTime,jdbcType=VARCHAR}, #{item.performance,jdbcType=VARCHAR}, #{item.padMetallurgy,jdbcType=VARCHAR},
+            #{item.outOfBandRejection1,jdbcType=VARCHAR}, #{item.outOfBandRejection2,jdbcType=VARCHAR},
+            #{item.outOfBandRejection3,jdbcType=VARCHAR}, #{item.outOfBandRejection4,jdbcType=VARCHAR},
+            #{item.outOfBandRejection5,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR}, #{item.ratedCurrent,jdbcType=VARCHAR},
+            #{item.bandwidth,jdbcType=VARCHAR}, #{item.stopBandBy40,jdbcType=VARCHAR}, #{item.passBandInsertionLossBy13,jdbcType=VARCHAR},
+            #{item.passBandInsertionLossBy20typ,jdbcType=VARCHAR}, #{item.materialType2,jdbcType=VARCHAR},
+            #{item.basisMaterial,jdbcType=VARCHAR}, #{item.outlet,jdbcType=VARCHAR}, #{item.evaluatingScope,jdbcType=VARCHAR},
+            #{item.appearance,jdbcType=VARCHAR}, #{item.del,jdbcType=BIT})
+        </foreach>
+    </insert>
 </mapper>

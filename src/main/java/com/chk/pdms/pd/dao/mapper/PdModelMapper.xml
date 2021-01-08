@@ -22,6 +22,9 @@
     <result column="object_url" jdbcType="VARCHAR" property="objectUrl" />
     <result column="chart_url" jdbcType="VARCHAR" property="chartUrl" />
     <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="general_norms" jdbcType="VARCHAR" property="generalNorms" />
+    <result column="detail_norms" jdbcType="VARCHAR" property="detailNorms" />
+    <result column="del" jdbcType="BIT" property="del" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,7 +87,7 @@
   <sql id="Base_Column_List">
     id, name, code, qa_code, pd_class_id, voltage, ohm, tan, other_param, purpose, feature, 
     contact, phone, order_rule, manual_url, size_url, order_rule_url, object_url, chart_url, 
-    company
+    company, general_norms, detail_norms, del
   </sql>
   <select id="selectByExample" parameterType="com.chk.pdms.pd.domain.PdModelExample" resultMap="BaseResultMap">
     select
@@ -117,30 +120,29 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.chk.pdms.pd.domain.PdModel">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into pd_model (name, code, qa_code, 
-      pd_class_id, voltage, ohm, 
-      tan, other_param, purpose, 
-      feature, contact, phone, 
-      order_rule, manual_url, size_url, 
-      order_rule_url, object_url, chart_url, 
-      company)
-    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{qaCode,jdbcType=VARCHAR}, 
-      #{pdClassId,jdbcType=BIGINT}, #{voltage,jdbcType=VARCHAR}, #{ohm,jdbcType=VARCHAR}, 
-      #{tan,jdbcType=VARCHAR}, #{otherParam,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, 
-      #{feature,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{orderRule,jdbcType=VARCHAR}, #{manualUrl,jdbcType=VARCHAR}, #{sizeUrl,jdbcType=VARCHAR}, 
-      #{orderRuleUrl,jdbcType=VARCHAR}, #{objectUrl,jdbcType=VARCHAR}, #{chartUrl,jdbcType=VARCHAR}, 
-      #{company,jdbcType=VARCHAR})
+    insert into pd_model (id, name, code, 
+      qa_code, pd_class_id, voltage, 
+      ohm, tan, other_param, 
+      purpose, feature, contact, 
+      phone, order_rule, manual_url, 
+      size_url, order_rule_url, object_url, 
+      chart_url, company, general_norms, 
+      detail_norms, del)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{qaCode,jdbcType=VARCHAR}, #{pdClassId,jdbcType=BIGINT}, #{voltage,jdbcType=VARCHAR}, 
+      #{ohm,jdbcType=VARCHAR}, #{tan,jdbcType=VARCHAR}, #{otherParam,jdbcType=VARCHAR}, 
+      #{purpose,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{orderRule,jdbcType=VARCHAR}, #{manualUrl,jdbcType=VARCHAR}, 
+      #{sizeUrl,jdbcType=VARCHAR}, #{orderRuleUrl,jdbcType=VARCHAR}, #{objectUrl,jdbcType=VARCHAR}, 
+      #{chartUrl,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{generalNorms,jdbcType=VARCHAR}, 
+      #{detailNorms,jdbcType=VARCHAR}, #{del,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.chk.pdms.pd.domain.PdModel">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into pd_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
@@ -198,8 +200,20 @@
       <if test="company != null">
         company,
       </if>
+      <if test="generalNorms != null">
+        general_norms,
+      </if>
+      <if test="detailNorms != null">
+        detail_norms,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -256,6 +270,15 @@
       </if>
       <if test="company != null">
         #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="generalNorms != null">
+        #{generalNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="detailNorms != null">
+        #{detailNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -328,6 +351,15 @@
       <if test="record.company != null">
         company = #{record.company,jdbcType=VARCHAR},
       </if>
+      <if test="record.generalNorms != null">
+        general_norms = #{record.generalNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailNorms != null">
+        detail_norms = #{record.detailNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.del != null">
+        del = #{record.del,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -354,7 +386,10 @@
       order_rule_url = #{record.orderRuleUrl,jdbcType=VARCHAR},
       object_url = #{record.objectUrl,jdbcType=VARCHAR},
       chart_url = #{record.chartUrl,jdbcType=VARCHAR},
-      company = #{record.company,jdbcType=VARCHAR}
+      company = #{record.company,jdbcType=VARCHAR},
+      general_norms = #{record.generalNorms,jdbcType=VARCHAR},
+      detail_norms = #{record.detailNorms,jdbcType=VARCHAR},
+      del = #{record.del,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -419,6 +454,15 @@
       <if test="company != null">
         company = #{company,jdbcType=VARCHAR},
       </if>
+      <if test="generalNorms != null">
+        general_norms = #{generalNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="detailNorms != null">
+        detail_norms = #{detailNorms,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -442,7 +486,10 @@
       order_rule_url = #{orderRuleUrl,jdbcType=VARCHAR},
       object_url = #{objectUrl,jdbcType=VARCHAR},
       chart_url = #{chartUrl,jdbcType=VARCHAR},
-      company = #{company,jdbcType=VARCHAR}
+      company = #{company,jdbcType=VARCHAR},
+      general_norms = #{generalNorms,jdbcType=VARCHAR},
+      detail_norms = #{detailNorms,jdbcType=VARCHAR},
+      del = #{del,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.pd.domain.PdModelExample" resultMap="BaseResultMap">
@@ -459,4 +506,5 @@
       order by ${orderByClause}
     </if>
   </select>
+
 </mapper>

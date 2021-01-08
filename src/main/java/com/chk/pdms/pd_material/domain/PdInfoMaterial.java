@@ -3,6 +3,12 @@ package com.chk.pdms.pd_material.domain;
 import java.io.Serializable;
 
 public class PdInfoMaterial implements Serializable {
+
+
+    /**
+     * modelId  用于 导入产品数据时用，
+     */
+    private String modelId;
     private Integer id;
 
     private Integer pdModelId;
@@ -130,6 +136,8 @@ public class PdInfoMaterial implements Serializable {
     private String evaluatingScope;
 
     private String appearance;
+
+    private Boolean del;
 
     private static final long serialVersionUID = 1L;
 
@@ -460,6 +468,13 @@ public class PdInfoMaterial implements Serializable {
     public void setSpecificSurfacearea(String specificSurfacearea) {
         this.specificSurfacearea = specificSurfacearea == null ? null : specificSurfacearea.trim();
     }
+    public String getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(String modelId) {
+        this.modelId = modelId;
+    }
 
     public String getD90() {
         return d90;
@@ -645,6 +660,14 @@ public class PdInfoMaterial implements Serializable {
         this.appearance = appearance == null ? null : appearance.trim();
     }
 
+    public Boolean getDel() {
+        return del;
+    }
+
+    public void setDel(Boolean del) {
+        this.del = del;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -715,6 +738,7 @@ public class PdInfoMaterial implements Serializable {
         sb.append(", outlet=").append(outlet);
         sb.append(", evaluatingScope=").append(evaluatingScope);
         sb.append(", appearance=").append(appearance);
+        sb.append(", del=").append(del);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -795,7 +819,8 @@ public class PdInfoMaterial implements Serializable {
             && (this.getBasisMaterial() == null ? other.getBasisMaterial() == null : this.getBasisMaterial().equals(other.getBasisMaterial()))
             && (this.getOutlet() == null ? other.getOutlet() == null : this.getOutlet().equals(other.getOutlet()))
             && (this.getEvaluatingScope() == null ? other.getEvaluatingScope() == null : this.getEvaluatingScope().equals(other.getEvaluatingScope()))
-            && (this.getAppearance() == null ? other.getAppearance() == null : this.getAppearance().equals(other.getAppearance()));
+            && (this.getAppearance() == null ? other.getAppearance() == null : this.getAppearance().equals(other.getAppearance()))
+            && (this.getDel() == null ? other.getDel() == null : this.getDel().equals(other.getDel()));
     }
 
     @Override
@@ -866,6 +891,7 @@ public class PdInfoMaterial implements Serializable {
         result = prime * result + ((getOutlet() == null) ? 0 : getOutlet().hashCode());
         result = prime * result + ((getEvaluatingScope() == null) ? 0 : getEvaluatingScope().hashCode());
         result = prime * result + ((getAppearance() == null) ? 0 : getAppearance().hashCode());
+        result = prime * result + ((getDel() == null) ? 0 : getDel().hashCode());
         return result;
     }
 }

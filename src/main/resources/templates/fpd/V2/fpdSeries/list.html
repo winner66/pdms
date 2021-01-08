@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+                        <div class="columns pull-left">
+                            <div class="columns pull-left">
+                                <button type="button" class="btn  btn-primary" onclick="add()">
+                                    <i class="fa fa-plus hidden" aria-hidden="true"></i>添加
+                                </button>
+                                <button type="button"  id="exportBtn" class="btn  btn-primary" >
+                                    <i class="fa fa-plus hidden" aria-hidden="true"></i>导出数据
+                                </button>
+                            </div>
+                        </div>
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
+                        <div class="columns pull-right col-md-2 nopadding">
+                            <input id="name" name="name" type="text" class="form-control" placeholder="产品型号">
+                        </div>
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/fpd/V2/fpdSeries/list.js"></script>
+<script src="/js/axios.min.js"></script>
+<script>
+    var prefix = "/fpd/V2/fpdSeries";
+    // const filename = "用户信息表.xls";
+
+    window.onload = function () {
+        const oBtn = document.getElementById('exportBtn');
+        oBtn.onclick = requestByAxios;
+    };
+
+    // 1.通过axios处理流数据
+    function requestByAxios() {
+        axios({
+            method: 'post',
+            url: '/fpd/V2/fpdSeries/exportFpdSeries',
+            // params: {filename: filename},
+            responseType: 'blob',
+        }).then(function (rep) {
+            const data = rep.data;
+            const blob = new Blob([data]);
+            const blobUrl = window.URL.createObjectURL(blob);
+            const filename = decodeURI(rep.headers["content-disposition"].split(";")[1].split("filename=")[1]);
+            // const filename="test.xlsx";
+            download(blobUrl, filename);
+        })
+    }
+
+    // 2.通过原生XMLHttpRequest请求流数据
+    function requestByXmlRequest() {
+        const req = new XMLHttpRequest();
+        req.open('POST', '/fpd/V2/fpdSeries/exportFpdSeries', true);
+        req.responseType = 'blob';
+        req.onload = function () {
+            const data = req.response;
+            const blob = new Blob([data]);
+            const blobUrl = window.URL.createObjectURL(blob);
+            download(blobUrl);
+        };
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.send('filename=' + filename);
+    }
+
+    // ！！！注意：jQuery的ajax返回数据格式里面没有blob
+
+    function download(url, filename) {
+        // 创建隐藏的可下载链接
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.download = filename;
+        a.href = url;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+
+</html>

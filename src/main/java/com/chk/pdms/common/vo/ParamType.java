@@ -23,8 +23,19 @@ public enum ParamType {
 
     wireMa("引线材质","引线材质"),
     wireSize("引线长短","引线长短"),
-    pin("引脚形状","引脚形状");
+    pin("引脚形状","引脚形状"),
 
+
+    surfaceCode("陶瓷基片的表面代码","表面类型"),
+    thicknessCode("陶瓷基片的厚度代码","厚度代码"),
+    lengthWidthCode("陶瓷基片的长宽代码","长宽代码"),
+    materialCode("陶瓷基片的材料代码","材料代码"),
+    centerFrequency("中心频率","中心频率"),
+    cutOffFrequency("3dB截止频率","3dB截止频率"),
+    passBandRange("通带范围","通带范围"),
+    frequencyRange("频率范围","频率范围"),
+    bandwidth("带宽","带宽"),
+    basisMaterial("适配基体材料","适配基体材料");
     private String value;
 
     private String title;

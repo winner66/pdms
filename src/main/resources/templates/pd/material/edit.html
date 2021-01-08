@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" id="editAll">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${info.id}" type="hidden">
+                    <input id="pdClassId" th:value="${info.pdClassId}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选择材料类型一级<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <!--                            onchange="tagChange()"-->
+                            <select class="form-control" data-placeholder="选择材料类型一级" id="tag1" name="tag1"
+                                    style="width:100%" tabindex="2" v-on:click="tag1Change">
+                                <option value>选择材料类型一级</option>
+                                <option th:each="qa1:${tag}" th:selected="${qa1.value eq info.materialType}"
+                                        th:text="${qa1.title}" th:value="${qa1.title}"></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label">选择材料类型二级<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" data-placeholder="选择材料类型二级" id="tag2" name="tag2"
+                                    style="width:100%" tabindex="2" v-on:click="tag2Change">
+                                <option value>选择材料类型二级</option>
+                                <!--                                <option th:each="qa2:${tag2}" th:value="${qa2.title}" th:text="${qa2.title}" th:selected="${qa2.value eq info.materialType2}" ></option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div v-if="tag1==1">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">尺寸<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择尺寸" id="size" name="size"
+                                            style="width:100%" tabindex="2">
+                                        <option value="">请选择尺寸</option>
+                                        <option th:each="o:${size}" th:selected="${o.code eq info.size}"
+                                                th:text="${o.code}" th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">质量等级<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择质量等级" id="quality" name="quality"
+                                            style="width:100%" tabindex="2">
+                                        <option value="">请选择质量等级</option>
+                                        <option th:each="o:${quality}" th:selected="${o.code eq info.quality}"
+                                                th:text="${o.code}" th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">频率范围<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择频率范围" id="frequencyRange"
+                                            name="size" style="width:100%" tabindex="2">
+                                        <option value="">请选择频率范围</option>
+                                        <option th:each="o:${frequencyRange}"
+                                                th:selected="${o.code eq info.frequencyRange}" th:text="${o.code}"
+                                                th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">质量等级<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择通带范围" id="passBandRange"
+                                            name="passBandRange" style="width:100%" tabindex="2">
+                                        <option value="">请选择质量等级</option>
+                                        <option th:each="o:${passBandRange}"
+                                                th:selected="${o.code eq info.passBandRange}" th:text="${o.code}"
+                                                th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else-if="tag1==4">
+
+                        </div>
+                        <div v-else-if="tag1==6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">材料代码<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择材料代码" id="materialCode"
+                                            name="materialCode" style="width:100%" tabindex="2">
+                                        <option value="">请选择材料代码</option>
+                                        <option th:each="o:${materialCode}" th:selected="${o.code eq info.materialCode}"
+                                                th:text="${o.code}" th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">厚度代码<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择厚度代码" id="thicknessCode"
+                                            name="thicknessCode" style="width:100%" tabindex="2">
+                                        <option value="">请选择厚度代码</option>
+                                        <option th:each="o:${thicknessCode}"
+                                                th:selected="${o.code eq info.thicknessCode}" th:text="${o.code}"
+                                                th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">长宽代码<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择长宽代码" id="lengthWidthCode"
+                                            name="lengthWidthCode" style="width:100%" tabindex="2">
+                                        <option value="">请选择长宽代码</option>
+                                        <option th:each="o:${lengthWidthCode}"
+                                                th:selected="${o.code eq info.lengthWidthCode}" th:text="${o.code}"
+                                                th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">表面特征<span style="color:red">*</span></label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" data-placeholder="请选择表面特征" id="surfaceCode"
+                                            name="surfaceCode" style="width:100%" tabindex="2">
+                                        <option value="">请选择表面特征</option>
+                                        <option th:each="o:${surfaceCode}" th:selected="${o.code eq info.surfaceCode}"
+                                                th:text="${o.code}" th:value="${o.code}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else-if="tag1==7">
+
+                        </div>
+                        <div v-else-if="tag1==8">
+
+                        </div>
+                        <div v-else-if="tag1==9">
+
+                        </div>
+                        <div v-else>2</div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+
+<script th:inline="javascript">
+
+    var sizes = [[${size}]];
+
+    function tagChange() {
+        var selectTag = document.getElementById("tag1");
+        var indexTag = selectTag.selectedIndex;
+
+        var tag = selectTag.options[indexTag].value;
+        console.log("tag", tag);
+
+        var selectTag2 = document.getElementById("tag2");
+
+        var str = "";
+        var tag2list = [[${tag2}]]
+        var list = [];
+        // console.log(tag2list);
+
+        $.each(tag2list, function (key, item) {
+            if (item.label == tag) {
+                list = item.children;
+            }
+        })
+        $.each(list, function (key, item) {
+            console.log(key, item);
+            str = str + "<option value='" + item.value + "' text='" + item.label + "'>" + item.label + "</option>";
+        })
+
+        selectTag2.innerHTML = str;
+        // vm.data.tag1=
+
+    }
+</script>
+
+<!--<script src="/js/appjs/pd/material/edit.js" type="text/javascript">-->
+<!--</script>-->
+<script src="/js/vue.min.js"></script>
+<script src="/js/axios.min.js"></script>
+<script>
+
+    var outTag2;
+    getTag2();
+    //source  1:  新增， 2 修改
+    var source=1;
+
+    function getTag2() {
+        var url = "/pd/material/getTag2";
+        $.ajax({
+            cache: false,
+            type: "Get",
+            url: url,
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                console.log("gettag2-data",data)
+                if (data.code == 0) {
+                    res = res.data;
+                    if (res.code == '0') {
+                        outTag2 = res.data;
+                    } else {
+                    }
+                } else {
+                    console.log("error")
+                }
+            }
+        });
+    }
+
+    var vm = new Vue({
+        el: '#editAll',
+        data: {
+            tag1: 1,
+            tag2: outTag2,
+        },
+        methods: {
+            tag1Change: function () {
+                var TreeRsp = {};
+                // this.tag1=e;
+                var selectTag = document.getElementById("tag1");
+                var indexTag = selectTag.selectedIndex;
+
+                var tag = selectTag.options[indexTag].value;
+                console.log("tag", tag);
+                var selectTag2 = document.getElementById("tag2");
+
+                var str = "";
+
+                var list = [];
+                console.log(tag2list);
+
+                $.each(list, function (key, item) {
+                    console.log(key, item);
+                    str = str + "<option value='" + item.value + "' text='" + item.label + "'>" + item.label + "</option>";
+                })
+                console.log("option", str);
+
+                selectTag2.innerHTML = str;
+
+            },
+            tag2Change: function () {
+                var selectTag = document.getElementById("tag2");
+                var indexTag = selectTag.selectedIndex;
+
+                var tag = selectTag.options[indexTag].value;
+                console.log("tag2", tag);
+                this.tag1 = tag.split("_")[0];
+            },
+            save: function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: prefix + "/save",
+                    data: serializeNotNull($('#dataForm').serialize()),
+                    async: false,
+                    error: function (request) {
+                        alert("Connection error");
+                    },
+                    success: function (data) {
+                        if (data.code == 0) {
+                            parent.layer.msg(data.msg);
+                            parent.reLoad();
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        } else {
+                            parent.layer.msg(data.msg);
+                        }
+                    }
+                });
+            },
+            validateRule: function () {
+                var icon = "<i class='fa fa-times-circle'></i> ";
+                $("#dataForm").validate({
+                    ignore: ":hidden:not(select)",
+                    rules: {
+                        tag: {
+                            required: true
+                        },
+                        tag2: {
+                            required: true
+                        }
+
+                    },
+                    messages: {
+                        tag: {
+                            required: icon + "请选择一级材料类型"
+                        },
+                        tag2: {
+                            required: icon + "请选择二级材料类型"
+                        },
+
+
+                    }
+                })
+            },
+
+            loadSelect: function () {
+                $("#quality").chosen({
+                    maxHeight: 200,
+                    // search_contains: true,
+                    no_results_text: "未找到",
+                });
+                $("#size").chosen({
+                    maxHeight: 200,
+                    // search_contains: true,
+                    no_results_text: "未找到",
+                });
+
+            }
+
+
+        }
+    });
+
+    function serializeNotNull(serStr) {
+        return serStr.split("&").filter(function (str) {
+            return !str.endsWith("=")
+        }).join("&");
+        // return serStr.split("&").filter(str => !str.endsWith("=")).join("&");
+    }
+
+    function dateFormat(date, fmt) {
+        var ret;
+        var opt = {
+            "y+": date.getFullYear().toString(),        // 年
+            "M+": (date.getMonth() + 1).toString(),     // 月
+            "d+": date.getDate().toString(),            // 日
+            "H+": date.getHours().toString(),           // 时
+            "m+": date.getMinutes().toString(),         // 分
+            "s+": date.getSeconds().toString()          // 秒
+            // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        };
+        for (var k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
+    }
+</script>
+</body>
+</html>

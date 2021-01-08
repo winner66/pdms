@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 @EnableTransactionManagement
 @ServletComponentScan
-@MapperScan("com.chk.pdms.**.dao")
+@MapperScan(basePackages = {"com.chk.pdms.pd_material.dao","com.chk.pdms.**.dao" })
+//@MapperScan("com.chk.pdms.**.dao" )
 @SpringBootApplication
 @EnableCaching
 public class PdmsApplication {

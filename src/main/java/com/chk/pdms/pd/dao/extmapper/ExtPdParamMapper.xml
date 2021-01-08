@@ -81,4 +81,32 @@
         select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '引脚形状'
         order by idx asc
     </select>
+
+    <select id="listMaterialInfo" resultType="com.chk.pdms.pd.domain.PdParam">
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '质量等级'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '封装及外形尺寸'
+        UNION ALL
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '3dB截止频率'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '中心频率'
+        UNION ALL
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '带宽'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '适配基体材料'
+        UNION ALL
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '陶瓷基片的厚度代码'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '陶瓷基片的材料代码'
+        UNION ALL
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '陶瓷基片的表面代码'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '陶瓷基片的长宽代码'
+        UNION ALL
+           select id as id, type as type, code as code, idx as idx, null as gp, null as rel from pd_param where type = '频率范围'
+        UNION ALL
+        select id as id, type as type, code as code, idx as idx, null as gp, rel as rel from pd_param where type = '通带范围'
+
+
+    </select>
 </mapper>

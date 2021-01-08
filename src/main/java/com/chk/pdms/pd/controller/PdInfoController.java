@@ -146,6 +146,7 @@ public class PdInfoController {
     @GetMapping("/list")
     @RequiresPermissions("pd:info:info")
     public Page<PdInfoVo> list(String key, PageReq pageReq) {
+
         Page<PdInfoVo> list = infoService.list(key, pageReq);
         return list;
     }

@@ -1,8 +1,8 @@
-package com.chk.pdms.pd_material.Dao;
+package com.chk.pdms.pd_material.dao;
 
 
-import com.chk.pdms.pd_material.Dao.exmapper.ExPdInfoMaterialMapper;
-import com.chk.pdms.pd_material.Dao.mapper.PdInfoMaterialMapper;
+import com.chk.pdms.pd_material.dao.extmapper.ExPdInfoMaterialMapper;
+import com.chk.pdms.pd_material.dao.mapper.PdInfoMaterialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

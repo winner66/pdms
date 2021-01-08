@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.pd_material.dao.extmapper.ExPdInfoMaterialMapper">
+
+
+  <select id="listFt" resultType="com.chk.pdms.pd.vo.PdFtVo">
+        select
+        pc.name as pcName,
+        pm.name as pmName,
+        pi.*
+        from pd_info_material pi
+        left join pd_model pm on pi.pd_model_id = pm.id
+        left join pd_class pc on pm.pd_class_id = pc.id
+    </select>
+
+  <update id="updateSearchKey" parameterType="java.util.List">
+    <foreach collection="pdsks" item="sk" index="index" open="" close="" separator=";">
+      UPDATE pd_info_material set search_key=#{sk.searchKey} where id=#{sk.id}
+    </foreach>
+  </update>
+
+  <select id="list" resultType="com.chk.pdms.pd_material.vo.PdMaterialVo">
+    select
+    pm.name as pmName,
+    pi.*
+    from pd_info_material pi
+    left join pd_model pm on pi.pd_model_id = pm.id
+    where 1=1
+    <if test="key != null">
+      AND MATCH(pi.search_key) AGAINST(#{key} in boolean mode)
+    </if>
+    order by id desc
+  </select>
+</mapper>

@@ -1,7 +1,7 @@
-package com.chk.pdms.pd_material.Dao.mapper;
+package com.chk.pdms.pd_material.dao.mapper;
 
-import com.chk.pdms.dao.Info.domain.PdInfoMaterial;
-import com.chk.pdms.dao.Info.domain.PdInfoMaterialExample;
+import com.chk.pdms.pd_material.domain.PdInfoMaterial;
+import com.chk.pdms.pd_material.domain.PdInfoMaterialExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

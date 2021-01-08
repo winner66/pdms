@@ -9,6 +9,7 @@ import com.chk.pdms.pd.domain.PdInfo;
 import com.chk.pdms.pd.domain.PdModel;
 import com.chk.pdms.pd.domain.PdParam;
 import com.chk.pdms.pd.service.PdInfoService;
+import com.chk.pdms.pd_material.service.PdMaterialService;
 import lombok.SneakyThrows;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,8 @@ public class CastService {
     @Autowired
     private PdInfoService infoService;
 
-
+    @Autowired
+    private PdMaterialService materialService;
 
 //    @PostConstruct
 //    public void init() {
@@ -376,7 +378,7 @@ public class CastService {
         }
     }
 
-    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos, List<PDHKLBPFInfoVo>LBPFVos, List<PDHKLLPFInfoVo>LLPEVos, List<PDLHPFInfoVo>LHPFVos, List<PDJLTCInfoVo>JLTCVos, List<PDCSInfoVo> pdcsInfoVos, List<PDPorcelainInfoVo> pdPorcelainInfoVos, List<PDSizingMaterialInfoVo> pdSizingMaterialInfoVos , List<PDRawPorcelainWithInfoVo> rawPorcelainWithInfoVos) {
+    public Map<String, Object> castPdInfo(List<DataRuleVo> dataRuleVos, List<PinVo> pinVos, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos) {
         HashMap<String, Object> result = new HashMap<>();
         List<PdInfo> infos = new ArrayList<>();
         result.put("pdInfo", infos);
@@ -425,48 +427,6 @@ public class CastService {
             isModel(set,modelMap,info,IsModelEnum.hasModel);
             addInfo(infos, info);
         }
-        for (PDHKLBPFInfoVo vo :LBPFVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.hasModel);
-            addInfo(infos, info);
-        }
-        for (PDHKLLPFInfoVo vo : LLPEVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.hasModel);
-            addInfo(infos, info);
-        }
-        for (PDLHPFInfoVo vo : LHPFVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.hasModel);
-            addInfo(infos, info);
-        }
-        for (PDJLTCInfoVo vo : JLTCVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.hasModel);
-            addInfo(infos, info);
-        }
-        for(PDCSInfoVo vo : pdcsInfoVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.notModel);
-            addInfo(infos, info);
-        }
-        for (PDRawPorcelainWithInfoVo  vo: rawPorcelainWithInfoVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.notModel);
-            addInfo(infos, info);
-        }
-        for (PDSizingMaterialInfoVo vo : pdSizingMaterialInfoVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.notModel);
-            addInfo(infos, info);
-        }
-        for (PDPorcelainInfoVo vo : pdPorcelainInfoVos) {
-            PdInfo info = castPdInfo(vo);
-            isModel(set,modelMap,info,IsModelEnum.notModel);
-            addInfo(infos, info);
-        }
-
-
 
 
 
@@ -834,61 +794,6 @@ public class CastService {
         addV(pdInfo);
         return pdInfo;
     }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDJLTCInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDLHPFInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDHKLLPFInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDHKLBPFInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDCSInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDPorcelainInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDRawPorcelainWithInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
-    @SneakyThrows
-    public PdInfo castPdInfo(PDSizingMaterialInfoVo vo) {
-        PdInfo pdInfo = new PdInfo();
-        BeanUtils.copyProperties(pdInfo, vo);
-        addV(pdInfo);
-        return pdInfo;
-    }
+
 
 }

@@ -14,5 +14,7 @@ public interface ExtPdParamMapper {
     public List<PdParam> listGp(String type);
 
     public List<PdParam> list4Info();
+    public  List<PdParam> listMaterialInfo();
+
 
 }

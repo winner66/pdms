@@ -1,10 +1,13 @@
 package com.chk.pdms.data.service;
 
+import com.alibaba.excel.EasyExcel;
 import com.chk.pdms.common.utils.OrderRuleUtil;
 import com.chk.pdms.common.vo.ParamType;
 import com.chk.pdms.data.utils.EasyExcelUtil;
 import com.chk.pdms.data.PdDetailExcel;
 import com.chk.pdms.data.ExportPdDetailReq;
+import com.chk.pdms.data.vo.FPDSeriesVo;
+import com.chk.pdms.fpd.domain.FpdSeries;
 import com.chk.pdms.pd.dao.PdClassDao;
 import com.chk.pdms.pd.dao.PdInfoDao;
 import com.chk.pdms.pd.dao.PdModelDao;
@@ -16,10 +19,12 @@ import com.chk.pdms.pd.vo.CasRsp;
 import com.chk.pdms.pd.vo.SelRsp;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -635,6 +640,19 @@ public class PdExportExcelService {
             e.printStackTrace();
         }
     }
+//    可以使用反射class
+    public void exportFpdSeriesData(List<FpdSeries> fpdSeries, HttpServletResponse response, String filename)throws IOException {
+        try {
+            // 文件下载
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            EasyExcel.write(bos, FPDSeriesVo.class).autoCloseStream(Boolean.FALSE).sheet("sheet").doWrite(fpdSeries);
+
+            EasyExcelUtil.downloadFile(filename, bos, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setWireMa(PdInfo info) {
         if (StringUtils.isNotBlank(info.getWireMa())) {
             String[] ss = StringUtils.split(info.getWireMa(), ";");
@@ -864,4 +882,6 @@ public class PdExportExcelService {
             pdInfo.setVoltage("10[100V]");
         }
     }
+
+
 }

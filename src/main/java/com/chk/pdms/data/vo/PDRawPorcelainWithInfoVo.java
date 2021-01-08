@@ -16,9 +16,11 @@ public class PDRawPorcelainWithInfoVo {
     public static String sheet = "生瓷带";
     @ExcelIgnore
     private String orderRule = "材料牌号|-|厚度|-|尺寸";
+    @ExcelProperty(value = "系列id")
+    private String pdModelId;
 
     @ExcelProperty(value = "产品型号")
-    private String pdname;
+    private String model;
 
     //    介电常数 @1.9G
     @ExcelProperty(value = "介电常数 @1.9G")
@@ -26,11 +28,12 @@ public class PDRawPorcelainWithInfoVo {
     //    介电常数 @15G
     @ExcelProperty(value = "介电常数 @15G")
     private String permittivityBy15G;
+
     //    介电损耗@1.9G
     @ExcelProperty(value = "介电损耗@1.9G")
     private String dielectricLossBy1_9G;
     //    介电常数 @15G
-    @ExcelProperty(value = "介电常数 @15G")
+    @ExcelProperty(value = "介电损耗 @15G")
     private String dielectricLossBy20G;
     //    抗弯强度
     @ExcelProperty(value = "抗弯强度")

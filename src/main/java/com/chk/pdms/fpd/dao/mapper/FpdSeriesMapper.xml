@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chk.pdms.fpd.dao.mapper.FpdSeriesMapper">
+  <resultMap id="BaseResultMap" type="com.chk.pdms.fpd.domain.FpdSeries">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="F_factorys" jdbcType="VARCHAR" property="fFactorys" />
+    <result column="F_series" jdbcType="VARCHAR" property="fSeries" />
+    <result column="HK_series" jdbcType="VARCHAR" property="hkSeries" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="temperature" jdbcType="VARCHAR" property="temperature" />
+    <result column="voltage" jdbcType="VARCHAR" property="voltage" />
+    <result column="outlet" jdbcType="VARCHAR" property="outlet" />
+    <result column="tolerance" jdbcType="VARCHAR" property="tolerance" />
+    <result column="soc_str" jdbcType="VARCHAR" property="socStr" />
+    <result column="elec_code" jdbcType="VARCHAR" property="elecCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, F_factorys, F_series, HK_series, size, temperature, voltage, outlet, tolerance, 
+    soc_str, elec_code
+  </sql>
+  <select id="selectByExample" parameterType="com.chk.pdms.fpd.domain.FpdSeriesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fpd_series
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fpd_series
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fpd_series
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chk.pdms.fpd.domain.FpdSeriesExample">
+    delete from fpd_series
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chk.pdms.fpd.domain.FpdSeries">
+    insert into fpd_series (Id, F_factorys, F_series, 
+      HK_series, size, temperature, 
+      voltage, outlet, tolerance, 
+      soc_str, elec_code)
+    values (#{id,jdbcType=INTEGER}, #{fFactorys,jdbcType=VARCHAR}, #{fSeries,jdbcType=VARCHAR}, 
+      #{hkSeries,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{temperature,jdbcType=VARCHAR}, 
+      #{voltage,jdbcType=VARCHAR}, #{outlet,jdbcType=VARCHAR}, #{tolerance,jdbcType=VARCHAR}, 
+      #{socStr,jdbcType=VARCHAR}, #{elecCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chk.pdms.fpd.domain.FpdSeries">
+    insert into fpd_series
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="fFactorys != null">
+        F_factorys,
+      </if>
+      <if test="fSeries != null">
+        F_series,
+      </if>
+      <if test="hkSeries != null">
+        HK_series,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
+      <if test="voltage != null">
+        voltage,
+      </if>
+      <if test="outlet != null">
+        outlet,
+      </if>
+      <if test="tolerance != null">
+        tolerance,
+      </if>
+      <if test="socStr != null">
+        soc_str,
+      </if>
+      <if test="elecCode != null">
+        elec_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fFactorys != null">
+        #{fFactorys,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeries != null">
+        #{fSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="hkSeries != null">
+        #{hkSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="outlet != null">
+        #{outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="tolerance != null">
+        #{tolerance,jdbcType=VARCHAR},
+      </if>
+      <if test="socStr != null">
+        #{socStr,jdbcType=VARCHAR},
+      </if>
+      <if test="elecCode != null">
+        #{elecCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chk.pdms.fpd.domain.FpdSeriesExample" resultType="java.lang.Long">
+    select count(*) from fpd_series
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fpd_series
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fFactorys != null">
+        F_factorys = #{record.fFactorys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSeries != null">
+        F_series = #{record.fSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hkSeries != null">
+        HK_series = #{record.hkSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperature != null">
+        temperature = #{record.temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voltage != null">
+        voltage = #{record.voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outlet != null">
+        outlet = #{record.outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tolerance != null">
+        tolerance = #{record.tolerance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socStr != null">
+        soc_str = #{record.socStr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elecCode != null">
+        elec_code = #{record.elecCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fpd_series
+    set Id = #{record.id,jdbcType=INTEGER},
+      F_factorys = #{record.fFactorys,jdbcType=VARCHAR},
+      F_series = #{record.fSeries,jdbcType=VARCHAR},
+      HK_series = #{record.hkSeries,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      temperature = #{record.temperature,jdbcType=VARCHAR},
+      voltage = #{record.voltage,jdbcType=VARCHAR},
+      outlet = #{record.outlet,jdbcType=VARCHAR},
+      tolerance = #{record.tolerance,jdbcType=VARCHAR},
+      soc_str = #{record.socStr,jdbcType=VARCHAR},
+      elec_code = #{record.elecCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.fpd.domain.FpdSeries">
+    update fpd_series
+    <set>
+      <if test="fFactorys != null">
+        F_factorys = #{fFactorys,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeries != null">
+        F_series = #{fSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="hkSeries != null">
+        HK_series = #{hkSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null">
+        voltage = #{voltage,jdbcType=VARCHAR},
+      </if>
+      <if test="outlet != null">
+        outlet = #{outlet,jdbcType=VARCHAR},
+      </if>
+      <if test="tolerance != null">
+        tolerance = #{tolerance,jdbcType=VARCHAR},
+      </if>
+      <if test="socStr != null">
+        soc_str = #{socStr,jdbcType=VARCHAR},
+      </if>
+      <if test="elecCode != null">
+        elec_code = #{elecCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.fpd.domain.FpdSeries">
+    update fpd_series
+    set F_factorys = #{fFactorys,jdbcType=VARCHAR},
+      F_series = #{fSeries,jdbcType=VARCHAR},
+      HK_series = #{hkSeries,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      voltage = #{voltage,jdbcType=VARCHAR},
+      outlet = #{outlet,jdbcType=VARCHAR},
+      tolerance = #{tolerance,jdbcType=VARCHAR},
+      soc_str = #{socStr,jdbcType=VARCHAR},
+      elec_code = #{elecCode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.fpd.domain.FpdSeriesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fpd_series
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="getList" resultMap="BaseResultMap">
+    select  * from fpd_series
+  </select>
+
+</mapper>

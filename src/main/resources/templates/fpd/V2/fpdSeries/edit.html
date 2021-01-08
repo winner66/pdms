@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <form class="form-horizontal m-t" id="dataForm">
+                    <input name="id" th:value="${model.Id}" type="hidden">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">国内/外厂家<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="fFactorys" class="form-control" type="text" th:value="${model.fFactorys}">
+                        </div>
+                        <label class="col-sm-1 control-label">国内/外系列<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="fSeries" class="form-control" type="text" th:value="${model.fSeries}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">宏科系列<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="hkSeries" class="form-control" type="text" th:value="${model.hkSeries}">
+                        </div>
+                        <label class="col-sm-1 control-label">特定尺寸<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="size" class="form-control" type="text" th:value="${model.size}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">特定温度特性<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="temperature" class="form-control" type="text" th:value="${model.temperature}">
+                        </div>
+                        <label class="col-sm-1 control-label">特定电压<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="voltage" class="form-control" type="text" th:value="${model.voltage}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">特定引出端<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="outlet" class="form-control" type="text" th:value="${model.outlet}">
+                        </div>
+                        <label class="col-sm-1 control-label">特定精度偏差<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="tolerance" class="form-control" type="text" th:value="${model.tolerance}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">特定端头结构<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="socStr" class="form-control" type="text" th:value="${model.socStr}">
+                        </div>
+                        <label class="col-sm-1 control-label">特定电极材料代码<span style="color:red">*</span></label>
+                        <div class="col-sm-5">
+                            <input name="elecCode" class="form-control" type="text" th:value="${model.elecCode}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-sm-offset-10">
+                            <button type="submit" class="btn btn-primary" style="width: 100px">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/fpd/V2/fpdSeries/edit.js">
+</script>
+</body>
+</html>

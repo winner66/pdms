@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-body">
+                    <div class="fixed-table-toolbar">
+                        <div class="columns pull-left">
+                            <button type="button" class="btn  btn-primary" onclick="add()">
+                                <i class="fa fa-plus hidden" aria-hidden="true"></i>添加
+                            </button>
+                        </div>
+                        <div class="columns pull-left">
+                            <button type="button" class="btn  btn-primary" style="margin-left: 20px" onclick="window.open('/files/material/材料导入数据模板.xlsx');">
+                                <i class="fa fa-plus hidden" aria-hidden="true">
+                                </i>下载模板
+                            </button>
+                        </div>
+                        <div class="columns pull-left">
+                            <form class="form-horizontal m-t" id="dataForm" enctype="multipart/form-data">
+                                <label for="data">
+                                    <span class="btn btn-primary" style="margin-top:-20px" title="">导入产品</span>
+                                    <input type="file" id="data" name="data" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none" onchange="importData()">
+                                </label>
+                            </form>
+                        </div>
+                        <div class="columns pull-right">
+                            <button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div>
+                        <div class="columns pull-right col-md-3 nopadding">
+                            <input id="key" name="key" type="text" class="form-control" placeholder="关键字">
+                        </div>
+                    </div>
+                    <table id="dataTable" style="table-layout:fixed;word-break:break-all;" data-mobile-responsive="true">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/pd/material/list.js"></script>
+</body>
+
+</html>

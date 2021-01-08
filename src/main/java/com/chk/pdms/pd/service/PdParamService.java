@@ -86,4 +86,8 @@ public class PdParamService {
     public void delete(Long id) {
         paramDao.getParamMapper().deleteByPrimaryKey(id);
     }
+
+    public List<PdParam> listMaterialInfo() {
+        return paramDao.getExtParamMapper().listMaterialInfo();
+    }
 }

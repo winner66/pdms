@@ -74,6 +74,7 @@ public class PdInfoService {
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         key = IKUtil.analyzWithSymbol(key, "+");
         List<PdInfoVo> pdInfos = infoDao.getExtInfoMapper().list(key);
+
         return new Page(pdInfos);
     }
 

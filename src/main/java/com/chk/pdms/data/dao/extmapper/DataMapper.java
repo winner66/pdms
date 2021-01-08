@@ -5,6 +5,8 @@ import com.chk.pdms.pd.domain.PdInfo;
 import com.chk.pdms.pd.domain.PdModel;
 import com.chk.pdms.pd.domain.PdParam;
 import com.chk.pdms.pd.vo.PdInfoVo;
+import com.chk.pdms.pd_material.domain.PdInfoMaterial;
+import com.chk.pdms.pd_material.vo.PdMaterialVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,4 +19,8 @@ public interface DataMapper {
     public void updateModelOR(@Param("models") List<PdModel> models);
 
     public List<PdInfoVo> get(@Param("info") PdInfo info);
+
+    List<PdMaterialVo> getPdInfoMaterial(@Param("infoMaterials") PdInfoMaterial  info);
+
+    void insertMaterialInfo(@Param("infoMaterials")List<PdInfoMaterial> par);
 }

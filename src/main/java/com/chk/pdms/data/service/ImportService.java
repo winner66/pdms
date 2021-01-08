@@ -1,21 +1,32 @@
 package com.chk.pdms.data.service;
 
 import com.alibaba.excel.EasyExcel;
+import com.chk.pdms.common.constat.IsModelEnum;
+import com.chk.pdms.common.utils.FileUtil;
 import com.chk.pdms.common.vo.ParamType;
 import com.chk.pdms.data.dao.DataDao;
 import com.chk.pdms.data.vo.*;
+import com.chk.pdms.fpd.domain.FpdSeries;
 import com.chk.pdms.pd.domain.PdInfo;
 import com.chk.pdms.pd.domain.PdModel;
 import com.chk.pdms.pd.domain.PdParam;
+import com.chk.pdms.pd.vo.ImportDataVo;
 import com.chk.pdms.pd.vo.PdInfoVo;
+import com.chk.pdms.pd_material.domain.PdInfoMaterial;
+import com.chk.pdms.pd_material.service.impl.PdMaterialServiceImpl;
+import com.chk.pdms.pd_material.vo.PdMaterialVo;
+import lombok.SneakyThrows;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.*;
 
 @Service
@@ -23,12 +34,17 @@ public class ImportService {
 
     private Logger log = LoggerFactory.getLogger(ImportService.class);
 
+
+    @Value("${virtual.filePath}")
+    private String filePath;
+
     @Autowired
     private ClassService classService;
 
     @Autowired
+    private CastMaterialService castMaterialService;
+    @Autowired
     private CastService castService;
-
     @Autowired
     private DataDao dataDao;
 
@@ -57,11 +73,54 @@ public class ImportService {
      */
     public void importModel(String path, boolean clear, List<DataRuleVo> dataRuleVos, List<PinVo> pinVo, List<MutilVo> mutilVos, List<SingleVo> singleVos, List<HKIVo> hkiVos, List<ThreeVo> threeVos, List<TerVo> terVos, List<HeartVo> heartVos) {
         List<ModelVo> modelVos = EasyExcel.read(path).head(ModelVo.class).sheet(ModelVo.sheet).doReadSync();
-        List<PdModel> models = castService.castPdModel(modelVos, dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
+        List<PdModel> models =castService.castPdModel(modelVos, dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
         if (clear) {
             dataDao.deleteModel();
         }
         dataDao.getDataMapper().insertModel(models);
+    }
+
+    public void importMaterialModel(String path, boolean clear, List<PDCSInfoVo>  css, List<PDHKLLPFInfoVo> llpf, List<PDHKLBPFInfoVo> lbpf, List<PDHKLHPFInfoVo> lhpf, List<PDRawPorcelainWithInfoVo> rawPorcelainWith, List<PDSizingMaterialInfoVo> sizingMaterial, List<PDJLTCInfoVo> jltc, List<PDPorcelainInfoVo> porcelain ) {
+        List<ModelVo> modelVos = EasyExcel.read(path).head(ModelVo.class).sheet(ModelVo.sheet).doReadSync();
+        List<PdModel> models =castMaterialService.castPdModel(modelVos,lbpf,llpf,lhpf,jltc,css,porcelain,sizingMaterial,rawPorcelainWith);
+        if (clear) {
+            dataDao.deleteModel();
+        }
+        dataDao.getDataMapper().insertModel(models);
+    }
+
+
+    @SneakyThrows
+    @Transactional
+    public ImportDataVo importData(ImportDataVo vo,String name) {
+        String file = FileUtil.transferTo(vo.getData(), filePath, "import-data/"+name+"/info");
+        String path = filePath + file.replace("/files", "");
+        Map<String, Object> map = importMaterialInfo(path, false, false);
+        String code = (String)map.get("code");
+        ImportDataVo rsp = new ImportDataVo();
+        if (code.equals("200")){
+            rsp.setCode(code);
+            Integer num = (Integer)map.get("num");
+            if (num > 0){
+                rsp.setMsg("导入成功<br>导入数量:" + num);
+            }else{
+                rsp.setMsg("导入完成<br>导入数量:" + num + "<br>请确认模板正确且有数据");
+            }
+        }else{
+            rsp.setCode(code);
+            Set<String> noModelInfo = (Set) map.get("noModelInfo");
+            rsp.setCode(code);
+            StringBuilder sb = new StringBuilder();
+            for (String s : noModelInfo) {
+                sb.append("<br>").append(s);
+            }
+            rsp.setMsg("导入失败<br>无对应型号的产品:" + sb.toString());
+        }
+        File dataFile = new File(path);
+        if (dataFile.isFile()) {
+            dataFile.delete();
+        }
+        return rsp;
     }
 
     /**
@@ -91,29 +150,10 @@ public class ImportService {
         List<HeartVo> heartVos = EasyExcel.read(path).head(HeartVo.class).sheet(HeartVo.sheet).doReadSync();
 
 
-
-//       LBPF
-        List<PDHKLBPFInfoVo> LBPFVos = EasyExcel.read(path).head(PDHKLBPFInfoVo.class).sheet(PDHKLBPFInfoVo.sheet).doReadSync();
-//       LLPE
-        List<PDHKLLPFInfoVo> LLPEVos = EasyExcel.read(path).head(PDHKLLPFInfoVo.class).sheet(PDHKLLPFInfoVo.sheet).doReadSync();
-//        LHPF
-        List<PDLHPFInfoVo> LHPFVos = EasyExcel.read(path).head(PDLHPFInfoVo.class).sheet(PDLHPFInfoVo.sheet).doReadSync();
-//        JLTC
-        List<PDJLTCInfoVo> JLTCVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
-
-        //      陶瓷
-        List<PDCSInfoVo> CSVos = EasyExcel.read(path).head(PDCSInfoVo.class).sheet(PDCSInfoVo.sheet).doReadSync();
-//        瓷料
-        List<PDPorcelainInfoVo> PorcelainVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
-//        浆料
-        List<PDSizingMaterialInfoVo> pdSizingMaterialInfoVos = EasyExcel.read(path).head(PDSizingMaterialInfoVo.class).sheet(PDSizingMaterialInfoVo.sheet).doReadSync();
-//       生瓷带
-        List<PDRawPorcelainWithInfoVo> RawPorcelainWithVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
-
         //增量导入不处理型号
         //importModel(path, clear, dataRuleVos,pinVo,mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
 
-        Map<String, Object> map = castService.castPdInfo(dataRuleVos, pinVo, mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos,LBPFVos,LLPEVos,LHPFVos,JLTCVos,CSVos,PorcelainVos, pdSizingMaterialInfoVos,RawPorcelainWithVos);
+        Map<String, Object> map = castService.castPdInfo(dataRuleVos,pinVo,mutilVos,singleVos,hkiVos,threeVos,terVos,heartVos);
         Set<String> noModelInfo = (Set<String>) map.get("noModelInfo");
         if(noModelInfo.size() > 0){
             result.put("code", "1000");
@@ -144,6 +184,8 @@ public class ImportService {
         result.put("num", infos.size());
         return result;
     }
+
+
 
     /**
      * 导入尺寸
@@ -272,5 +314,99 @@ public class ImportService {
             }
         }
         return rsp;
+    }
+
+
+    public Map<String, Object> importMaterialInfo(String path, boolean checkDup, boolean clear) {
+
+        Map<String, Object> result = new HashMap<>();
+//       LBPF
+        List<PDHKLBPFInfoVo> LBPFVos = EasyExcel.read(path).head(PDHKLBPFInfoVo.class).sheet(PDHKLBPFInfoVo.sheet).doReadSync();
+//       LLPE
+        List<PDHKLLPFInfoVo> LLPEVos = EasyExcel.read(path).head(PDHKLLPFInfoVo.class).sheet(PDHKLLPFInfoVo.sheet).doReadSync();
+//        LHPF
+        List<PDHKLHPFInfoVo> LHPFVos = EasyExcel.read(path).head(PDHKLHPFInfoVo.class).sheet(PDHKLHPFInfoVo.sheet).doReadSync();
+//        JLTC
+        List<PDJLTCInfoVo> JLTCVos = EasyExcel.read(path).head(PDJLTCInfoVo.class).sheet(PDJLTCInfoVo.sheet).doReadSync();
+        //       介质滤波器
+        List<PDHKJBPFInfoVo> JBPFVos= EasyExcel.read(path).head(PDHKJBPFInfoVo.class).sheet(PDHKJBPFInfoVo.sheet).doReadSync();
+
+        //      陶瓷
+        List<PDCSInfoVo> CSVos = EasyExcel.read(path).head(PDCSInfoVo.class).sheet(PDCSInfoVo.sheet).doReadSync();
+//        瓷料
+        List<PDPorcelainInfoVo> PorcelainVos = EasyExcel.read(path).head(PDPorcelainInfoVo.class).sheet(PDPorcelainInfoVo.sheet).doReadSync();
+//        浆料
+        List<PDSizingMaterialInfoVo> pdSizingMaterialInfoVos = EasyExcel.read(path).head(PDSizingMaterialInfoVo.class).sheet(PDSizingMaterialInfoVo.sheet).doReadSync();
+//       生瓷带
+        List<PDRawPorcelainWithInfoVo> RawPorcelainWithVos = EasyExcel.read(path).head(PDRawPorcelainWithInfoVo.class).sheet(PDRawPorcelainWithInfoVo.sheet).doReadSync();
+
+
+        //增量导入不处理型号
+        //importModel(path, clear, dataRuleVos,pinVo,mutilVos, singleVos, hkiVos, threeVos, terVos, heartVos);
+
+        Map<String, Object> map = castMaterialService.castMaterialPdInfo(LBPFVos,LLPEVos,LHPFVos,JLTCVos,CSVos,JBPFVos,PorcelainVos, pdSizingMaterialInfoVos,RawPorcelainWithVos);
+        Set<String> noModelInfo = (Set<String>) map.get("noModelInfo");
+        if(noModelInfo.size() > 0){
+            result.put("code", "1000");
+            result.put("noModelInfo", noModelInfo);
+            return result;
+        }
+
+        List<PdInfoMaterial> infos = (List<PdInfoMaterial>) map.get("PdInfoMaterial");
+        int dupCount = 0;
+        if (checkDup) {
+            for (PdInfoMaterial info : infos) {
+                //??getPdInfoMaterial  xml未写
+                List<PdMaterialVo> vos = dataDao.getDataMapper().getPdInfoMaterial(info);
+                if (vos.size() >= 0) {
+                    dupCount++;
+                }
+            }
+        }
+        log.info("info dupCount = {}", dupCount);
+
+        if (clear) {
+            dataDao.deleteInfoMaterial();
+        }
+        List<List<PdInfoMaterial>> partition = ListUtils.partition(infos, 500);
+        for (List<PdInfoMaterial> par : partition) {
+            dataDao.getDataMapper().insertMaterialInfo(par);
+        }
+        result.put("code", "200");
+        result.put("num", infos.size());
+        return result;
+    }
+
+    public Map<String, Object> importFPDInfo(String path ) {
+        Map<String, Object> result = new HashMap<>();
+        List<FPDSeriesVo> FPDSeriesVos = EasyExcel.read(path).head(FPDSeriesVo.class).sheet(FPDSeriesVo.sheet).doReadSync();
+        Map<String, Object> map = castFPDSeries(FPDSeriesVos);
+        List<FpdSeries> infos = (List<FpdSeries>) map.get("FPDSeries");
+
+        result.put("code", "200");
+        result.put("num", infos.size());
+        return result;
+    }
+
+    private Map<String, Object> castFPDSeries(List<FPDSeriesVo> fpdSeriesVos) {
+        HashMap<String, Object> result = new HashMap<>();
+        List<FpdSeries> infos = new ArrayList<>();
+        result.put("FPDSeries", infos);
+        Set<String> set = new LinkedHashSet<>();
+
+        for (FPDSeriesVo vo :fpdSeriesVos) {
+            FpdSeries info = castfpdSeriesVo(vo);
+            infos.add(info);
+
+        }
+        return result;
+    }
+
+
+    @SneakyThrows
+    private FpdSeries castfpdSeriesVo(FPDSeriesVo vo) {
+        FpdSeries fpdSeries= new FpdSeries();
+        BeanUtils.copyProperties(fpdSeries,vo);
+        return fpdSeries;
     }
 }

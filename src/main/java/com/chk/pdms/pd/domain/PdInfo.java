@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PdInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
 
     private Long pdModelId;
@@ -24,8 +23,6 @@ public class PdInfo implements Serializable {
     private String temperature;
 
     private String voltage;
-    //        容量具体值
-    private String capacity;
 
     private String capacityMin;
 
@@ -61,6 +58,10 @@ public class PdInfo implements Serializable {
 
     private String searchKey;
 
+    private Boolean del;
+    private String capacity ;
+
+
 
     private List<CasRsp> capacities = new ArrayList<>();
 
@@ -71,9 +72,7 @@ public class PdInfo implements Serializable {
     private List<SelRsp> wireMas = new ArrayList<>();
 
     private List<SelRsp> wireSizes = new ArrayList<>();
-
-    private List<SelRsp> pins = new ArrayList<>();
-
+    private static final long serialVersionUID = 1L;
     public String getCapacity() {
         return capacity;
     }
@@ -81,7 +80,6 @@ public class PdInfo implements Serializable {
     public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
-
     public List<CasRsp> getCapacities() {
         return capacities;
     }
@@ -130,8 +128,7 @@ public class PdInfo implements Serializable {
         this.pins = pins;
     }
 
-
-
+    private List<SelRsp> pins = new ArrayList<>();
 
 
 
@@ -335,96 +332,50 @@ public class PdInfo implements Serializable {
         this.searchKey = searchKey == null ? null : searchKey.trim();
     }
 
-    @Override
-    public String toString() {
-        return "PdInfo{" +
-                "id=" + id +
-                ", pdModelId=" + pdModelId +
-                ", std='" + std + '\'' +
-                ", quality='" + quality + '\'' +
-                ", model='" + model + '\'' +
-                ", size='" + size + '\'' +
-                ", temperature='" + temperature + '\'' +
-                ", voltage='" + voltage + '\'' +
-                ", capacityMin='" + capacityMin + '\'' +
-                ", capacityMax='" + capacityMax + '\'' +
-                ", capacityMinIdx=" + capacityMinIdx +
-                ", capacityMaxIdx=" + capacityMaxIdx +
-                ", tolerance='" + tolerance + '\'' +
-                ", outlet='" + outlet + '\'' +
-                ", elecCode='" + elecCode + '\'' +
-                ", capNum='" + capNum + '\'' +
-                ", elecType='" + elecType + '\'' +
-                ", temperRange='" + temperRange + '\'' +
-                ", wireMa='" + wireMa + '\'' +
-                ", wireSize='" + wireSize + '\'' +
-                ", elecSer='" + elecSer + '\'' +
-                ", socStr='" + socStr + '\'' +
-                ", packType='" + packType + '\'' +
-                ", pin='" + pin + '\'' +
-                ", searchKey='" + searchKey + '\'' +
-
-                '}';
+    public Boolean getDel() {
+        return del;
     }
 
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(getClass().getSimpleName());
-//        sb.append(" [");
-//        sb.append("Hash = ").append(hashCode());
-//        sb.append(", id=").append(id);
-//        sb.append(", pdModelId=").append(pdModelId);
-//        sb.append(", std=").append(std);
-//        sb.append(", quality=").append(quality);
-//        sb.append(", model=").append(model);
-//        sb.append(", size=").append(size);
-//        sb.append(", temperature=").append(temperature);
-//        sb.append(", voltage=").append(voltage);
-//        sb.append(", capacityMin=").append(capacityMin);
-//        sb.append(", capacityMax=").append(capacityMax);
-//        sb.append(", capacityMinIdx=").append(capacityMinIdx);
-//        sb.append(", capacityMaxIdx=").append(capacityMaxIdx);
-//        sb.append(", tolerance=").append(tolerance);
-//        sb.append(", outlet=").append(outlet);
-//        sb.append(", elecCode=").append(elecCode);
-//        sb.append(", capNum=").append(capNum);
-//        sb.append(", elecType=").append(elecType);
-//        sb.append(", temperRange=").append(temperRange);
-//        sb.append(", wireMa=").append(wireMa);
-//        sb.append(", wireSize=").append(wireSize);
-//        sb.append(", elecSer=").append(elecSer);
-//        sb.append(", socStr=").append(socStr);
-//        sb.append(", packType=").append(packType);
-//        sb.append(", pin=").append(pin);
-//        sb.append(", searchKey=").append(searchKey);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//        sb.append(", serialVersionUID=").append(serialVersionUID);
-//
-//
-//        sb.append("]");
-//        return sb.toString();
-//    }
+    public void setDel(Boolean del) {
+        this.del = del;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", pdModelId=").append(pdModelId);
+        sb.append(", std=").append(std);
+        sb.append(", quality=").append(quality);
+        sb.append(", model=").append(model);
+        sb.append(", size=").append(size);
+        sb.append(", temperature=").append(temperature);
+        sb.append(", voltage=").append(voltage);
+        sb.append(", capacityMin=").append(capacityMin);
+        sb.append(", capacityMax=").append(capacityMax);
+        sb.append(", capacityMinIdx=").append(capacityMinIdx);
+        sb.append(", capacityMaxIdx=").append(capacityMaxIdx);
+        sb.append(", tolerance=").append(tolerance);
+        sb.append(", outlet=").append(outlet);
+        sb.append(", elecCode=").append(elecCode);
+        sb.append(", capNum=").append(capNum);
+        sb.append(", elecType=").append(elecType);
+        sb.append(", temperRange=").append(temperRange);
+        sb.append(", wireMa=").append(wireMa);
+        sb.append(", wireSize=").append(wireSize);
+        sb.append(", elecSer=").append(elecSer);
+        sb.append(", socStr=").append(socStr);
+        sb.append(", packType=").append(packType);
+        sb.append(", pin=").append(pin);
+        sb.append(", searchKey=").append(searchKey);
+        sb.append(", del=").append(del);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
 
     @Override
     public boolean equals(Object that) {
@@ -462,7 +413,8 @@ public class PdInfo implements Serializable {
             && (this.getSocStr() == null ? other.getSocStr() == null : this.getSocStr().equals(other.getSocStr()))
             && (this.getPackType() == null ? other.getPackType() == null : this.getPackType().equals(other.getPackType()))
             && (this.getPin() == null ? other.getPin() == null : this.getPin().equals(other.getPin()))
-            && (this.getSearchKey() == null ? other.getSearchKey() == null : this.getSearchKey().equals(other.getSearchKey()));
+            && (this.getSearchKey() == null ? other.getSearchKey() == null : this.getSearchKey().equals(other.getSearchKey()))
+            && (this.getDel() == null ? other.getDel() == null : this.getDel().equals(other.getDel()));
     }
 
     @Override
@@ -494,6 +446,7 @@ public class PdInfo implements Serializable {
         result = prime * result + ((getPackType() == null) ? 0 : getPackType().hashCode());
         result = prime * result + ((getPin() == null) ? 0 : getPin().hashCode());
         result = prime * result + ((getSearchKey() == null) ? 0 : getSearchKey().hashCode());
+        result = prime * result + ((getDel() == null) ? 0 : getDel().hashCode());
         return result;
     }
 }

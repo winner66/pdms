@@ -43,6 +43,12 @@ public class PdModel implements Serializable {
 
     private String company;
 
+    private String generalNorms;
+
+    private String detailNorms;
+
+    private Boolean del;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -205,6 +211,30 @@ public class PdModel implements Serializable {
         this.company = company == null ? null : company.trim();
     }
 
+    public String getGeneralNorms() {
+        return generalNorms;
+    }
+
+    public void setGeneralNorms(String generalNorms) {
+        this.generalNorms = generalNorms == null ? null : generalNorms.trim();
+    }
+
+    public String getDetailNorms() {
+        return detailNorms;
+    }
+
+    public void setDetailNorms(String detailNorms) {
+        this.detailNorms = detailNorms == null ? null : detailNorms.trim();
+    }
+
+    public Boolean getDel() {
+        return del;
+    }
+
+    public void setDel(Boolean del) {
+        this.del = del;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -231,6 +261,9 @@ public class PdModel implements Serializable {
         sb.append(", objectUrl=").append(objectUrl);
         sb.append(", chartUrl=").append(chartUrl);
         sb.append(", company=").append(company);
+        sb.append(", generalNorms=").append(generalNorms);
+        sb.append(", detailNorms=").append(detailNorms);
+        sb.append(", del=").append(del);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -267,7 +300,10 @@ public class PdModel implements Serializable {
             && (this.getOrderRuleUrl() == null ? other.getOrderRuleUrl() == null : this.getOrderRuleUrl().equals(other.getOrderRuleUrl()))
             && (this.getObjectUrl() == null ? other.getObjectUrl() == null : this.getObjectUrl().equals(other.getObjectUrl()))
             && (this.getChartUrl() == null ? other.getChartUrl() == null : this.getChartUrl().equals(other.getChartUrl()))
-            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()));
+            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()))
+            && (this.getGeneralNorms() == null ? other.getGeneralNorms() == null : this.getGeneralNorms().equals(other.getGeneralNorms()))
+            && (this.getDetailNorms() == null ? other.getDetailNorms() == null : this.getDetailNorms().equals(other.getDetailNorms()))
+            && (this.getDel() == null ? other.getDel() == null : this.getDel().equals(other.getDel()));
     }
 
     @Override
@@ -294,6 +330,9 @@ public class PdModel implements Serializable {
         result = prime * result + ((getObjectUrl() == null) ? 0 : getObjectUrl().hashCode());
         result = prime * result + ((getChartUrl() == null) ? 0 : getChartUrl().hashCode());
         result = prime * result + ((getCompany() == null) ? 0 : getCompany().hashCode());
+        result = prime * result + ((getGeneralNorms() == null) ? 0 : getGeneralNorms().hashCode());
+        result = prime * result + ((getDetailNorms() == null) ? 0 : getDetailNorms().hashCode());
+        result = prime * result + ((getDel() == null) ? 0 : getDel().hashCode());
         return result;
     }
 }

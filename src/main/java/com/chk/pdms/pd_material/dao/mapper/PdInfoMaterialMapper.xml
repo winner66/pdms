@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chk.pdms.pd_material.Dao.mapper.PdInfoMaterialMapper">
-  <resultMap id="BaseResultMap" type="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+<mapper namespace="com.chk.pdms.pd_material.dao.mapper.PdInfoMaterialMapper">
+  <resultMap id="BaseResultMap" type="com.chk.pdms.pd_material.domain.PdInfoMaterial">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pd_model_id" jdbcType="INTEGER" property="pdModelId" />
     <result column="std" jdbcType="VARCHAR" property="std" />
@@ -66,6 +66,7 @@
     <result column="outlet" jdbcType="VARCHAR" property="outlet" />
     <result column="evaluating_scope" jdbcType="VARCHAR" property="evaluatingScope" />
     <result column="appearance" jdbcType="VARCHAR" property="appearance" />
+    <result column="del" jdbcType="BIT" property="del" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -138,9 +139,9 @@
     out_of_band_rejection2, out_of_band_rejection3, out_of_band_rejection4, out_of_band_rejection5, 
     material_type, rated_current, bandwidth, stop_band_by40, pass_band_insertion_loss_by1_3, 
     pass_band_insertion_loss_by2_0Typ, material_type2, basis_material, outlet, evaluating_scope, 
-    appearance
+    appearance, del
   </sql>
-  <select id="selectByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -164,13 +165,13 @@
     delete from pd_info_material
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample">
+  <delete id="deleteByExample" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterialExample">
     delete from pd_info_material
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+  <insert id="insert" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterial">
     insert into pd_info_material (id, pd_model_id, std, 
       quality, model, size, 
       search_key, surface_code, thickness_code, 
@@ -194,7 +195,7 @@
       bandwidth, stop_band_by40, pass_band_insertion_loss_by1_3, 
       pass_band_insertion_loss_by2_0Typ, material_type2, 
       basis_material, outlet, evaluating_scope, 
-      appearance)
+      appearance, del)
     values (#{id,jdbcType=INTEGER}, #{pdModelId,jdbcType=INTEGER}, #{std,jdbcType=VARCHAR}, 
       #{quality,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
       #{searchKey,jdbcType=VARCHAR}, #{surfaceCode,jdbcType=VARCHAR}, #{thicknessCode,jdbcType=VARCHAR}, 
@@ -218,9 +219,9 @@
       #{bandwidth,jdbcType=VARCHAR}, #{stopBandBy40,jdbcType=VARCHAR}, #{passBandInsertionLossBy13,jdbcType=VARCHAR}, 
       #{passBandInsertionLossBy20typ,jdbcType=VARCHAR}, #{materialType2,jdbcType=VARCHAR}, 
       #{basisMaterial,jdbcType=VARCHAR}, #{outlet,jdbcType=VARCHAR}, #{evaluatingScope,jdbcType=VARCHAR}, 
-      #{appearance,jdbcType=VARCHAR})
+      #{appearance,jdbcType=VARCHAR}, #{del,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+  <insert id="insertSelective" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterial">
     insert into pd_info_material
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -414,6 +415,9 @@
       </if>
       <if test="appearance != null">
         appearance,
+      </if>
+      <if test="del != null">
+        del,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -609,9 +613,12 @@
       <if test="appearance != null">
         #{appearance,jdbcType=VARCHAR},
       </if>
+      <if test="del != null">
+        #{del,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterialExample" resultType="java.lang.Long">
     select count(*) from pd_info_material
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -812,6 +819,9 @@
       <if test="record.appearance != null">
         appearance = #{record.appearance,jdbcType=VARCHAR},
       </if>
+      <if test="record.del != null">
+        del = #{record.del,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -882,12 +892,13 @@
       basis_material = #{record.basisMaterial,jdbcType=VARCHAR},
       outlet = #{record.outlet,jdbcType=VARCHAR},
       evaluating_scope = #{record.evaluatingScope,jdbcType=VARCHAR},
-      appearance = #{record.appearance,jdbcType=VARCHAR}
+      appearance = #{record.appearance,jdbcType=VARCHAR},
+      del = #{record.del,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+  <update id="updateByPrimaryKeySelective" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterial">
     update pd_info_material
     <set>
       <if test="pdModelId != null">
@@ -1079,10 +1090,13 @@
       <if test="appearance != null">
         appearance = #{appearance,jdbcType=VARCHAR},
       </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterial">
+  <update id="updateByPrimaryKey" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterial">
     update pd_info_material
     set pd_model_id = #{pdModelId,jdbcType=INTEGER},
       std = #{std,jdbcType=VARCHAR},
@@ -1146,10 +1160,11 @@
       basis_material = #{basisMaterial,jdbcType=VARCHAR},
       outlet = #{outlet,jdbcType=VARCHAR},
       evaluating_scope = #{evaluatingScope,jdbcType=VARCHAR},
-      appearance = #{appearance,jdbcType=VARCHAR}
+      appearance = #{appearance,jdbcType=VARCHAR},
+      del = #{del,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.dao.Info.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.chk.pdms.pd_material.domain.PdInfoMaterialExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -1163,4 +1178,5 @@
       order by ${orderByClause}
     </if>
   </select>
+
 </mapper>

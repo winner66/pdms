@@ -1484,6 +1484,206 @@ public class PdModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andGeneralNormsIsNull() {
+            addCriterion("general_norms is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsIsNotNull() {
+            addCriterion("general_norms is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsEqualTo(String value) {
+            addCriterion("general_norms =", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsNotEqualTo(String value) {
+            addCriterion("general_norms <>", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsGreaterThan(String value) {
+            addCriterion("general_norms >", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsGreaterThanOrEqualTo(String value) {
+            addCriterion("general_norms >=", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsLessThan(String value) {
+            addCriterion("general_norms <", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsLessThanOrEqualTo(String value) {
+            addCriterion("general_norms <=", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsLike(String value) {
+            addCriterion("general_norms like", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsNotLike(String value) {
+            addCriterion("general_norms not like", value, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsIn(List<String> values) {
+            addCriterion("general_norms in", values, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsNotIn(List<String> values) {
+            addCriterion("general_norms not in", values, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsBetween(String value1, String value2) {
+            addCriterion("general_norms between", value1, value2, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsNotBetween(String value1, String value2) {
+            addCriterion("general_norms not between", value1, value2, "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsIsNull() {
+            addCriterion("detail_norms is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsIsNotNull() {
+            addCriterion("detail_norms is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsEqualTo(String value) {
+            addCriterion("detail_norms =", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsNotEqualTo(String value) {
+            addCriterion("detail_norms <>", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsGreaterThan(String value) {
+            addCriterion("detail_norms >", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsGreaterThanOrEqualTo(String value) {
+            addCriterion("detail_norms >=", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsLessThan(String value) {
+            addCriterion("detail_norms <", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsLessThanOrEqualTo(String value) {
+            addCriterion("detail_norms <=", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsLike(String value) {
+            addCriterion("detail_norms like", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsNotLike(String value) {
+            addCriterion("detail_norms not like", value, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsIn(List<String> values) {
+            addCriterion("detail_norms in", values, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsNotIn(List<String> values) {
+            addCriterion("detail_norms not in", values, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsBetween(String value1, String value2) {
+            addCriterion("detail_norms between", value1, value2, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsNotBetween(String value1, String value2) {
+            addCriterion("detail_norms not between", value1, value2, "detailNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelIsNull() {
+            addCriterion("del is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelIsNotNull() {
+            addCriterion("del is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelEqualTo(Boolean value) {
+            addCriterion("del =", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelNotEqualTo(Boolean value) {
+            addCriterion("del <>", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelGreaterThan(Boolean value) {
+            addCriterion("del >", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("del >=", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelLessThan(Boolean value) {
+            addCriterion("del <", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelLessThanOrEqualTo(Boolean value) {
+            addCriterion("del <=", value, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelIn(List<Boolean> values) {
+            addCriterion("del in", values, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelNotIn(List<Boolean> values) {
+            addCriterion("del not in", values, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelBetween(Boolean value1, Boolean value2) {
+            addCriterion("del between", value1, value2, "del");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("del not between", value1, value2, "del");
+            return (Criteria) this;
+        }
+
         public Criteria andNameLikeInsensitive(String value) {
             addCriterion("upper(name) like", value.toUpperCase(), "name");
             return (Criteria) this;
@@ -1571,6 +1771,16 @@ public class PdModelExample {
 
         public Criteria andCompanyLikeInsensitive(String value) {
             addCriterion("upper(company) like", value.toUpperCase(), "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralNormsLikeInsensitive(String value) {
+            addCriterion("upper(general_norms) like", value.toUpperCase(), "generalNorms");
+            return (Criteria) this;
+        }
+
+        public Criteria andDetailNormsLikeInsensitive(String value) {
+            addCriterion("upper(detail_norms) like", value.toUpperCase(), "detailNorms");
             return (Criteria) this;
         }
     }
